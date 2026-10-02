@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Pin Kobold Codex to the spec."""
+"""Pin Kobold Codex to the specs."""
 
 import json
 import re
@@ -9,6 +9,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SPEC = ROOT / "docs/specs/2026-10-01-kobold-codex-design.md"
 SKILL = ROOT / "skills/kobold-codex/SKILL.md"
+SCOPE_SPEC = ROOT / "docs/specs/2026-10-01-scope-the-edit-design.md"
+SCOPE_SKILL = ROOT / "skills/scope-the-edit/SKILL.md"
 README = ROOT / "README.md"
 PLUGIN = ROOT / ".claude-plugin/plugin.json"
 MARKET = ROOT / ".claude-plugin/marketplace.json"
@@ -25,15 +27,29 @@ HEADINGS = (
     "Build a rerunnable tool",
 )
 
+SCOPE_HEADINGS = (
+    "Name the scope",
+    "Small",
+    "Intermediate",
+    "Architectural",
+    "Real code",
+)
+
 DESCRIPTION = (
     "Use before writing a reply, a diff, a commit message, or a document. "
     "Kobold Codex is the voice and the engineering principles for "
     "DragonCrafted87's agents on Grok and Claude Code."
 )
 
+SCOPE_DESCRIPTION = (
+    "Use before changing a file or making a commit. "
+    "Name the scope of the edit, then add only the plan and the proof "
+    "that scope calls for."
+)
+
 PLUGIN_DESCRIPTION = (
-    "Voice and engineering principles for DragonCrafted87's agents on "
-    "Grok and Claude Code."
+    "Voice, engineering principles, and edit scoping for "
+    "DragonCrafted87's agents on Grok and Claude Code."
 )
 
 INSTALL_LINES = (
@@ -41,6 +57,13 @@ INSTALL_LINES = (
     "grok plugin install . --trust",
     "/plugin marketplace add DragonCrafted87/kobold-codex",
     "/plugin install kobold-codex@kobold-codex",
+)
+
+README_LINKS = (
+    "skills/kobold-codex/SKILL.md",
+    "docs/specs/2026-10-01-kobold-codex-design.md",
+    "skills/scope-the-edit/SKILL.md",
+    "docs/specs/2026-10-01-scope-the-edit-design.md",
 )
 
 NEEDLES = (
@@ -75,34 +98,46 @@ def sections(text):
     return found
 
 
-def check_skill():
-    if not SKILL.is_file():
-        fail(f"missing {SKILL}")
-    raw = SKILL.read_text()
+def check_one(path, spec_path, expected_name, description, headings):
+    if not path.is_file():
+        fail(f"missing {path.relative_to(ROOT)}")
+    raw = path.read_text()
     if not raw.startswith("---\n"):
-        fail("SKILL.md is missing frontmatter")
+        fail(f"{expected_name} is missing frontmatter")
     end = raw.find("\n---\n", 4)
     if end < 0:
-        fail("SKILL.md frontmatter does not close")
+        fail(f"{expected_name} frontmatter does not close")
     front = raw[4:end]
     body = raw[end + 5 :]
     name = re.search(r"^name:\s*(.+)$", front, re.M)
     desc = re.search(r"^description:\s*(.+)$", front, re.M)
-    if name is None or name.group(1).strip() != "kobold-codex":
-        fail("frontmatter name must be kobold-codex")
-    if desc is None or desc.group(1).strip() != DESCRIPTION:
-        fail("frontmatter description does not match the spec")
+    if name is None or name.group(1).strip() != expected_name:
+        fail(f"frontmatter name must be {expected_name}")
+    if desc is None or desc.group(1).strip() != description:
+        fail(f"frontmatter description does not match for {expected_name}")
     skill_sections = sections(body)
-    spec_sections = sections(SPEC.read_text())
-    for heading in HEADINGS:
+    spec_sections = sections(spec_path.read_text())
+    readme = README.read_text()
+    for heading in headings:
         if heading not in skill_sections:
-            fail(f"SKILL.md missing heading {heading}")
+            fail(f"{expected_name} missing heading {heading}")
         if heading not in spec_sections:
             fail(f"spec missing heading {heading}")
         if skill_sections[heading] != spec_sections[heading]:
             fail(f"section {heading!r} does not match the spec")
-        if skill_sections[heading] in README.read_text():
+        if skill_sections[heading] in readme:
             fail(f"README restates {heading}")
+
+
+def check_skills():
+    check_one(SKILL, SPEC, "kobold-codex", DESCRIPTION, HEADINGS)
+    check_one(
+        SCOPE_SKILL,
+        SCOPE_SPEC,
+        "scope-the-edit",
+        SCOPE_DESCRIPTION,
+        SCOPE_HEADINGS,
+    )
 
 
 def check_manifests():
@@ -110,7 +145,7 @@ def check_manifests():
     market = json.loads(MARKET.read_text())
     if plugin["name"] != "kobold-codex":
         fail("plugin name")
-    if plugin["version"] != "0.1.0":
+    if plugin["version"] != "0.2.0":
         fail("plugin version")
     if plugin["description"] != PLUGIN_DESCRIPTION:
         fail("plugin description")
@@ -142,6 +177,9 @@ def check_manifests():
     for line in INSTALL_LINES:
         if line not in readme:
             fail(f"README missing install line: {line}")
+    for line in README_LINKS:
+        if line not in readme:
+            fail(f"README missing link: {line}")
     if (ROOT / "hooks").exists() or any(ROOT.rglob("hooks.json")):
         fail("hooks are out of scope")
 
@@ -159,7 +197,7 @@ def check_public_text():
 
 
 def main():
-    check_skill()
+    check_skills()
     check_manifests()
     check_public_text()
 

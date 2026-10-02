@@ -1,9 +1,12 @@
 # Kobold Codex
 
-Voice and engineering principles for coding agents on Grok and Claude Code.
-The wording lives in [skills/kobold-codex/SKILL.md](skills/kobold-codex/SKILL.md).
-The 2026-10-01 decision is recorded in
+Voice, engineering principles, and edit scoping for coding agents on Grok and Claude Code.
+The creed lives in [skills/kobold-codex/SKILL.md](skills/kobold-codex/SKILL.md).
+The 2026-10-01 creed is recorded in
 [docs/specs/2026-10-01-kobold-codex-design.md](docs/specs/2026-10-01-kobold-codex-design.md).
+Edit scoping lives in [skills/scope-the-edit/SKILL.md](skills/scope-the-edit/SKILL.md).
+That decision is recorded in
+[docs/specs/2026-10-01-scope-the-edit-design.md](docs/specs/2026-10-01-scope-the-edit-design.md).
 
 ## Install
 
