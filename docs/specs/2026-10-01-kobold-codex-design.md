@@ -19,10 +19,10 @@ these rules.
 
 ## Decisions
 
-The skillset replaces Superpowers in Grok once it is installed.
-Superpowers stays enabled until that install happens and the plugin is
-turned off. pstack is a source of ideas. This repo does not vendor
-either project, and the principle text is original.
+The skillset is the replacement for Superpowers. Superpowers is already
+disabled in the home Grok config. This skill does not toggle other
+plugins. pstack is a source of ideas. This repo does not vendor either
+project, and the principle text is original.
 
 The first spec is principles and voice. A later spec covers the rule
 that an edit is preceded by a short design and an explicit yes, including
@@ -41,21 +41,23 @@ into a host that has no plugin install.
 
 ## Repository
 
-Path on runewyrm: `/home/dragon/git-workspace/kobold-codex`.
-
-GitHub: `DragonCrafted87/kobold-codex`, private. Work Claude Code
-installs it with the account that already has access to that account's
-private repositories.
-
-The repo is its own project. Machine setup stays in `~/dot-files`.
+GitHub: `DragonCrafted87/kobold-codex`, public.
 
 ```
 kobold-codex/
   .claude-plugin/plugin.json
+  .claude-plugin/marketplace.json
   skills/kobold-codex/SKILL.md
   README.md
+  LICENSE
   docs/specs/2026-10-01-kobold-codex-design.md
+  docs/plans/2026-10-01-kobold-codex.md
+  tests/check_plugin.py
 ```
+
+`marketplace.json` exists so Claude Code can add the GitHub repo as a
+marketplace and install the plugin from it. The marketplace name and the
+plugin name are both `kobold-codex`, and the plugin `source` is `./`.
 
 `.claude-plugin/plugin.json` is:
 
@@ -76,10 +78,21 @@ kobold-codex/
 Grok installs a Claude plugin layout directly. Claude Code installs the
 same layout from the GitHub repo.
 
-`README.md` is the install note: `grok plugin install` from this path on
-runewyrm, and Claude Code's plugin install from GitHub on the work
-machine. It points at the skill for the living wording and at this spec
-for the original decision.
+`README.md` is the install note. It gives these commands and no others:
+
+```bash
+grok plugin install DragonCrafted87/kobold-codex --trust
+grok plugin install . --trust
+```
+
+```text
+/plugin marketplace add DragonCrafted87/kobold-codex
+/plugin install kobold-codex@kobold-codex
+```
+
+It points at the skill for the living wording and at this spec for the
+original decision. It does not restate the principles. Tracked files do
+not name a hostname, a home directory, or a machine.
 
 License is MIT. The text is original.
 
@@ -193,8 +206,11 @@ The first build is done when all of these are true:
 
 - The tree matches the layout above.
 - `SKILL.md` carries this voice section and these eight principles, with
-  the frontmatter name and description from this spec.
-- `grok plugin validate` accepts the plugin, or the command is missing
-  and the layout has been checked against the Grok plugin docs by hand.
-- The README states both install commands and does not restate the
-  principles.
+  the frontmatter name and description from this spec. The heading text
+  matches. The paragraphs match this document.
+- `tests/check_plugin.py` fails when a paragraph, the frontmatter, the
+  manifest names, or the install commands drift, and when a tracked file
+  names a hostname, a home directory, or a machine.
+- `grok plugin validate` accepts the plugin.
+- The README states the install commands from this spec and does not
+  restate the principles.
