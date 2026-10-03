@@ -90,13 +90,13 @@ What will change is the goal above. What the change touches is the architecture 
 - Consumes: the specs and this plan, already in the worktree on `feat/remaining-skills`.
 - Produces: two commits when the resolved keys allow them. The spec commit contains only the eleven specs. The plan commit contains only this plan. The checkboxes in that plan commit are still empty.
 
-- [ ] **Step 1: Commit the specs**
+- [x] **Step 1: Commit the specs**
 
 When the eleven specs are already committed on this branch, mark this step done and go to Step 2.
 
 Otherwise resolve `commit-specs` and commit only those eleven files when that value allows it. Leave this plan unstaged. The subject is `Record the remaining skill specs`. The body says the specs record the eleven step-7 skills, and that the skill files are not in this commit. A second run leaves a finished spec commit as it is.
 
-- [ ] **Step 2: Commit this plan**
+- [x] **Step 2: Commit this plan**
 
 When this plan is already committed, mark this step done.
 
@@ -128,7 +128,7 @@ Otherwise resolve `commit-plans` and commit only this file when that value allow
 - Consumes: the `###` bodies under each spec's `## Skill` heading. The checks already in `tests/check_plugin.py`.
 - Produces: a tree where `python3 tests/check_plugin.py` exits 0 and `grok plugin validate .` reports version `0.9.0`. Validate counts the `skills/` directory, so the component line stays `1 skill dir(s)`.
 
-- [ ] **Step 1: Extend the check and confirm it fails**
+- [x] **Step 1: Extend the check and confirm it fails**
 
 When `tests/check_plugin.py` already requires the eleven skills, version `0.9.0`, and the twenty-two new guide links, mark this step done and go to Step 2.
 
@@ -187,13 +187,13 @@ python3 tests/check_plugin.py
 
 Expected: exit 1, and stderr contains `missing` and `isolate-the-work`. The creed sections are not the failure. This exercises the missing-file branch of `check_one`. No new function was added, so there is no new branch to cover.
 
-- [ ] **Step 2: Write the eleven skills**
+- [x] **Step 2: Write the eleven skills**
 
 When a skill file already carries the frontmatter and the section bodies from its spec, leave that file. Otherwise create it.
 
 The file starts with `---` frontmatter, `name`, and the one-line `description` from Global Constraints. The description stays on one physical line. The H1 title is the title from Global Constraints. Copy each section body from that skill's spec. Do not rewrap a copied line.
 
-- [ ] **Step 3: Bump the manifests and the skill map**
+- [x] **Step 3: Bump the manifests and the skill map**
 
 Set `"version"` to `0.9.0` in `.claude-plugin/plugin.json` and in the one plugin entry inside `.claude-plugin/marketplace.json`. Leave `"description"` as `Principles and workflow skills for DragonCrafted87's agents on Grok and Claude Code.` Leave the other manifest fields as they are. Do not add a version field to the marketplace object.
 
@@ -241,7 +241,7 @@ Under Records, add these items after the `run-the-play` item:
 
 When that version and those sentences are already present, leave them.
 
-- [ ] **Step 4: Run the check and validate the plugin**
+- [x] **Step 4: Run the check and validate the plugin**
 
 ```bash
 python3 tests/check_plugin.py
@@ -254,7 +254,7 @@ Confirm a drifted paragraph in `skills/isolate-the-work/SKILL.md` fails the chec
 
 The missing-file branch is the failure in Step 1. The body branch is the drifted paragraph. The version branch is the version confirm. Say in the reply which of those confirms were run. `check_one` is unchanged, so this task adds no new branch.
 
-- [ ] **Step 5: Commit the work**
+- [x] **Step 5: Commit the work**
 
 `commit` governs this step. Stage the eleven skills, `tests/check_plugin.py`, both manifests, and `docs/skills.md`. Leave the specs and this plan in their own commits. A second run leaves a finished work commit as it is and commits a set only when it is still uncommitted and still allowed. Commit only when the resolved `commit` value allows it.
 
@@ -272,13 +272,13 @@ Mark an item done only when that command was run and passed, and the tree was re
 
 - Modify: `docs/plans/2026-10-03-remaining-skills.md`
 
-- [ ] **Step 1: Mark the finished checkboxes**
+- [x] **Step 1: Mark the finished checkboxes**
 
 When every checkbox in this plan except Step 3 and Step 4 of this task is `- [x]`, mark this step done.
 
 Otherwise mark each finished step `- [x]`. Leave Step 3 and Step 4 of this task empty. Leave a step that did not run empty.
 
-- [ ] **Step 2: Commit the checkbox update**
+- [x] **Step 2: Commit the checkbox update**
 
 `commit-plans` governs this step. Stage only this plan. The subject is `Mark the finished remaining-skills plan steps`. Commit only when that value allows it and the plan file is still uncommitted. A second run leaves a finished plan commit as it is.
 
