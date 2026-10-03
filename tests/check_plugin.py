@@ -31,6 +31,9 @@ STRESS_SPEC = ROOT / "docs/specs/2026-10-03-stress-the-change-design.md"
 STRESS_SKILL = ROOT / "skills/stress-the-change/SKILL.md"
 SHIP_SPEC = ROOT / "docs/specs/2026-10-03-ship-the-branch-design.md"
 SHIP_SKILL = ROOT / "skills/ship-the-branch/SKILL.md"
+RUN_SPEC = ROOT / "docs/specs/2026-10-03-run-the-play-design.md"
+RUN_SKILL = ROOT / "skills/run-the-play/SKILL.md"
+PLAYBOOK_DIR = ROOT / "skills/run-the-play/playbooks"
 README = ROOT / "README.md"
 GUIDE = ROOT / "docs/skills.md"
 PLUGIN = ROOT / ".claude-plugin/plugin.json"
@@ -134,6 +137,14 @@ SHIP_HEADINGS = (
     "The same branch",
 )
 
+RUN_HEADINGS = (
+    "The match",
+    "The list",
+    "A step left out",
+    "Where it stops",
+    "The same task",
+)
+
 DESCRIPTION = (
     "Use before writing a reply, a diff, a commit message, or a document. "
     "Kobold Codex is the voice and the engineering principles for "
@@ -206,6 +217,13 @@ SHIP_DESCRIPTION = (
     "each as the resolved bounds allow."
 )
 
+RUN_DESCRIPTION = (
+    "Use when a task should follow a playbook. "
+    "Match it to one playbook, copy that playbook's steps into the "
+    "working list, record a skip with a reason, and stop where the "
+    "resolved bounds say to stop."
+)
+
 PLUGIN_DESCRIPTION = (
     "Principles and workflow skills for DragonCrafted87's agents on Grok "
     "and Claude Code."
@@ -243,6 +261,8 @@ GUIDE_LINKS = (
     "docs/specs/2026-10-03-stress-the-change-design.md",
     "skills/ship-the-branch/SKILL.md",
     "docs/specs/2026-10-03-ship-the-branch-design.md",
+    "skills/run-the-play/SKILL.md",
+    "docs/specs/2026-10-03-run-the-play-design.md",
 )
 
 NEEDLES = (
@@ -306,6 +326,146 @@ def check_one(path, spec_path, expected_name, description, headings):
             fail(f"section {heading!r} does not match the spec")
         if skill_sections[heading] in readme:
             fail(f"README restates {heading}")
+
+
+def playbook_title(name):
+    words = name.replace("-", " ")
+    return words[:1].upper() + words[1:]
+
+
+def playbook_regions(spec_text):
+    lines = spec_text.splitlines()
+    found = []
+    for index, line in enumerate(lines):
+        match = re.match(
+            r"^## Playbook: ([a-z][a-z0-9]*(?:-[a-z0-9]+)*)$",
+            line,
+        )
+        if match:
+            found.append((match.group(1), index))
+    if not found:
+        fail("run-the-play spec has no playbook")
+    regions = []
+    for name, start in found:
+        body = []
+        for line in lines[start + 1 :]:
+            if line.startswith("## ") and not line.startswith("### "):
+                break
+            body.append(line)
+        regions.append((name, body))
+    return regions
+
+
+def region_steps(name, body_lines):
+    steps = []
+    current = None
+    buf = []
+    lead = []
+    for line in body_lines:
+        match = re.match(r"^(#{1,6}) (.+)$", line)
+        if match:
+            if current is None and "\n".join(lead).strip():
+                fail(f"playbook {name} region has text before its steps")
+            if current is not None:
+                steps.append((current, "\n".join(buf).strip()))
+            level = len(match.group(1))
+            title = match.group(2).strip()
+            if level != 3:
+                fail(
+                    f"playbook {name} region heading {title!r} "
+                    "must be level 3"
+                )
+            current = title
+            buf = []
+        elif current is not None:
+            buf.append(line.rstrip())
+        else:
+            lead.append(line.rstrip())
+    if current is not None:
+        steps.append((current, "\n".join(buf).strip()))
+    if not steps:
+        fail(f"playbook {name} region has no steps")
+    return steps
+
+
+def heading_items(text):
+    items = []
+    current = None
+    level = None
+    buf = []
+    for line in text.splitlines():
+        match = re.match(r"^(#{1,6}) (.+)$", line)
+        if match:
+            if current is not None:
+                items.append((level, current, "\n".join(buf).strip()))
+            level = len(match.group(1))
+            current = match.group(2).strip()
+            buf = []
+        elif current is not None:
+            buf.append(line.rstrip())
+    if current is not None:
+        items.append((level, current, "\n".join(buf).strip()))
+    return items
+
+
+def check_playbook_file(name, steps, readme):
+    path = PLAYBOOK_DIR / f"{name}.md"
+    if not path.is_file():
+        fail(f"missing {path.relative_to(ROOT)}")
+    raw = path.read_text()
+    if raw.startswith("---"):
+        fail(f"{name} playbook starts with frontmatter")
+    title = playbook_title(name)
+    items = heading_items(raw)
+    if not items or items[0][0] != 1 or items[0][1] != title:
+        fail(f"{name} playbook title must be {title}")
+    before = []
+    for line in raw.splitlines():
+        if line.startswith("## ") and not line.startswith("### "):
+            break
+        before.append(line.rstrip())
+    kept = []
+    removed = False
+    for line in before:
+        if not removed and line == f"# {title}":
+            removed = True
+            continue
+        kept.append(line)
+    if "\n".join(kept).strip():
+        fail(f"{name} playbook has text before its steps")
+    for level, heading, _body in items[1:]:
+        if level != 2:
+            fail(f"{name} playbook has an unexpected heading {heading}")
+    found = [(heading, body) for level, heading, body in items if level == 2]
+    expected = [heading for heading, _body in steps]
+    actual = [heading for heading, _body in found]
+    if actual != expected:
+        fail(f"{name} playbook headings are {actual}, expected {expected}")
+    for (heading, body), (_title, spec_body) in zip(found, steps):
+        if not body:
+            fail(f"{name} playbook section {heading!r} is empty")
+        if body != spec_body:
+            fail(f"playbook {name} section {heading!r} does not match the spec")
+        if body in readme:
+            fail(f"README restates {name} {heading}")
+
+
+def check_playbooks(spec_path):
+    regions = playbook_regions(spec_path.read_text())
+    readme = README.read_text()
+    names = []
+    for name, body in regions:
+        steps = region_steps(name, body)
+        for heading, step_body in steps:
+            if not step_body:
+                fail(f"playbook {name} section {heading!r} is empty in the spec")
+        check_playbook_file(name, steps, readme)
+        names.append(name)
+    if not PLAYBOOK_DIR.is_dir():
+        fail(f"missing {PLAYBOOK_DIR.relative_to(ROOT)}")
+    for path in sorted(PLAYBOOK_DIR.glob("*.md")):
+        if path.stem not in names:
+            fail(f"playbook file {path.name} is not in the spec")
 
 
 def check_skills():
@@ -387,6 +547,14 @@ def check_skills():
         SHIP_DESCRIPTION,
         SHIP_HEADINGS,
     )
+    check_one(
+        RUN_SKILL,
+        RUN_SPEC,
+        "run-the-play",
+        RUN_DESCRIPTION,
+        RUN_HEADINGS,
+    )
+    check_playbooks(RUN_SPEC)
 
 
 def check_manifests():
@@ -394,7 +562,7 @@ def check_manifests():
     market = json.loads(MARKET.read_text())
     if plugin["name"] != "kobold-codex":
         fail("plugin name")
-    if plugin["version"] != "0.7.0":
+    if plugin["version"] != "0.8.0":
         fail("plugin version")
     if plugin["description"] != PLUGIN_DESCRIPTION:
         fail("plugin description")
