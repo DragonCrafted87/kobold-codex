@@ -1,7 +1,7 @@
 {
   "name": "kobold-codex",
   "description": "Principles and workflow skills for DragonCrafted87's agents on Grok and Claude Code.",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "author": {
     "name": "Scott Gudeman",
     "email": "24697493+DragonCrafted87@users.noreply.github.com"
