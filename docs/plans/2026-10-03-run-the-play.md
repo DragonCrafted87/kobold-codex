@@ -62,13 +62,13 @@ What will change is the goal above. What the change touches is the architecture 
 - Consumes: the spec and this plan, already in the worktree on `feat/run-the-play`.
 - Produces: two commits when the resolved keys allow them. The spec commit contains only the spec. The plan commit contains only this plan. The checkboxes in that plan commit are still empty.
 
-- [ ] **Step 1: Commit the spec**
+- [x] **Step 1: Commit the spec**
 
 When the spec is already committed on this branch, mark this step done and go to Step 2.
 
 Otherwise resolve `commit-specs` and commit only that file when that value allows it. Leave this plan unstaged. The subject is `Record the run-the-play spec`. The body says the spec records `run-the-play` and the four playbooks, and that the skill file is not in this commit. A second run leaves a finished spec commit as it is.
 
-- [ ] **Step 2: Commit this plan**
+- [x] **Step 2: Commit this plan**
 
 When this plan is already committed, mark this step done.
 
@@ -94,7 +94,7 @@ Otherwise resolve `commit-plans` and commit only this file when that value allow
 - Consumes: the `###` bodies under the spec's `## Skill` heading, and each `## Playbook:` region. The checks already in `tests/check_plugin.py`.
 - Produces: a tree where `python3 tests/check_plugin.py` exits 0 and `grok plugin validate .` reports version `0.8.0`. Validate counts the `skills/` directory, so the component line stays `1 skill dir(s)`.
 
-- [ ] **Step 1: Extend the check and confirm it fails**
+- [x] **Step 1: Extend the check and confirm it fails**
 
 When `tests/check_plugin.py` already requires the new skill, version `0.8.0`, the two new guide links, and one file per `## Playbook:` region, mark this step done and go to Step 2.
 
@@ -135,7 +135,7 @@ python3 tests/check_plugin.py
 
 Expected: exit 1, and stderr contains `missing` and `run-the-play`. The creed sections are not the failure.
 
-- [ ] **Step 2: Write the skill and the four playbooks**
+- [x] **Step 2: Write the skill and the four playbooks**
 
 When `skills/run-the-play/SKILL.md` already carries the frontmatter and the section bodies from the spec, leave that file. Otherwise create it.
 
@@ -143,7 +143,7 @@ The file starts with `---` frontmatter, `name`, and the one-line `description` f
 
 When a playbook file already carries the title and the section bodies from its region, leave that file. Otherwise create it. The first line is `#` and the title from Global Constraints. Then a blank line. Then each `###` step from that region copied as `##`, with the same body and the same line breaks. No frontmatter. No extra prose. The directory contains only the four files the spec names.
 
-- [ ] **Step 3: Bump the manifests and the skill map**
+- [x] **Step 3: Bump the manifests and the skill map**
 
 Set `"version"` to `0.8.0` in `.claude-plugin/plugin.json` and in the one plugin entry inside `.claude-plugin/marketplace.json`. Leave `"description"` as `Principles and workflow skills for DragonCrafted87's agents on Grok and Claude Code.` Leave the other manifest fields as they are. Do not add a version field to the marketplace object.
 
@@ -161,7 +161,7 @@ Under Records, add this item after the `ship-the-branch` item:
 
 When that version and those two sentences are already present, leave them.
 
-- [ ] **Step 4: Run the check and validate the plugin**
+- [x] **Step 4: Run the check and validate the plugin**
 
 ```bash
 python3 tests/check_plugin.py
@@ -174,7 +174,7 @@ Confirm a drifted playbook paragraph fails the check, then restore the copied bo
 
 The new playbook check has branches for a missing file, frontmatter, a wrong title, a wrong heading order, a mismatched body, an empty body, a README restatement, and an extra markdown file. The missing-file branch is the failure in Step 1. The body branch and the order branch are the two confirms above. The other branches are the conditions in Step 1. Say in the reply which of those confirms were run.
 
-- [ ] **Step 5: Commit the work**
+- [x] **Step 5: Commit the work**
 
 `commit` governs this step. Stage the skill, the four playbooks, `tests/check_plugin.py`, both manifests, and `docs/skills.md`. Leave the spec and this plan in their own commits. A second run leaves a finished work commit as it is and commits a set only when it is still uncommitted and still allowed. Commit only when the resolved `commit` value allows it.
 
@@ -192,13 +192,13 @@ Mark an item done only when that command was run and passed, and the tree was re
 
 - Modify: `docs/plans/2026-10-03-run-the-play.md`
 
-- [ ] **Step 1: Mark the finished checkboxes**
+- [x] **Step 1: Mark the finished checkboxes**
 
 When every checkbox in this plan except Step 3 and Step 4 of this task is `- [x]`, mark this step done.
 
 Otherwise mark each finished step `- [x]`. Leave Step 3 and Step 4 of this task empty. Leave a step that did not run empty.
 
-- [ ] **Step 2: Commit the checkbox update**
+- [x] **Step 2: Commit the checkbox update**
 
 `commit-plans` governs this step. Stage only this plan. The subject is `Mark the finished run-the-play plan steps`. Commit only when that value allows it and the plan file is still uncommitted. A second run leaves a finished plan commit as it is.
 
