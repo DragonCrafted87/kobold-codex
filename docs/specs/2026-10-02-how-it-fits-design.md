@@ -48,20 +48,17 @@ because its brief includes the fix.
 Nothing in the skill names a Grok tool or a Claude tool. No hooks.
 
 These three investigation skills ship together. The plugin version
-becomes `0.4.0` in that change. The plugin and marketplace
-description becomes the following sentence.
-
-```text
-Voice, engineering principles, edit scoping, action bounds, and investigation for DragonCrafted87's agents on Grok and Claude Code.
-```
-
-The README points at the new skill and at this spec. It does not
-restate the skill paragraphs. Install commands stay as they are.
+becomes `0.4.0` in that change. The manifest description stays the
+stable sentence in the catalog's ship rule, and later skills leave
+that sentence as it is. The root README stays the introduction and
+the install guide. It does not record this decision. `docs/skills.md`
+links the skill and this spec, and it does not restate the skill
+paragraphs. Install commands stay as they are.
 
 `tests/check_plugin.py` pins the new section bodies to this document
 the same way it pins the creed, `scope-the-edit`, and
-`set-the-bounds`, and it requires version `0.4.0` and the description
-above.
+`set-the-bounds`, and it requires version `0.4.0` and the stable
+description.
 
 ## Where the words live
 
@@ -147,17 +144,20 @@ The build is done when all of these are true:
   sections above. The heading text matches. The paragraphs match this
   document.
 - `skills/kobold-codex/SKILL.md`, `skills/scope-the-edit/SKILL.md`,
-  `skills/set-the-bounds/SKILL.md`, the three specs those skills pin,
-  and the catalog are unchanged.
+  `skills/set-the-bounds/SKILL.md`, and the three specs those skills
+  pin are unchanged. The catalog's skill briefs stay. Its ship rule
+  records the stable manifest description and points the skill map
+  at `docs/skills.md`.
 - `tests/check_plugin.py` fails when a new paragraph, the new
   frontmatter, the version, the manifest description, or a restatement
   of a skill paragraph in the README drifts.
 - Plugin version is `0.4.0` in `.claude-plugin/plugin.json` and
   `.claude-plugin/marketplace.json`, and both descriptions match the
-  sentence in Decisions. `debug-the-failure` and `why-it-is` ship in
-  that same version.
-- The README links this spec and the new skill, keeps the install
-  commands, and does not restate the paragraphs.
+  stable sentence in the catalog's ship rule. `debug-the-failure`
+  and `why-it-is` ship in that same version.
+- The root README keeps the install commands and does not link this
+  spec. `docs/skills.md` links this spec and the new skill. The
+  README does not restate the paragraphs.
 - `grok plugin validate` accepts the plugin and reports version
   `0.4.0`. The component line counts the `skills/` directory, so it
   stays `1 skill dir(s)` while the skills live under it. The Python
