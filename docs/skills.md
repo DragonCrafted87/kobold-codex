@@ -16,6 +16,10 @@ Reading a subsystem before changing it uses [skills/how-it-fits/SKILL.md](../ski
 
 A behavior or a threshold that needs a reason uses [skills/why-it-is/SKILL.md](../skills/why-it-is/SKILL.md).
 
+An architectural change, or a request for a plan, uses [skills/write-the-plan/SKILL.md](../skills/write-the-plan/SKILL.md).
+
+An approved plan uses [skills/carry-out-the-plan/SKILL.md](../skills/carry-out-the-plan/SKILL.md).
+
 ## Records
 
 - [skills/kobold-codex/SKILL.md](../skills/kobold-codex/SKILL.md) is recorded in [docs/specs/2026-10-01-kobold-codex-design.md](specs/2026-10-01-kobold-codex-design.md).
@@ -24,3 +28,5 @@ A behavior or a threshold that needs a reason uses [skills/why-it-is/SKILL.md](.
 - [skills/debug-the-failure/SKILL.md](../skills/debug-the-failure/SKILL.md) is recorded in [docs/specs/2026-10-02-debug-the-failure-design.md](specs/2026-10-02-debug-the-failure-design.md).
 - [skills/how-it-fits/SKILL.md](../skills/how-it-fits/SKILL.md) is recorded in [docs/specs/2026-10-02-how-it-fits-design.md](specs/2026-10-02-how-it-fits-design.md).
 - [skills/why-it-is/SKILL.md](../skills/why-it-is/SKILL.md) is recorded in [docs/specs/2026-10-02-why-it-is-design.md](specs/2026-10-02-why-it-is-design.md).
+- [skills/write-the-plan/SKILL.md](../skills/write-the-plan/SKILL.md) is recorded in [docs/specs/2026-10-02-write-the-plan-design.md](specs/2026-10-02-write-the-plan-design.md).
+- [skills/carry-out-the-plan/SKILL.md](../skills/carry-out-the-plan/SKILL.md) is recorded in [docs/specs/2026-10-02-carry-out-the-plan-design.md](specs/2026-10-02-carry-out-the-plan-design.md).
