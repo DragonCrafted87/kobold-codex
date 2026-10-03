@@ -23,6 +23,12 @@ PLAN_SPEC = ROOT / "docs/specs/2026-10-02-write-the-plan-design.md"
 PLAN_SKILL = ROOT / "skills/write-the-plan/SKILL.md"
 CARRY_SPEC = ROOT / "docs/specs/2026-10-02-carry-out-the-plan-design.md"
 CARRY_SKILL = ROOT / "skills/carry-out-the-plan/SKILL.md"
+REVIEW_SPEC = ROOT / "docs/specs/2026-10-03-review-the-diff-design.md"
+REVIEW_SKILL = ROOT / "skills/review-the-diff/SKILL.md"
+TAKE_SPEC = ROOT / "docs/specs/2026-10-03-take-the-review-design.md"
+TAKE_SKILL = ROOT / "skills/take-the-review/SKILL.md"
+STRESS_SPEC = ROOT / "docs/specs/2026-10-03-stress-the-change-design.md"
+STRESS_SKILL = ROOT / "skills/stress-the-change/SKILL.md"
 README = ROOT / "README.md"
 GUIDE = ROOT / "docs/skills.md"
 PLUGIN = ROOT / ".claude-plugin/plugin.json"
@@ -96,6 +102,28 @@ CARRY_HEADINGS = (
     "The same plan",
 )
 
+REVIEW_HEADINGS = (
+    "The diff",
+    "The request and the checks",
+    "Findings",
+    "Leave the tree",
+)
+
+TAKE_HEADINGS = (
+    "The notes",
+    "Against the code",
+    "One note at a time",
+    "A note that does not hold",
+    "The same notes",
+)
+
+STRESS_HEADINGS = (
+    "The diff",
+    "Three passes",
+    "One list",
+    "Leave the tree",
+)
+
 DESCRIPTION = (
     "Use before writing a reply, a diff, a commit message, or a document. "
     "Kobold Codex is the voice and the engineering principles for "
@@ -143,6 +171,24 @@ CARRY_DESCRIPTION = (
     "allows it, and finish each task on the check the plan named."
 )
 
+REVIEW_DESCRIPTION = (
+    "Use before a merge, or when the user asks for a review. Review the "
+    "diff against the request and the checks, report each finding with "
+    "file and line, and leave the tree alone."
+)
+
+TAKE_DESCRIPTION = (
+    "Use when review notes are in hand. Check each note against the code, "
+    "implement the notes that hold, and for a note that does not hold say "
+    "why and leave that code as it is."
+)
+
+STRESS_DESCRIPTION = (
+    "Use when a diff needs several independent reviews. Run separate "
+    "passes on different angles, merge the findings into one list, and "
+    "leave the tree alone."
+)
+
 PLUGIN_DESCRIPTION = (
     "Principles and workflow skills for DragonCrafted87's agents on Grok "
     "and Claude Code."
@@ -172,6 +218,12 @@ GUIDE_LINKS = (
     "docs/specs/2026-10-02-write-the-plan-design.md",
     "skills/carry-out-the-plan/SKILL.md",
     "docs/specs/2026-10-02-carry-out-the-plan-design.md",
+    "skills/review-the-diff/SKILL.md",
+    "docs/specs/2026-10-03-review-the-diff-design.md",
+    "skills/take-the-review/SKILL.md",
+    "docs/specs/2026-10-03-take-the-review-design.md",
+    "skills/stress-the-change/SKILL.md",
+    "docs/specs/2026-10-03-stress-the-change-design.md",
 )
 
 NEEDLES = (
@@ -288,6 +340,27 @@ def check_skills():
         CARRY_DESCRIPTION,
         CARRY_HEADINGS,
     )
+    check_one(
+        REVIEW_SKILL,
+        REVIEW_SPEC,
+        "review-the-diff",
+        REVIEW_DESCRIPTION,
+        REVIEW_HEADINGS,
+    )
+    check_one(
+        TAKE_SKILL,
+        TAKE_SPEC,
+        "take-the-review",
+        TAKE_DESCRIPTION,
+        TAKE_HEADINGS,
+    )
+    check_one(
+        STRESS_SKILL,
+        STRESS_SPEC,
+        "stress-the-change",
+        STRESS_DESCRIPTION,
+        STRESS_HEADINGS,
+    )
 
 
 def check_manifests():
@@ -295,7 +368,7 @@ def check_manifests():
     market = json.loads(MARKET.read_text())
     if plugin["name"] != "kobold-codex":
         fail("plugin name")
-    if plugin["version"] != "0.5.0":
+    if plugin["version"] != "0.6.0":
         fail("plugin version")
     if plugin["description"] != PLUGIN_DESCRIPTION:
         fail("plugin description")
