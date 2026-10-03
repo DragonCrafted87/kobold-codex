@@ -19,6 +19,10 @@ FITS_SPEC = ROOT / "docs/specs/2026-10-02-how-it-fits-design.md"
 FITS_SKILL = ROOT / "skills/how-it-fits/SKILL.md"
 WHY_SPEC = ROOT / "docs/specs/2026-10-02-why-it-is-design.md"
 WHY_SKILL = ROOT / "skills/why-it-is/SKILL.md"
+PLAN_SPEC = ROOT / "docs/specs/2026-10-02-write-the-plan-design.md"
+PLAN_SKILL = ROOT / "skills/write-the-plan/SKILL.md"
+CARRY_SPEC = ROOT / "docs/specs/2026-10-02-carry-out-the-plan-design.md"
+CARRY_SKILL = ROOT / "skills/carry-out-the-plan/SKILL.md"
 README = ROOT / "README.md"
 GUIDE = ROOT / "docs/skills.md"
 PLUGIN = ROOT / ".claude-plugin/plugin.json"
@@ -76,6 +80,22 @@ WHY_HEADINGS = (
     "No reason on record",
 )
 
+PLAN_HEADINGS = (
+    "The document",
+    "Where it goes",
+    "What the reviewer reads",
+    "Tasks",
+    "Stop there",
+)
+
+CARRY_HEADINGS = (
+    "An approved plan",
+    "In order",
+    "Beside this session",
+    "The check",
+    "The same plan",
+)
+
 DESCRIPTION = (
     "Use before writing a reply, a diff, a commit message, or a document. "
     "Kobold Codex is the voice and the engineering principles for "
@@ -111,6 +131,18 @@ WHY_DESCRIPTION = (
     "each source."
 )
 
+PLAN_DESCRIPTION = (
+    "Use when an architectural change needs a written plan, or the user "
+    "asks for one. Write what will change, what it touches, what stays "
+    "the same, what the checks cover, and the ordered tasks, then stop."
+)
+
+CARRY_DESCRIPTION = (
+    "Use when a plan has been approved. Run its tasks in order in this "
+    "session, send independent tasks to another agent only when subagents "
+    "allows it, and finish each task on the check the plan named."
+)
+
 PLUGIN_DESCRIPTION = (
     "Principles and workflow skills for DragonCrafted87's agents on Grok "
     "and Claude Code."
@@ -136,6 +168,10 @@ GUIDE_LINKS = (
     "docs/specs/2026-10-02-how-it-fits-design.md",
     "skills/why-it-is/SKILL.md",
     "docs/specs/2026-10-02-why-it-is-design.md",
+    "skills/write-the-plan/SKILL.md",
+    "docs/specs/2026-10-02-write-the-plan-design.md",
+    "skills/carry-out-the-plan/SKILL.md",
+    "docs/specs/2026-10-02-carry-out-the-plan-design.md",
 )
 
 NEEDLES = (
@@ -238,6 +274,20 @@ def check_skills():
         WHY_DESCRIPTION,
         WHY_HEADINGS,
     )
+    check_one(
+        PLAN_SKILL,
+        PLAN_SPEC,
+        "write-the-plan",
+        PLAN_DESCRIPTION,
+        PLAN_HEADINGS,
+    )
+    check_one(
+        CARRY_SKILL,
+        CARRY_SPEC,
+        "carry-out-the-plan",
+        CARRY_DESCRIPTION,
+        CARRY_HEADINGS,
+    )
 
 
 def check_manifests():
@@ -245,7 +295,7 @@ def check_manifests():
     market = json.loads(MARKET.read_text())
     if plugin["name"] != "kobold-codex":
         fail("plugin name")
-    if plugin["version"] != "0.4.0":
+    if plugin["version"] != "0.5.0":
         fail("plugin version")
     if plugin["description"] != PLUGIN_DESCRIPTION:
         fail("plugin description")

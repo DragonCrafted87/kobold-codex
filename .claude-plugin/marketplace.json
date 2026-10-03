@@ -9,7 +9,7 @@
     {
       "name": "kobold-codex",
       "description": "Principles and workflow skills for DragonCrafted87's agents on Grok and Claude Code.",
-      "version": "0.4.0",
+      "version": "0.5.0",
       "source": "./",
       "license": "MIT",
       "author": {
