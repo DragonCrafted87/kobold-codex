@@ -1,6 +1,6 @@
 {
   "name": "kobold-codex",
-  "description": "Voice and engineering principles for DragonCrafted87's agents on Grok and Claude Code.",
+  "description": "Voice, engineering principles, and edit scoping for DragonCrafted87's agents on Grok and Claude Code.",
   "owner": {
     "name": "Scott Gudeman",
     "email": "24697493+DragonCrafted87@users.noreply.github.com"
@@ -8,8 +8,8 @@
   "plugins": [
     {
       "name": "kobold-codex",
-      "description": "Voice and engineering principles for DragonCrafted87's agents on Grok and Claude Code.",
-      "version": "0.1.0",
+      "description": "Voice, engineering principles, and edit scoping for DragonCrafted87's agents on Grok and Claude Code.",
+      "version": "0.2.0",
       "source": "./",
       "license": "MIT",
       "author": {
