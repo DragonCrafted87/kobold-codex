@@ -20,6 +20,12 @@ An architectural change, or a request for a plan, uses [skills/write-the-plan/SK
 
 An approved plan uses [skills/carry-out-the-plan/SKILL.md](../skills/carry-out-the-plan/SKILL.md).
 
+A review before a merge, or a request to review a diff, uses [skills/review-the-diff/SKILL.md](../skills/review-the-diff/SKILL.md).
+
+Review notes to check against the code use [skills/take-the-review/SKILL.md](../skills/take-the-review/SKILL.md).
+
+Several independent passes over one diff use [skills/stress-the-change/SKILL.md](../skills/stress-the-change/SKILL.md).
+
 ## Records
 
 - [skills/kobold-codex/SKILL.md](../skills/kobold-codex/SKILL.md) is recorded in [docs/specs/2026-10-01-kobold-codex-design.md](specs/2026-10-01-kobold-codex-design.md).
@@ -30,3 +36,6 @@ An approved plan uses [skills/carry-out-the-plan/SKILL.md](../skills/carry-out-t
 - [skills/why-it-is/SKILL.md](../skills/why-it-is/SKILL.md) is recorded in [docs/specs/2026-10-02-why-it-is-design.md](specs/2026-10-02-why-it-is-design.md).
 - [skills/write-the-plan/SKILL.md](../skills/write-the-plan/SKILL.md) is recorded in [docs/specs/2026-10-02-write-the-plan-design.md](specs/2026-10-02-write-the-plan-design.md).
 - [skills/carry-out-the-plan/SKILL.md](../skills/carry-out-the-plan/SKILL.md) is recorded in [docs/specs/2026-10-02-carry-out-the-plan-design.md](specs/2026-10-02-carry-out-the-plan-design.md).
+- [skills/review-the-diff/SKILL.md](../skills/review-the-diff/SKILL.md) is recorded in [docs/specs/2026-10-03-review-the-diff-design.md](specs/2026-10-03-review-the-diff-design.md).
+- [skills/take-the-review/SKILL.md](../skills/take-the-review/SKILL.md) is recorded in [docs/specs/2026-10-03-take-the-review-design.md](specs/2026-10-03-take-the-review-design.md).
+- [skills/stress-the-change/SKILL.md](../skills/stress-the-change/SKILL.md) is recorded in [docs/specs/2026-10-03-stress-the-change-design.md](specs/2026-10-03-stress-the-change-design.md).
