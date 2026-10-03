@@ -26,6 +26,8 @@ Review notes to check against the code use [skills/take-the-review/SKILL.md](../
 
 Several independent passes over one diff use [skills/stress-the-change/SKILL.md](../skills/stress-the-change/SKILL.md).
 
+Integrating a branch after its checks pass uses [skills/ship-the-branch/SKILL.md](../skills/ship-the-branch/SKILL.md).
+
 ## Records
 
 - [skills/kobold-codex/SKILL.md](../skills/kobold-codex/SKILL.md) is recorded in [docs/specs/2026-10-01-kobold-codex-design.md](specs/2026-10-01-kobold-codex-design.md).
@@ -39,3 +41,4 @@ Several independent passes over one diff use [skills/stress-the-change/SKILL.md]
 - [skills/review-the-diff/SKILL.md](../skills/review-the-diff/SKILL.md) is recorded in [docs/specs/2026-10-03-review-the-diff-design.md](specs/2026-10-03-review-the-diff-design.md).
 - [skills/take-the-review/SKILL.md](../skills/take-the-review/SKILL.md) is recorded in [docs/specs/2026-10-03-take-the-review-design.md](specs/2026-10-03-take-the-review-design.md).
 - [skills/stress-the-change/SKILL.md](../skills/stress-the-change/SKILL.md) is recorded in [docs/specs/2026-10-03-stress-the-change-design.md](specs/2026-10-03-stress-the-change-design.md).
+- [skills/ship-the-branch/SKILL.md](../skills/ship-the-branch/SKILL.md) is recorded in [docs/specs/2026-10-03-ship-the-branch-design.md](specs/2026-10-03-ship-the-branch-design.md).

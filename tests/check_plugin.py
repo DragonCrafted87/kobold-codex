@@ -29,6 +29,8 @@ TAKE_SPEC = ROOT / "docs/specs/2026-10-03-take-the-review-design.md"
 TAKE_SKILL = ROOT / "skills/take-the-review/SKILL.md"
 STRESS_SPEC = ROOT / "docs/specs/2026-10-03-stress-the-change-design.md"
 STRESS_SKILL = ROOT / "skills/stress-the-change/SKILL.md"
+SHIP_SPEC = ROOT / "docs/specs/2026-10-03-ship-the-branch-design.md"
+SHIP_SKILL = ROOT / "skills/ship-the-branch/SKILL.md"
 README = ROOT / "README.md"
 GUIDE = ROOT / "docs/skills.md"
 PLUGIN = ROOT / ".claude-plugin/plugin.json"
@@ -124,6 +126,14 @@ STRESS_HEADINGS = (
     "Leave the tree",
 )
 
+SHIP_HEADINGS = (
+    "The branch",
+    "Three commits",
+    "The remote",
+    "The worktree",
+    "The same branch",
+)
+
 DESCRIPTION = (
     "Use before writing a reply, a diff, a commit message, or a document. "
     "Kobold Codex is the voice and the engineering principles for "
@@ -189,6 +199,13 @@ STRESS_DESCRIPTION = (
     "leave the tree alone."
 )
 
+SHIP_DESCRIPTION = (
+    "Use when the checks pass and the branch should be integrated. "
+    "Commit the specs, the plans, and the work under their own keys, "
+    "then push, open a pull request, or merge, and remove the worktree, "
+    "each as the resolved bounds allow."
+)
+
 PLUGIN_DESCRIPTION = (
     "Principles and workflow skills for DragonCrafted87's agents on Grok "
     "and Claude Code."
@@ -224,6 +241,8 @@ GUIDE_LINKS = (
     "docs/specs/2026-10-03-take-the-review-design.md",
     "skills/stress-the-change/SKILL.md",
     "docs/specs/2026-10-03-stress-the-change-design.md",
+    "skills/ship-the-branch/SKILL.md",
+    "docs/specs/2026-10-03-ship-the-branch-design.md",
 )
 
 NEEDLES = (
@@ -361,6 +380,13 @@ def check_skills():
         STRESS_DESCRIPTION,
         STRESS_HEADINGS,
     )
+    check_one(
+        SHIP_SKILL,
+        SHIP_SPEC,
+        "ship-the-branch",
+        SHIP_DESCRIPTION,
+        SHIP_HEADINGS,
+    )
 
 
 def check_manifests():
@@ -368,7 +394,7 @@ def check_manifests():
     market = json.loads(MARKET.read_text())
     if plugin["name"] != "kobold-codex":
         fail("plugin name")
-    if plugin["version"] != "0.6.0":
+    if plugin["version"] != "0.7.0":
         fail("plugin version")
     if plugin["description"] != PLUGIN_DESCRIPTION:
         fail("plugin description")
