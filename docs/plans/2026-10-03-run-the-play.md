@@ -202,11 +202,11 @@ Otherwise mark each finished step `- [x]`. Leave Step 3 and Step 4 of this task 
 
 `commit-plans` governs this step. Stage only this plan. The subject is `Mark the finished run-the-play plan steps`. Commit only when that value allows it and the plan file is still uncommitted. A second run leaves a finished plan commit as it is.
 
-- [ ] **Step 3: Push and open the pull request**
+- [x] **Step 3: Push and open the pull request**
 
 Resolve `push`. Push when that value allows it. Resolve `pull-request`. Open one pull request when that value allows it. Resolve `merge` and stop when that value is `never`. Do not force-push. There is no worktree to remove.
 
-- [ ] **Step 4: Mark this publish step**
+- [x] **Step 4: Mark this publish step**
 
 When Step 3 did not open the pull request, leave this step empty.
 
