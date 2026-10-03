@@ -62,13 +62,13 @@ What will change is the goal above. What the change touches is the architecture 
 - Consumes: the three specs and this plan, already in the worktree on `feat/review-skills`.
 - Produces: two commits when the resolved keys allow them. The spec commit contains only the three specs. The plan commit contains only this plan.
 
-- [ ] **Step 1: Commit the specs**
+- [x] **Step 1: Commit the specs**
 
 When the three specs are already committed on this branch, mark this step done and go to Step 2.
 
 Otherwise resolve `commit-specs` and commit only those three files when that value allows it. Leave this plan unstaged. A second run leaves a finished spec commit as it is.
 
-- [ ] **Step 2: Commit this plan**
+- [x] **Step 2: Commit this plan**
 
 When this plan is already committed, mark this step done.
 
@@ -92,7 +92,7 @@ Otherwise resolve `commit-plans` and commit only this file when that value allow
 - Consumes: the `###` bodies under each spec's `## Skill` heading. The checks already in `tests/check_plugin.py`.
 - Produces: a tree where `python3 tests/check_plugin.py` exits 0 and `grok plugin validate .` reports version `0.6.0`. Validate counts the `skills/` directory, so the component line stays `1 skill dir(s)`.
 
-- [ ] **Step 1: Extend the check and confirm it fails**
+- [x] **Step 1: Extend the check and confirm it fails**
 
 When `tests/check_plugin.py` already requires all three new skills, version `0.6.0`, and the six new guide links, mark this step done and go to Step 2.
 
@@ -119,13 +119,13 @@ python3 tests/check_plugin.py
 
 Expected: exit 1, and stderr contains `missing` and `review-the-diff`. The creed sections are not the failure.
 
-- [ ] **Step 2: Write the three skills**
+- [x] **Step 2: Write the three skills**
 
 When a `SKILL.md` already carries the frontmatter and the section bodies from its spec, leave that file. Otherwise create it.
 
 Each file starts with `---` frontmatter, `name`, and the one-line `description` from Global Constraints. The description stays on one physical line. The H1 titles are `Review the diff`, `Take the review`, and `Stress the change`. Copy each section body from that skill's spec. Do not rewrap a copied line.
 
-- [ ] **Step 3: Bump the manifests and the skill map**
+- [x] **Step 3: Bump the manifests and the skill map**
 
 Set `"version"` to `0.6.0` in `.claude-plugin/plugin.json`, in the marketplace object, and in the one plugin entry inside `.claude-plugin/marketplace.json`. Leave `"description"` as `Principles and workflow skills for DragonCrafted87's agents on Grok and Claude Code.` Leave the other manifest fields as they are.
 
@@ -149,7 +149,7 @@ Under Records, add these three items after the `carry-out-the-plan` item:
 
 When those version fields and those six sentences are already present, leave them.
 
-- [ ] **Step 4: Run the check and validate the plugin**
+- [x] **Step 4: Run the check and validate the plugin**
 
 ```bash
 python3 tests/check_plugin.py
@@ -160,7 +160,7 @@ Expected: `check_plugin.py` exits 0 with no stderr. `grok plugin validate .` exi
 
 Confirm a drifted paragraph fails the check, then restore the copied body. Confirm the files Global Constraints says are not edited have an empty diff against `main`. The three specs and this plan are new files, so they sit outside that empty-diff check.
 
-- [ ] **Step 5: Commit the work**
+- [x] **Step 5: Commit the work**
 
 `commit` governs this step. Stage the three skills, `tests/check_plugin.py`, both manifests, and `docs/skills.md`. Leave the specs and this plan in their own commits. A second run leaves a finished work commit as it is and commits a set only when it is still uncommitted and still allowed. Commit only when the resolved `commit` value allows it.
 
@@ -170,13 +170,13 @@ Confirm a drifted paragraph fails the check, then restore the copied body. Confi
 
 - Modify: `docs/plans/2026-10-03-review-skills.md`
 
-- [ ] **Step 1: Mark the finished checkboxes**
+- [x] **Step 1: Mark the finished checkboxes**
 
 When every checkbox in this plan is `- [x]`, mark this step done.
 
 Otherwise mark each finished step `- [x]`. Leave a step that did not run empty.
 
-- [ ] **Step 2: Commit the checkbox update**
+- [x] **Step 2: Commit the checkbox update**
 
 `commit-plans` governs this step. Stage only this plan. Commit only when that value allows it and the plan file is still uncommitted. A second run leaves a finished plan commit as it is.
 
