@@ -53,7 +53,9 @@ no repository can allow. Replacement is the rule, because the closest
 setting is the one that applies.
 
 This catalog does not bump the plugin version and does not change the
-README. The spec that ships a skill does both.
+README. A spec that ships a skill bumps the plugin version. The
+manifest description and the shape of the README stay on the ship
+rule below.
 
 ## Already in the plugin
 
@@ -393,11 +395,23 @@ The session that builds a skill writes a spec for that skill, with the
 frontmatter description on one physical line and the section bodies
 that ship. `tests/check_plugin.py` pins those bodies to that spec the
 same way it pins the creed and `scope-the-edit`. The skill names no
-Grok tool and no Claude tool. The README links the new skill and its
-spec and does not restate a section body. Plugin version and the
-manifest description bump in that same change. The playbook files ship
-with `run-the-play` and are pinned by name and by section, in that
-skill's spec.
+Grok tool and no Claude tool.
+
+The root README stays an introduction and the install guide. It does
+not gain a link to the skill or the spec, and it does not restate a
+section body. `docs/skills.md` is the map of which skill applies. It
+links the new skill and its spec, and it does not restate a section
+body.
+
+Plugin version bumps in that same change. The manifest description
+does not. It stays this sentence.
+
+```text
+Principles and workflow skills for DragonCrafted87's agents on Grok and Claude Code.
+```
+
+The playbook files ship with `run-the-play` and are pinned by name
+and by section, in that skill's spec.
 
 ## Implementation check
 
