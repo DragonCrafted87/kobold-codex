@@ -13,7 +13,14 @@ SCOPE_SPEC = ROOT / "docs/specs/2026-10-01-scope-the-edit-design.md"
 SCOPE_SKILL = ROOT / "skills/scope-the-edit/SKILL.md"
 BOUNDS_SPEC = ROOT / "docs/specs/2026-10-02-set-the-bounds-design.md"
 BOUNDS_SKILL = ROOT / "skills/set-the-bounds/SKILL.md"
+DEBUG_SPEC = ROOT / "docs/specs/2026-10-02-debug-the-failure-design.md"
+DEBUG_SKILL = ROOT / "skills/debug-the-failure/SKILL.md"
+FITS_SPEC = ROOT / "docs/specs/2026-10-02-how-it-fits-design.md"
+FITS_SKILL = ROOT / "skills/how-it-fits/SKILL.md"
+WHY_SPEC = ROOT / "docs/specs/2026-10-02-why-it-is-design.md"
+WHY_SKILL = ROOT / "skills/why-it-is/SKILL.md"
 README = ROOT / "README.md"
+GUIDE = ROOT / "docs/skills.md"
 PLUGIN = ROOT / ".claude-plugin/plugin.json"
 MARKET = ROOT / ".claude-plugin/marketplace.json"
 
@@ -47,6 +54,28 @@ BOUNDS_HEADINGS = (
     "Revise a layer",
 )
 
+DEBUG_HEADINGS = (
+    "Reproduce",
+    "One hypothesis",
+    "Evidence",
+    "The producer",
+    "The same failure",
+)
+
+FITS_HEADINGS = (
+    "Read first",
+    "Runtime path",
+    "Owner",
+    "Layer",
+)
+
+WHY_HEADINGS = (
+    "The question",
+    "Sources",
+    "The read",
+    "No reason on record",
+)
+
 DESCRIPTION = (
     "Use before writing a reply, a diff, a commit message, or a document. "
     "Kobold Codex is the voice and the engineering principles for "
@@ -65,9 +94,26 @@ BOUNDS_DESCRIPTION = (
     "layers, and revise one layer when the user wants a change."
 )
 
+DEBUG_DESCRIPTION = (
+    "Use when a failure can be reproduced. Hold one hypothesis at a time, "
+    "check it on the running system, and put the fix at the producer of "
+    "the symptom."
+)
+
+FITS_DESCRIPTION = (
+    "Use before changing a subsystem. Name the runtime path, the package "
+    "that owns the behavior, and the layer the change belongs on."
+)
+
+WHY_DESCRIPTION = (
+    "Use when you need the reason for a behavior or a threshold. Recover "
+    "it from the code, the history, the issues, and the docs, and cite "
+    "each source."
+)
+
 PLUGIN_DESCRIPTION = (
-    "Voice, engineering principles, edit scoping, and action bounds for "
-    "DragonCrafted87's agents on Grok and Claude Code."
+    "Principles and workflow skills for DragonCrafted87's agents on Grok "
+    "and Claude Code."
 )
 
 INSTALL_LINES = (
@@ -77,13 +123,19 @@ INSTALL_LINES = (
     "/plugin install kobold-codex@kobold-codex",
 )
 
-README_LINKS = (
+GUIDE_LINKS = (
     "skills/kobold-codex/SKILL.md",
     "docs/specs/2026-10-01-kobold-codex-design.md",
     "skills/scope-the-edit/SKILL.md",
     "docs/specs/2026-10-01-scope-the-edit-design.md",
     "skills/set-the-bounds/SKILL.md",
     "docs/specs/2026-10-02-set-the-bounds-design.md",
+    "skills/debug-the-failure/SKILL.md",
+    "docs/specs/2026-10-02-debug-the-failure-design.md",
+    "skills/how-it-fits/SKILL.md",
+    "docs/specs/2026-10-02-how-it-fits-design.md",
+    "skills/why-it-is/SKILL.md",
+    "docs/specs/2026-10-02-why-it-is-design.md",
 )
 
 NEEDLES = (
@@ -165,6 +217,27 @@ def check_skills():
         BOUNDS_DESCRIPTION,
         BOUNDS_HEADINGS,
     )
+    check_one(
+        DEBUG_SKILL,
+        DEBUG_SPEC,
+        "debug-the-failure",
+        DEBUG_DESCRIPTION,
+        DEBUG_HEADINGS,
+    )
+    check_one(
+        FITS_SKILL,
+        FITS_SPEC,
+        "how-it-fits",
+        FITS_DESCRIPTION,
+        FITS_HEADINGS,
+    )
+    check_one(
+        WHY_SKILL,
+        WHY_SPEC,
+        "why-it-is",
+        WHY_DESCRIPTION,
+        WHY_HEADINGS,
+    )
 
 
 def check_manifests():
@@ -172,7 +245,7 @@ def check_manifests():
     market = json.loads(MARKET.read_text())
     if plugin["name"] != "kobold-codex":
         fail("plugin name")
-    if plugin["version"] != "0.3.0":
+    if plugin["version"] != "0.4.0":
         fail("plugin version")
     if plugin["description"] != PLUGIN_DESCRIPTION:
         fail("plugin description")
@@ -204,9 +277,16 @@ def check_manifests():
     for line in INSTALL_LINES:
         if line not in readme:
             fail(f"README missing install line: {line}")
-    for line in README_LINKS:
-        if line not in readme:
-            fail(f"README missing link: {line}")
+    if "docs/skills.md" not in readme:
+        fail("README missing link: docs/skills.md")
+    if "docs/specs/" in readme:
+        fail("README links a spec")
+    if not GUIDE.is_file():
+        fail("missing docs/skills.md")
+    guide = GUIDE.read_text()
+    for line in GUIDE_LINKS:
+        if line not in guide:
+            fail(f"docs/skills.md missing link: {line}")
     if (ROOT / "hooks").exists() or any(ROOT.rglob("hooks.json")):
         fail("hooks are out of scope")
 
