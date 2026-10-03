@@ -30,6 +30,28 @@ Integrating a branch after its checks pass uses [skills/ship-the-branch/SKILL.md
 
 A task that should follow a playbook uses [skills/run-the-play/SKILL.md](../skills/run-the-play/SKILL.md).
 
+Feature work, or the execution of a plan, in its own checkout uses [skills/isolate-the-work/SKILL.md](../skills/isolate-the-work/SKILL.md).
+
+Work that does not share state uses [skills/fan-out/SKILL.md](../skills/fan-out/SKILL.md).
+
+A change whose first shape would stick uses [skills/try-several-shapes/SKILL.md](../skills/try-several-shapes/SKILL.md).
+
+A small diff, before it ships, uses [skills/measure-the-blast/SKILL.md](../skills/measure-the-blast/SKILL.md).
+
+A repo with no scripted way to drive the app the way a user does uses [skills/prove-the-product/SKILL.md](../skills/prove-the-product/SKILL.md).
+
+A long run or an unattended run uses [skills/leave-a-trail/SKILL.md](../skills/leave-a-trail/SKILL.md).
+
+A new session continuing work already in progress uses [skills/pick-up-the-work/SKILL.md](../skills/pick-up-the-work/SKILL.md).
+
+A lesson from a session that stumbled, or from a preference worth keeping, uses [skills/learn-from-the-session/SKILL.md](../skills/learn-from-the-session/SKILL.md).
+
+Authoring or revising a skill in this plugin uses [skills/write-a-skill/SKILL.md](../skills/write-a-skill/SKILL.md).
+
+A pass over prose or a diff for narration, stock phrasing, and comments that restate the code uses [skills/cut-the-slop/SKILL.md](../skills/cut-the-slop/SKILL.md).
+
+A README, a spec, a pull request, or a commit message uses [skills/write-the-doc/SKILL.md](../skills/write-the-doc/SKILL.md).
+
 ## Records
 
 - [skills/kobold-codex/SKILL.md](../skills/kobold-codex/SKILL.md) is recorded in [docs/specs/2026-10-01-kobold-codex-design.md](specs/2026-10-01-kobold-codex-design.md).
@@ -45,3 +67,14 @@ A task that should follow a playbook uses [skills/run-the-play/SKILL.md](../skil
 - [skills/stress-the-change/SKILL.md](../skills/stress-the-change/SKILL.md) is recorded in [docs/specs/2026-10-03-stress-the-change-design.md](specs/2026-10-03-stress-the-change-design.md).
 - [skills/ship-the-branch/SKILL.md](../skills/ship-the-branch/SKILL.md) is recorded in [docs/specs/2026-10-03-ship-the-branch-design.md](specs/2026-10-03-ship-the-branch-design.md).
 - [skills/run-the-play/SKILL.md](../skills/run-the-play/SKILL.md) is recorded in [docs/specs/2026-10-03-run-the-play-design.md](specs/2026-10-03-run-the-play-design.md).
+- [skills/isolate-the-work/SKILL.md](../skills/isolate-the-work/SKILL.md) is recorded in [docs/specs/2026-10-03-isolate-the-work-design.md](specs/2026-10-03-isolate-the-work-design.md).
+- [skills/fan-out/SKILL.md](../skills/fan-out/SKILL.md) is recorded in [docs/specs/2026-10-03-fan-out-design.md](specs/2026-10-03-fan-out-design.md).
+- [skills/try-several-shapes/SKILL.md](../skills/try-several-shapes/SKILL.md) is recorded in [docs/specs/2026-10-03-try-several-shapes-design.md](specs/2026-10-03-try-several-shapes-design.md).
+- [skills/measure-the-blast/SKILL.md](../skills/measure-the-blast/SKILL.md) is recorded in [docs/specs/2026-10-03-measure-the-blast-design.md](specs/2026-10-03-measure-the-blast-design.md).
+- [skills/prove-the-product/SKILL.md](../skills/prove-the-product/SKILL.md) is recorded in [docs/specs/2026-10-03-prove-the-product-design.md](specs/2026-10-03-prove-the-product-design.md).
+- [skills/leave-a-trail/SKILL.md](../skills/leave-a-trail/SKILL.md) is recorded in [docs/specs/2026-10-03-leave-a-trail-design.md](specs/2026-10-03-leave-a-trail-design.md).
+- [skills/pick-up-the-work/SKILL.md](../skills/pick-up-the-work/SKILL.md) is recorded in [docs/specs/2026-10-03-pick-up-the-work-design.md](specs/2026-10-03-pick-up-the-work-design.md).
+- [skills/learn-from-the-session/SKILL.md](../skills/learn-from-the-session/SKILL.md) is recorded in [docs/specs/2026-10-03-learn-from-the-session-design.md](specs/2026-10-03-learn-from-the-session-design.md).
+- [skills/write-a-skill/SKILL.md](../skills/write-a-skill/SKILL.md) is recorded in [docs/specs/2026-10-03-write-a-skill-design.md](specs/2026-10-03-write-a-skill-design.md).
+- [skills/cut-the-slop/SKILL.md](../skills/cut-the-slop/SKILL.md) is recorded in [docs/specs/2026-10-03-cut-the-slop-design.md](specs/2026-10-03-cut-the-slop-design.md).
+- [skills/write-the-doc/SKILL.md](../skills/write-the-doc/SKILL.md) is recorded in [docs/specs/2026-10-03-write-the-doc-design.md](specs/2026-10-03-write-the-doc-design.md).
