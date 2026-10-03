@@ -80,10 +80,10 @@ uses a named tool reads the resolved keys first.
 Four layers, from farthest to nearest:
 
 1. Defaults in `skills/set-the-bounds/SKILL.md`.
-2. The user config file `~/.config/kobold-codex/bounds.md`, one per
+2. The user config file `~/.config/kobold-codex/bounds.yaml`, one per
    machine, outside every repository.
-3. The committed repo file `.kobold/bounds.md` at the repository root.
-4. The checkout file `.kobold/bounds.local.md`, gitignored.
+3. The committed repo file `.kobold/bounds.yaml` at the repository root.
+4. The checkout file `.kobold/bounds.local.yaml`, gitignored.
 
 The same keys exist at every layer. A missing key inherits from the
 layer behind it. The nearest layer that sets a key wins for that key.
@@ -137,22 +137,25 @@ Values:
 
 - `commit`, `commit-plans`, `commit-specs`, and `push` are `ask`,
   `auto`, or `never`.
-- `pull-request` is `never`, `ask`, or `open`. `open` opens one without
-  a fresh ask. `github-write` is the other GitHub writes: comments,
-  labels, issues, and review submission.
+- `pull-request` is `never`, `ask`, `open`, or `auto`. `open` and
+  `auto` each open one without a fresh ask. `github-write` is the
+  other GitHub writes: comments, labels, issues, and review submission.
 - `merge` and `force-push` are `never` or `ask`.
-- Each tool key is `ask`, `allow`, or `deny`. The tool names in the
-  default set are `shell-network`, `browser`, `github-write`,
-  `subagents`, and `worktrees`. A file may add a name.
-- `unattended` is `stop-at-plan`, `safe-steps`, or `through-publish`.
-  Safe steps are read, edit, run the project's checks, and write the
-  plan and the trail.
+- Each tool key is `ask`, `allow`, `auto`, or `deny`. `auto` proceeds,
+  the same as `allow`. The tool names in the default set are
+  `shell-network`, `browser`, `github-write`, `subagents`, and
+  `worktrees`. A file may add a name.
+- `unattended` is `stop-at-plan`, `safe-steps`, `through-publish`, or
+  `auto`. `auto` follows the publishing keys, the same as
+  `through-publish`. Safe steps are read, edit, run the project's
+  checks, and write the plan and the trail.
 - `model` is optional. Absent means the model already running the
   session.
 
-The file is one `key: value` line per setting. Re-running setup
+The file is YAML, one `key: value` line per setting. Re-running setup
 overwrites only the layer the user named, and leaves every key they
-did not mention as it was.
+did not mention as it was. When the user names no keys, the reply is
+the table from `set-the-bounds` and the file is left unwritten.
 
 ## Skills
 

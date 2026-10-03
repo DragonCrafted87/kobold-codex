@@ -1,7 +1,7 @@
 {
   "name": "kobold-codex",
-  "description": "Voice, engineering principles, and edit scoping for DragonCrafted87's agents on Grok and Claude Code.",
-  "version": "0.2.0",
+  "description": "Voice, engineering principles, edit scoping, and action bounds for DragonCrafted87's agents on Grok and Claude Code.",
+  "version": "0.3.0",
   "author": {
     "name": "Scott Gudeman",
     "email": "24697493+DragonCrafted87@users.noreply.github.com"

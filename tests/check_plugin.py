@@ -11,6 +11,8 @@ SPEC = ROOT / "docs/specs/2026-10-01-kobold-codex-design.md"
 SKILL = ROOT / "skills/kobold-codex/SKILL.md"
 SCOPE_SPEC = ROOT / "docs/specs/2026-10-01-scope-the-edit-design.md"
 SCOPE_SKILL = ROOT / "skills/scope-the-edit/SKILL.md"
+BOUNDS_SPEC = ROOT / "docs/specs/2026-10-02-set-the-bounds-design.md"
+BOUNDS_SKILL = ROOT / "skills/set-the-bounds/SKILL.md"
 README = ROOT / "README.md"
 PLUGIN = ROOT / ".claude-plugin/plugin.json"
 MARKET = ROOT / ".claude-plugin/marketplace.json"
@@ -35,6 +37,16 @@ SCOPE_HEADINGS = (
     "Real code",
 )
 
+BOUNDS_HEADINGS = (
+    "Resolve first",
+    "Layers",
+    "Defaults",
+    "Values",
+    "Publishing sets",
+    "Unattended",
+    "Revise a layer",
+)
+
 DESCRIPTION = (
     "Use before writing a reply, a diff, a commit message, or a document. "
     "Kobold Codex is the voice and the engineering principles for "
@@ -47,8 +59,14 @@ SCOPE_DESCRIPTION = (
     "that scope calls for."
 )
 
+BOUNDS_DESCRIPTION = (
+    "Use before a commit, a push, a pull request, a merge, a force-push, "
+    "an unattended stretch, or a named tool. Resolve the four bounds "
+    "layers, and revise one layer when the user wants a change."
+)
+
 PLUGIN_DESCRIPTION = (
-    "Voice, engineering principles, and edit scoping for "
+    "Voice, engineering principles, edit scoping, and action bounds for "
     "DragonCrafted87's agents on Grok and Claude Code."
 )
 
@@ -64,6 +82,8 @@ README_LINKS = (
     "docs/specs/2026-10-01-kobold-codex-design.md",
     "skills/scope-the-edit/SKILL.md",
     "docs/specs/2026-10-01-scope-the-edit-design.md",
+    "skills/set-the-bounds/SKILL.md",
+    "docs/specs/2026-10-02-set-the-bounds-design.md",
 )
 
 NEEDLES = (
@@ -138,6 +158,13 @@ def check_skills():
         SCOPE_DESCRIPTION,
         SCOPE_HEADINGS,
     )
+    check_one(
+        BOUNDS_SKILL,
+        BOUNDS_SPEC,
+        "set-the-bounds",
+        BOUNDS_DESCRIPTION,
+        BOUNDS_HEADINGS,
+    )
 
 
 def check_manifests():
@@ -145,7 +172,7 @@ def check_manifests():
     market = json.loads(MARKET.read_text())
     if plugin["name"] != "kobold-codex":
         fail("plugin name")
-    if plugin["version"] != "0.2.0":
+    if plugin["version"] != "0.3.0":
         fail("plugin version")
     if plugin["description"] != PLUGIN_DESCRIPTION:
         fail("plugin description")
