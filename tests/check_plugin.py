@@ -33,6 +33,28 @@ SHIP_SPEC = ROOT / "docs/specs/2026-10-03-ship-the-branch-design.md"
 SHIP_SKILL = ROOT / "skills/ship-the-branch/SKILL.md"
 RUN_SPEC = ROOT / "docs/specs/2026-10-03-run-the-play-design.md"
 RUN_SKILL = ROOT / "skills/run-the-play/SKILL.md"
+ISOLATE_SPEC = ROOT / "docs/specs/2026-10-03-isolate-the-work-design.md"
+ISOLATE_SKILL = ROOT / "skills/isolate-the-work/SKILL.md"
+FAN_SPEC = ROOT / "docs/specs/2026-10-03-fan-out-design.md"
+FAN_SKILL = ROOT / "skills/fan-out/SKILL.md"
+SHAPES_SPEC = ROOT / "docs/specs/2026-10-03-try-several-shapes-design.md"
+SHAPES_SKILL = ROOT / "skills/try-several-shapes/SKILL.md"
+BLAST_SPEC = ROOT / "docs/specs/2026-10-03-measure-the-blast-design.md"
+BLAST_SKILL = ROOT / "skills/measure-the-blast/SKILL.md"
+PROVE_SPEC = ROOT / "docs/specs/2026-10-03-prove-the-product-design.md"
+PROVE_SKILL = ROOT / "skills/prove-the-product/SKILL.md"
+TRAIL_SPEC = ROOT / "docs/specs/2026-10-03-leave-a-trail-design.md"
+TRAIL_SKILL = ROOT / "skills/leave-a-trail/SKILL.md"
+PICKUP_SPEC = ROOT / "docs/specs/2026-10-03-pick-up-the-work-design.md"
+PICKUP_SKILL = ROOT / "skills/pick-up-the-work/SKILL.md"
+LEARN_SPEC = ROOT / "docs/specs/2026-10-03-learn-from-the-session-design.md"
+LEARN_SKILL = ROOT / "skills/learn-from-the-session/SKILL.md"
+AUTHOR_SPEC = ROOT / "docs/specs/2026-10-03-write-a-skill-design.md"
+AUTHOR_SKILL = ROOT / "skills/write-a-skill/SKILL.md"
+SLOP_SPEC = ROOT / "docs/specs/2026-10-03-cut-the-slop-design.md"
+SLOP_SKILL = ROOT / "skills/cut-the-slop/SKILL.md"
+DOC_SPEC = ROOT / "docs/specs/2026-10-03-write-the-doc-design.md"
+DOC_SKILL = ROOT / "skills/write-the-doc/SKILL.md"
 PLAYBOOK_DIR = ROOT / "skills/run-the-play/playbooks"
 README = ROOT / "README.md"
 GUIDE = ROOT / "docs/skills.md"
@@ -145,6 +167,89 @@ RUN_HEADINGS = (
     "The same task",
 )
 
+ISOLATE_HEADINGS = (
+    "The work",
+    "The key",
+    "The checkout",
+    "The path",
+    "The same work",
+)
+
+FAN_HEADINGS = (
+    "The pieces",
+    "The workers",
+    "One report",
+    "The same split",
+)
+
+SHAPES_HEADINGS = (
+    "The moment",
+    "The candidates",
+    "The base",
+    "The fold",
+    "The same attempt",
+)
+
+BLAST_HEADINGS = (
+    "The diff",
+    "The claim",
+    "The run",
+    "Leave the tree",
+    "The same diff",
+)
+
+PROVE_HEADINGS = (
+    "The drive",
+    "The skill file",
+    "Prove it once",
+    "A later pass",
+    "The same map",
+)
+
+TRAIL_HEADINGS = (
+    "When it starts",
+    "The row",
+    "Where it lives",
+    "The same run",
+)
+
+PICKUP_HEADINGS = (
+    "The sources",
+    "The brief",
+    "Leave the tree",
+    "The same point",
+)
+
+LEARN_HEADINGS = (
+    "The lesson",
+    "The home",
+    "The edit",
+    "The same lesson",
+)
+
+AUTHOR_HEADINGS = (
+    "The trigger",
+    "The spec",
+    "The file",
+    "The check",
+    "The same skill",
+)
+
+SLOP_HEADINGS = (
+    "The pass",
+    "What comes out",
+    "A constraint",
+    "The same pass",
+)
+
+DOC_HEADINGS = (
+    "The document",
+    "The headings",
+    "The sentences",
+    "Where it stops",
+    "The same document",
+)
+
 DESCRIPTION = (
     "Use before writing a reply, a diff, a commit message, or a document. "
     "Kobold Codex is the voice and the engineering principles for "
@@ -224,6 +329,72 @@ RUN_DESCRIPTION = (
     "resolved bounds say to stop."
 )
 
+ISOLATE_DESCRIPTION = (
+    "Use when feature work, or the execution of a plan, should sit "
+    "in its own checkout. Create that checkout when worktrees allows "
+    "it, and record the path so ship-the-branch can remove it."
+)
+
+FAN_DESCRIPTION = (
+    "Use when work that does not share state should run as parallel "
+    "workers. Split it, wait for the workers, and return one report. "
+    "subagents has to allow the parallel form."
+)
+
+SHAPES_DESCRIPTION = (
+    "Use when the first shape of a change would stick. Run several "
+    "candidates, pick a base, and fold the strongest pieces of the "
+    "others into it."
+)
+
+BLAST_DESCRIPTION = (
+    "Use before a small diff ships. Name what else could break "
+    "outside the diff, and prove that claim by running the code that "
+    "would show the break."
+)
+
+PROVE_DESCRIPTION = (
+    "Use when a repo has no scripted way to drive the app the way a "
+    "user does. Write a project-local verification skill, prove it "
+    "once, and re-run it so the map stays honest."
+)
+
+TRAIL_DESCRIPTION = (
+    "Use for a long run or an unattended run. Append one row per "
+    "decision, with what, why, evidence, and result, to a log a "
+    "reviewer can read afterward."
+)
+
+PICKUP_DESCRIPTION = (
+    "Use when a new session should continue work already in "
+    "progress. Rebuild a short brief from the branch, the "
+    "transcript, and the trail."
+)
+
+LEARN_DESCRIPTION = (
+    "Use after a session that stumbled, or that found a preference "
+    "worth keeping. Name the lesson and edit the skill, playbook, "
+    "or bounds file that should carry it."
+)
+
+AUTHOR_DESCRIPTION = (
+    "Use when authoring or revising a skill in this plugin. Write "
+    "one trigger description, original wording, and a check that "
+    "the skill file matches its spec."
+)
+
+SLOP_DESCRIPTION = (
+    "Use when prose or a diff needs a pass for narration, stock "
+    "phrasing, and comments that restate the code. Encode a real "
+    "constraint in the structure, then drop the comment."
+)
+
+DOC_DESCRIPTION = (
+    "Use when writing or revising a README, a spec, a pull request, "
+    "or a commit message. Use the headings the project already uses, "
+    "in sentences a new reader can follow."
+)
+
 PLUGIN_DESCRIPTION = (
     "Principles and workflow skills for DragonCrafted87's agents on Grok "
     "and Claude Code."
@@ -263,6 +434,28 @@ GUIDE_LINKS = (
     "docs/specs/2026-10-03-ship-the-branch-design.md",
     "skills/run-the-play/SKILL.md",
     "docs/specs/2026-10-03-run-the-play-design.md",
+    "skills/isolate-the-work/SKILL.md",
+    "docs/specs/2026-10-03-isolate-the-work-design.md",
+    "skills/fan-out/SKILL.md",
+    "docs/specs/2026-10-03-fan-out-design.md",
+    "skills/try-several-shapes/SKILL.md",
+    "docs/specs/2026-10-03-try-several-shapes-design.md",
+    "skills/measure-the-blast/SKILL.md",
+    "docs/specs/2026-10-03-measure-the-blast-design.md",
+    "skills/prove-the-product/SKILL.md",
+    "docs/specs/2026-10-03-prove-the-product-design.md",
+    "skills/leave-a-trail/SKILL.md",
+    "docs/specs/2026-10-03-leave-a-trail-design.md",
+    "skills/pick-up-the-work/SKILL.md",
+    "docs/specs/2026-10-03-pick-up-the-work-design.md",
+    "skills/learn-from-the-session/SKILL.md",
+    "docs/specs/2026-10-03-learn-from-the-session-design.md",
+    "skills/write-a-skill/SKILL.md",
+    "docs/specs/2026-10-03-write-a-skill-design.md",
+    "skills/cut-the-slop/SKILL.md",
+    "docs/specs/2026-10-03-cut-the-slop-design.md",
+    "skills/write-the-doc/SKILL.md",
+    "docs/specs/2026-10-03-write-the-doc-design.md",
 )
 
 NEEDLES = (
@@ -554,6 +747,83 @@ def check_skills():
         RUN_DESCRIPTION,
         RUN_HEADINGS,
     )
+    check_one(
+        ISOLATE_SKILL,
+        ISOLATE_SPEC,
+        "isolate-the-work",
+        ISOLATE_DESCRIPTION,
+        ISOLATE_HEADINGS,
+    )
+    check_one(
+        FAN_SKILL,
+        FAN_SPEC,
+        "fan-out",
+        FAN_DESCRIPTION,
+        FAN_HEADINGS,
+    )
+    check_one(
+        SHAPES_SKILL,
+        SHAPES_SPEC,
+        "try-several-shapes",
+        SHAPES_DESCRIPTION,
+        SHAPES_HEADINGS,
+    )
+    check_one(
+        BLAST_SKILL,
+        BLAST_SPEC,
+        "measure-the-blast",
+        BLAST_DESCRIPTION,
+        BLAST_HEADINGS,
+    )
+    check_one(
+        PROVE_SKILL,
+        PROVE_SPEC,
+        "prove-the-product",
+        PROVE_DESCRIPTION,
+        PROVE_HEADINGS,
+    )
+    check_one(
+        TRAIL_SKILL,
+        TRAIL_SPEC,
+        "leave-a-trail",
+        TRAIL_DESCRIPTION,
+        TRAIL_HEADINGS,
+    )
+    check_one(
+        PICKUP_SKILL,
+        PICKUP_SPEC,
+        "pick-up-the-work",
+        PICKUP_DESCRIPTION,
+        PICKUP_HEADINGS,
+    )
+    check_one(
+        LEARN_SKILL,
+        LEARN_SPEC,
+        "learn-from-the-session",
+        LEARN_DESCRIPTION,
+        LEARN_HEADINGS,
+    )
+    check_one(
+        AUTHOR_SKILL,
+        AUTHOR_SPEC,
+        "write-a-skill",
+        AUTHOR_DESCRIPTION,
+        AUTHOR_HEADINGS,
+    )
+    check_one(
+        SLOP_SKILL,
+        SLOP_SPEC,
+        "cut-the-slop",
+        SLOP_DESCRIPTION,
+        SLOP_HEADINGS,
+    )
+    check_one(
+        DOC_SKILL,
+        DOC_SPEC,
+        "write-the-doc",
+        DOC_DESCRIPTION,
+        DOC_HEADINGS,
+    )
     check_playbooks(RUN_SPEC)
 
 
@@ -562,7 +832,7 @@ def check_manifests():
     market = json.loads(MARKET.read_text())
     if plugin["name"] != "kobold-codex":
         fail("plugin name")
-    if plugin["version"] != "0.8.0":
+    if plugin["version"] != "0.9.0":
         fail("plugin version")
     if plugin["description"] != PLUGIN_DESCRIPTION:
         fail("plugin description")
