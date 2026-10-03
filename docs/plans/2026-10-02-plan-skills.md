@@ -61,7 +61,7 @@ What will change is the goal above. What the change touches is the architecture 
 - Consumes: the `###` bodies under each spec's `## Skill` heading. The checks already in `tests/check_plugin.py`.
 - Produces: a tree where `python3 tests/check_plugin.py` exits 0 and `grok plugin validate .` reports version `0.5.0`. Validate counts the `skills/` directory, so the component line stays `1 skill dir(s)`.
 
-- [ ] **Step 1: Extend the check and confirm it fails**
+- [x] **Step 1: Extend the check and confirm it fails**
 
 When `tests/check_plugin.py` already requires both new skills, version `0.5.0`, and the four new guide links, mark this step done and go to Step 2.
 
@@ -86,13 +86,13 @@ python3 tests/check_plugin.py
 
 Expected: exit 1, and stderr contains `missing` and `write-the-plan`. The creed sections are not the failure.
 
-- [ ] **Step 2: Write the two skills**
+- [x] **Step 2: Write the two skills**
 
 When a `SKILL.md` already carries the frontmatter and the section bodies from its spec, leave that file. Otherwise create it.
 
 Each file starts with `---` frontmatter, `name`, and the one-line `description` from Global Constraints. The description stays on one physical line. The H1 titles are `Write the plan` and `Carry out the plan`. Copy each section body from that skill's spec. Do not rewrap a copied line.
 
-- [ ] **Step 3: Bump the manifests and the skill map**
+- [x] **Step 3: Bump the manifests and the skill map**
 
 Set `"version"` to `0.5.0` in `.claude-plugin/plugin.json`, in the marketplace object, and in the one plugin entry inside `.claude-plugin/marketplace.json`. Leave `"description"` as `Principles and workflow skills for DragonCrafted87's agents on Grok and Claude Code.` Leave the other manifest fields as they are.
 
@@ -113,7 +113,7 @@ Under Records, add these two items after the `why-it-is` item:
 
 When those version fields and those four sentences are already present, leave them.
 
-- [ ] **Step 4: Run the check and validate the plugin**
+- [x] **Step 4: Run the check and validate the plugin**
 
 ```bash
 python3 tests/check_plugin.py
@@ -124,6 +124,6 @@ Expected: `check_plugin.py` exits 0 with no stderr. `grok plugin validate .` exi
 
 Confirm a drifted paragraph fails the check, then restore the copied body. Confirm the files Global Constraints says are not edited have an empty diff against the commit this branch started from. The spec diff and this plan are the earlier commits on the branch, so they are outside that empty-diff check.
 
-- [ ] **Step 5: Commit the work**
+- [x] **Step 5: Commit the work**
 
 `commit` governs this step. Stage the two skills, `tests/check_plugin.py`, both manifests, and `docs/skills.md`. Leave the specs and this plan in their own commits. A second run leaves a finished work commit as it is and commits a set only when it is still uncommitted and still allowed. Commit only when the resolved `commit` value allows it.
