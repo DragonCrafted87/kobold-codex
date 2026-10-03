@@ -10,7 +10,8 @@ waiting.
 ## Cause
 
 Continue that same pass. One hypothesis, then a check against the
-running system. Stop when that skill says to stop.
+running system. Name the scope with `scope-the-edit` before any
+observation is written. Stop when that skill says to stop.
 
 ## Fix
 

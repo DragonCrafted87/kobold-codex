@@ -1,6 +1,6 @@
 ---
 name: learn-from-the-session
-description: Use after a session that stumbled, or that found a preference worth keeping. Name the lesson and edit the skill, playbook, or bounds file that should carry it.
+description: Use after a session that stumbled, or that found a preference worth keeping. Name the lesson and edit the skill or playbook that should carry it. A bounds value is named and handed to set-the-bounds.
 ---
 
 # Learn from the session

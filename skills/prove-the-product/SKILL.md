@@ -11,15 +11,23 @@ A scripted user-level drive performs the actions a user performs
 and checks what the user would see. A unit test of a function is
 not that drive.
 
+When the repo has no app a user drives, say so and stop. Name the
+scripted check the repo already has, and run it when it can be
+run. In this plugin that check is `tests/check_plugin.py`. Do not
+write a verification skill for that repo.
+
 When the repo already has that drive, name it and stop. Do not
 write a second one. When it does not, write a project-local
-verification skill that is the drive.
+verification skill that is the drive. The skill lives in the
+project that owns the app. It is not a file under this plugin's
+`skills/` directory.
 
 ## The skill file
 
-Look for a directory the project already uses for a skill a
-session loads. When the project has one, write the skill there.
-When it has none, stop and ask where the skill should live.
+Look for a directory the project that owns the app already uses
+for a skill a session loads. That directory is not this plugin's
+`skills/` directory. When the project has one, write the skill
+there. When it has none, stop and ask where the skill should live.
 Leave the tree alone until the user names the directory.
 
 The skill is one directory with one `SKILL.md`. The directory

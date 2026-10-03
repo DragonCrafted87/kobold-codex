@@ -31,7 +31,9 @@ that rule. Say the value and the layer that set it.
 
 `ask` stops for a yes that names this checkout. A yes creates it. A
 no leaves the work in the current checkout. `deny` leaves the work
-in the current checkout. `allow` and `auto` create it.
+in the current checkout. `allow` and `auto` create it. When another
+skill names a set of checkouts, each checkout still needs a yes
+that names it.
 
 While the user is away, `unattended` still applies. This skill does
 not loosen it.

@@ -31,14 +31,16 @@ not exist yet, and for the checkout.
 
 Resolve `worktrees` once for the set. `set-the-bounds` is that
 rule. When the value allows a checkout, each candidate is built
-in its own checkout. When the value is `ask`, one yes covers the
-set, and the yes names the set. When the value does not allow a
-checkout, leave each candidate as the sentence in the reply, and
-build none of them until the base is picked.
+in its own checkout. When the value is `ask`, `isolate-the-work`
+asks once per checkout, and the yes names that checkout. When the
+value does not allow a checkout, leave each candidate as the
+sentence in the reply, and build none of them until the base is
+picked.
 
 When each candidate has its own checkout, the candidates share no
-files. `fan-out` runs that split. This skill names the candidates
-and reads the report.
+files. This skill builds each candidate in its checkout. When
+`subagents` allows it, those builds may run together. This skill
+reads each result, then picks the base and folds.
 
 The candidate sentences, and a checkout the key allows, are the
 exploration. `scope-the-edit` applies to the fold.

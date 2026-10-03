@@ -40,9 +40,10 @@ starts. Each entry is waiting, done, or skipped.
 Follow one step, then update the list, before the next step
 starts. When a step names a skill, follow that skill for the part
 the step describes. A later step that continues the same pass
-picks up where that part stopped. When the named skill stops the
-work, this playbook stops with it, and the later steps stay
-waiting.
+picks up where that part stopped. When the playbook says the step
+is done, mark it done. The later steps stay waiting. When the
+named skill stops because it cannot continue, this playbook stops
+with it, and the later steps stay waiting.
 
 When every step is done or skipped, say that the playbook is done.
 
@@ -64,6 +65,14 @@ without them, resolve `unattended` before the first step.
 Do not start a step the resolved value does not allow. Leave that
 step and the later steps waiting, and stop. Name the key, the
 value, and the layer that set it.
+
+`stop-at-plan` may start a step that names a scope or writes a
+plan. It does not start a step that edits when the work has no
+plan, and it stops once the plan is written. `safe-steps` may
+start a step that reads, edits, runs a check, or writes a plan or
+a trail. It does not start a step that publishes or uses a named
+tool. `through-publish` and `auto` may start a publishing step as
+far as that step's key allows. A named tool stays on its own key.
 
 While the user is directing the next step, the publishing keys and
 the tool keys decide. A step that commits, pushes, opens a pull

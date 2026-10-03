@@ -37,9 +37,10 @@ at the place the hypothesis named. A frame in the trace is a place to
 look. The value at that frame, on this input, is the evidence.
 
 When the trace does not show the value, add a temporary observation.
-A log line, a print, or a breakpoint counts. Remove that observation
-before calling the work done, unless the project already keeps that
-kind of trace.
+Name the scope with `scope-the-edit` before that observation is
+written. A log line, a print, or a breakpoint counts. Remove that
+observation before calling the work done, unless the project already
+keeps that kind of trace.
 
 Report the value you observed. Leave out a value the run did not show.
 

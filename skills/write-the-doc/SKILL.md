@@ -43,11 +43,12 @@ The edit follows `scope-the-edit`.
 
 This skill writes the words. Committing them follows `commit`,
 `commit-plans`, or `commit-specs`, whichever set the file belongs
-to. Opening a pull request follows `pull-request`. Changing a
-pull request that is already open follows `github-write`.
-`set-the-bounds` resolves the key. `ship-the-branch` is the skill
-that integrates the branch, and it keeps an open pull request's
-title and body.
+to. Opening a pull request follows `pull-request`. For a pull
+request that is already open, this skill drafts the words in the
+reply and does not change the title or the body. A comment on that
+pull request follows `github-write`. `set-the-bounds` resolves the
+key. `ship-the-branch` is the skill that integrates the branch, and
+it keeps an open pull request's title and body.
 
 ## The same document
 

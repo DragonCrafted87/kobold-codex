@@ -9,10 +9,10 @@ Leave the later steps waiting.
 
 ## Scope
 
-`scope-the-edit` names the scope before the first edit. Follow
-that skill, including the edit it requires for a small or
-intermediate scope. An architectural scope names the scope and
-does not edit in this step.
+`scope-the-edit` names the scope before the first edit. For a
+small or intermediate scope, follow that skill, including the
+edit it requires. An architectural scope only names the scope in
+this step. Writing the plan is Shape.
 
 ## Shape
 

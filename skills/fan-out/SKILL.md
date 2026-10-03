@@ -41,8 +41,11 @@ When `model` is set, a worker in another agent uses that model.
 When `model` is absent, the worker uses the model already running
 the session.
 
-While the user is away, `unattended` still applies. A named tool
-stays on its own key. `set-the-bounds` is that rule.
+While the user is away, `unattended` still applies.
+`set-the-bounds` is that rule. `stop-at-plan` and `safe-steps`
+do not start another agent. Run the pieces in this session, or
+stop before a worker. `through-publish` and `auto` leave a named
+tool on its own key.
 
 A worker that does not return leaves the report unfinished. Name
 the missing piece and stop. Leave the finished pieces unmerged.
