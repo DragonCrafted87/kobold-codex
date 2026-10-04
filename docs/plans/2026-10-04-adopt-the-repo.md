@@ -279,7 +279,7 @@ When the skill, the match paragraph, the manifests, and the map are already comm
 
 Otherwise resolve `commit` and commit those files when that value allows it. Leave the spec and this plan out of that commit. The subject is `Add the adopt-the-repo skill`. The body says the skill joins a repository on the full path or the shadow path, a local spec can stay out through gitignore or git exclude, a config repo keeps its own bounds, `run-the-play` can match a project playbook directory, and the plugin is `0.10.0`. Include a test plan that names the two checks from Task 2 Step 5 and the result you observed.
 
-- [ ] **Step 3: Push and open the pull request**
+- [x] **Step 3: Push and open the pull request**
 
 Resolve `push` and `pull-request`. Push the branch when `push` allows it. Open one pull request when `pull-request` allows it. The base is `main`. The title is `Add the adopt-the-repo skill`. The body follows the work commit. Do not force-push. `force-push` is `never` from the skill defaults unless a nearer layer sets it, and a force-push still requires `push` to be `ask` or `auto`.
 
