@@ -186,13 +186,13 @@ The existing rules then apply to both directories. Do not add a second copy of t
 - Consumes: this plan's Goal, Architecture, Global Constraints, and "The behavior the spec records".
 - Produces: a spec whose Skill heading has the seven sections, with the description on one physical line. The Decisions heading holds the discovery notes: a session loads the instruction names listed in The sources and skips an instruction file git is ignoring, including a match from `.git/info/exclude`; a session loads a skill under `.grok/skills/`, `.agents/skills/`, `.claude/skills/`, and `.cursor/skills/` even when that directory is ignored. The spec does not bump the version. The catalog is not edited.
 
-- [ ] **Step 1: Write the spec**
+- [x] **Step 1: Write the spec**
 
 Write `docs/specs/2026-10-04-adopt-the-repo-design.md` in the shape of `docs/specs/2026-10-03-write-the-doc-design.md`: a title, a purpose, the decisions, where the words live, and a Skill heading whose subsection bodies are the text that will ship. The seven subsection titles are the heading names in Global Constraints. The description under Skill is the one line in Global Constraints.
 
 The check is a read of that file. Done means the seven titles are present, the description is that one line, and the bodies cover the two paths, the why split, the project bounds table, the hide choice, the config repo and its own bounds, the empty tree, and the second run.
 
-- [ ] **Step 2: Commit the spec**
+- [x] **Step 2: Commit the spec**
 
 When the spec is already committed on this branch, mark this step done.
 
@@ -215,25 +215,25 @@ Otherwise resolve `commit-specs` and commit only that file when that value allow
 - Consumes: the Skill section of `docs/specs/2026-10-04-adopt-the-repo-design.md`. The current manifests at `0.9.2`. The match section of `skills/run-the-play/SKILL.md`.
 - Produces: a skill whose section bodies match the spec, a match that can see a recorded project playbook directory, both manifests at `0.10.0` with the stable description, and a map entry. `tests/check_plugin.py` is unchanged.
 
-- [ ] **Step 1: Add the skill file**
+- [x] **Step 1: Add the skill file**
 
 Create `skills/adopt-the-repo/SKILL.md`. Frontmatter `name` is `adopt-the-repo`. Frontmatter `description` is the one line in Global Constraints. The title is `Adopt the repo`. Copy each section body from the spec, including line breaks.
 
 The check is a read of the skill file against the spec. Done means each section body matches and the description is one physical line.
 
-- [ ] **Step 2: Extend the match**
+- [x] **Step 2: Extend the match**
 
 Edit `skills/run-the-play/SKILL.md` only by inserting the paragraph under "Project playbooks and the match" into `The match`, after the sentence that names the plugin `playbooks` directory. Leave the rest of that skill as it is. Do not edit `docs/specs/2026-10-03-run-the-play-design.md`.
 
 The check is `git diff -- skills/run-the-play/SKILL.md`. Done means the diff is that paragraph and nothing else.
 
-- [ ] **Step 3: Bump the manifests**
+- [x] **Step 3: Bump the manifests**
 
 Set `version` to `0.10.0` in `.claude-plugin/plugin.json` and in the plugin entry in `.claude-plugin/marketplace.json`. Leave both descriptions as the stable sentence.
 
 The check is a read of both `version` fields. Done means both are `0.10.0` and the descriptions still match the sentence in Global Constraints.
 
-- [ ] **Step 4: Link the skill from the map**
+- [x] **Step 4: Link the skill from the map**
 
 In `docs/skills.md`, under "Which skill applies", add this paragraph after the `write-the-doc` paragraph:
 
@@ -249,7 +249,7 @@ Under "Records", add this bullet after the `write-the-doc` bullet:
 
 The check is a read of `docs/skills.md`. Done means both entries are present and neither repeats a section body from the skill.
 
-- [ ] **Step 5: Run the checks**
+- [x] **Step 5: Run the checks**
 
 Run `python3 tests/check_plugin.py` from the repository root. Then run `grok plugin validate .`.
 
@@ -267,13 +267,13 @@ Done means `python3 tests/check_plugin.py` exits 0, and `grok plugin validate .`
 - Consumes: Task 1 and Task 2 finished, with Step 5 of Task 2 passing. `commit-specs`, `commit-plans`, `commit`, `push`, `pull-request`, and `merge` from `set-the-bounds`.
 - Produces: the commits the keys allow, a pull request when `pull-request` allows one, and the finished checkboxes. `merge` is not this task unless that key is `ask` and the user says yes.
 
-- [ ] **Step 1: Commit the plan**
+- [x] **Step 1: Commit the plan**
 
 When this plan is already committed and the committed file matches the worktree, mark this step done.
 
 When the worktree plan differs from the committed plan, resolve `commit-plans` and commit only this file when that value allows it. The subject of the first plan commit is `Add the plan for adopt-the-repo`. The subject of a revision before the work is `Revise the adopt-the-repo plan`. The subject of the checkbox update is `Mark the finished adopt-the-repo plan steps`. Checkboxes that Task 1 and Task 2 have finished are marked only in the checkbox commit.
 
-- [ ] **Step 2: Commit the work**
+- [x] **Step 2: Commit the work**
 
 When the skill, the match paragraph, the manifests, and the map are already committed, mark this step done.
 
