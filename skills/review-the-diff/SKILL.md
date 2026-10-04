@@ -35,9 +35,12 @@ the diff does not touch stays out of the findings.
 ## Findings
 
 A finding names the file, the line, what is wrong, and why it
-matters to the request or to a check. When you cannot name the
-line, say what you looked at, and leave that item out of the
-findings.
+matters to the request or to a check. A failed check, a check
+that cannot be run, and a check that passes without reaching the
+behavior stay in the findings when they have no line. Name the
+command and the reason in place of the line. When some other item
+has no line, say what you looked at, and leave that item out of
+the findings.
 
 Report the findings in the reply. When there are none, say that,
 and name the diff you reviewed.
@@ -55,5 +58,5 @@ The report stays in the reply. A request to post it follows
 `github-write`.
 
 This review is one pass in this session. `stress-the-change` runs
-the separate passes. This skill stops at the report. A merge
-follows `set-the-bounds`.
+the separate passes. This skill stops at the report. Integrating
+the branch follows `ship-the-branch`.

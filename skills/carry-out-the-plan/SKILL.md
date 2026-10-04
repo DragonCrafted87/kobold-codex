@@ -31,6 +31,15 @@ another agent, run those tasks one after another in this session.
 
 The work stays in the checkout you are already in.
 
+While the user is away, `unattended` still applies.
+`set-the-bounds` is that rule. This skill does not loosen it.
+`stop-at-plan` does not start a task, because the plan is already
+written. `safe-steps` may run a task that reads, edits, runs a
+check, or writes a plan or a trail. It does not start another
+agent, and it does not publish. `through-publish` and `auto` may
+run a task that publishes as far as that task's key allows. A
+named tool stays on its own key.
+
 ## The check
 
 A task's check is done when you have run the check the plan names

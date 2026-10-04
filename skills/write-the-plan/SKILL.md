@@ -24,7 +24,8 @@ separated by hyphens.
 
 When that file already holds the four things below and the tasks,
 leave it in place. When the user asks for a change to the plan, edit
-that file.
+that file. Leave each `- [x]` mark. A new step, or a step whose text
+changed, begins with `- [ ]`.
 
 ## What the reviewer reads
 
@@ -50,11 +51,13 @@ A task that changes a function names a check that reaches the bar in
 `scope-the-edit`. Write the command and the result in the task.
 
 Each task, and each step under it, begins with an empty checkbox,
-written `- [ ]`. Write each step so an empty checkbox is a valid
-place to start. A later session marks a finished checkbox `- [x]`.
+written `- [ ]`, on a new plan. Write each step so an empty checkbox
+is a valid place to start. A later session marks a finished checkbox
+`- [x]`. An edit of the plan follows Where it goes.
 
 ## Stop there
 
-Write the file, then stop. Leave every checkbox empty. The work
-starts when the user approves this plan. `scope-the-edit` says which
-reply counts as that approval.
+Write the file, then stop. Leave every checkbox empty when the plan
+has not been approved. An edit keeps the marks from Where it goes.
+The work starts when the user approves this plan. `scope-the-edit`
+says which reply counts as that approval.

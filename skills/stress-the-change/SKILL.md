@@ -68,8 +68,10 @@ line fine, keep the finding and name the passes on each side.
 Order the list by file, then by line. When a pass raised nothing,
 say so.
 
-When you cannot name the line, say what the pass looked at, and
-leave that item out of the list.
+A check finding that has no line stays in the list. Name the
+command and the reason in place of the line. When some other item
+has no line, say what the pass looked at, and leave that item out
+of the list.
 
 ## Leave the tree
 
