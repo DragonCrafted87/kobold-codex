@@ -10,11 +10,10 @@ description: Use when a task should follow a playbook. Match it to one playbook,
 Match the task to one file in the `playbooks` directory beside
 this skill.
 
-The match also includes a project playbook directory when
-`adopt-the-repo` has recorded one for this repository. A file
-there is a file the match can use. There means the plugin
-directory and that project directory. The four plugin playbooks
-stay the files for the task kinds they already name.
+The match also includes the project playbook directory recorded
+under `playbooks` in `.kobold/adopt.yaml`, when that file records
+one. Those files are the files in the plugin directory and the
+files in that project directory. There means both directories.
 
 When the user names one of those files, or names its title, use
 that file. When the name is not a file there, name the files that
@@ -29,6 +28,9 @@ that keeps the outward behavior is `refactor`. New behavior is
 When more than one of those fits, name the matching files and ask
 which one to run. When none of them fits, name the files that are
 there and stop.
+
+The four plugin playbooks stay the files for the task kinds they
+already name.
 
 A file that no rule above names stays unused until the user names
 it.

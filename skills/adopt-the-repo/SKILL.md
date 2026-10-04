@@ -118,9 +118,12 @@ that deletion would remove the last root instruction file, keep
 one root file and let the pointer be its body. When the
 repository had both `AGENTS.md` and `CLAUDE.md`, minimize both.
 When it had neither, An empty tree creates `AGENTS.md` and does
-not also create `CLAUDE.md`. A command file on the full path
-becomes a one-line pointer at the skill that now holds its
-procedure. On the shadow path, command files stay as they are.
+not also create `CLAUDE.md`. A command file is an ordered
+procedure. It becomes a playbook, unless that procedure only
+makes sense inside one subject, in which case it stays in that
+subject's skill. On the full path the command file becomes a
+one-line pointer at the playbook or the skill that received it.
+On the shadow path, command files stay as they are.
 
 A sentence that sets a bound stays in the source until The bounds
 has recorded the suggestion. After the user accepts a key, the
@@ -142,8 +145,9 @@ no `.gitkeep`.
 The plan directory is the one `write-the-plan` would use. The
 spec directory is the one the project already uses for design
 specs. When the project has neither, the paths are `docs/plans/`
-and `docs/specs/` until a config repo takes the local ones. When
-a directory already has tracked files, record it as tracked and
+and `docs/specs/`. A config repo keeps those paths and holds the
+local files behind the symlinks in The local repo. When a
+directory already has tracked files, record it as tracked and
 do not ask. Ask only when the directory is absent or untracked.
 Suggest local for plans, because `commit-plans` defaults to
 `never`. Suggest tracked for specs, because `commit-specs`
@@ -167,17 +171,22 @@ suggests `commit: ask`. The same three values apply to `push`,
 those actions.
 
 Always opening a pull request suggests `pull-request: auto`.
-Never opening one suggests `pull-request: never`. A ban on merge
+Opening one only when asked suggests `pull-request: ask`. Never
+opening one suggests `pull-request: never`. A ban on merge
 suggests `merge: never`. Merge only when asked suggests
 `merge: ask`. A ban on rewriting the remote suggests
-`force-push: never`.
+`force-push: never`. A rewrite only when asked suggests
+`force-push: ask`.
 
 Work that continues through publish while the user is away
 suggests `unattended: through-publish`. Stopping at the plan
-suggests `unattended: stop-at-plan`. A ban on other agents
-suggests `subagents: deny`. Permission to start them suggests
-`subagents: allow`. The same allow or deny reading applies to
-`browser`, `shell-network`, `github-write`, and `worktrees`.
+suggests `unattended: stop-at-plan`. Editing and checking
+without publishing suggests `unattended: safe-steps`. A ban on
+other agents suggests `subagents: deny`. Permission to start
+them without an ask suggests `subagents: allow`. A sentence that
+still requires an ask suggests `subagents: ask`. The same three
+readings apply to `browser`, `shell-network`, `github-write`,
+and `worktrees`.
 
 A branch policy the keys cannot express is not a suggestion. It
 stays a skill or a playbook, and the reply names the sentence.
@@ -233,16 +242,30 @@ repository tracks stay there. The config repo has its own root
 so its bounds file is not the project's bounds file.
 
 A session loads skills from a scanned skill root. When the skills
-live in the config repo, the skill root in the project is a
-symlink to `<config-repo>/skills`. The hide choice covers that
-symlink. The recorded playbook directory is
-`<config-repo>/playbooks`. The recorded spec directory is
-`<config-repo>/specs` when the specs are local. The recorded plan
-directory is `<config-repo>/plans` when the plans are local. The
-adopt record that sessions read stays `.kobold/adopt.yaml`. When
-the record lives in the config repo, that path is a symlink to
-`<config-repo>/adopt.yaml`, and the hide choice covers the
-symlink.
+live in the config repo and the skill root has no tracked files,
+that root is one relative symlink to `<config-repo>/skills`, and
+the playbook directory is one relative symlink to
+`<config-repo>/playbooks`. The hide choice covers both symlinks.
+When the skill root already has tracked files, leave that root
+and the playbook directory in the project. Each new skill
+directory is a relative symlink to its directory under
+`<config-repo>/skills`. Each new playbook file is a relative
+symlink to its file under `<config-repo>/playbooks`. The hide
+choice covers those new paths and leaves the existing directories
+visible. The recorded skill root and the recorded playbook
+directory stay those project paths. The recorded plan directory
+stays the path `write-the-plan` would use. The recorded spec
+directory stays the path the project already uses for design
+specs. When a config repo holds the local plans, that project
+path is a relative symlink to `<config-repo>/plans`. When a
+config repo holds the local specs, that project path is a
+relative symlink to `<config-repo>/specs`. The hide choice covers
+those symlinks. `write-the-plan` then writes through the plan
+path it already discovers, and the file lands in the config repo.
+The adopt record that sessions read stays `.kobold/adopt.yaml`.
+When the record lives in the config repo, that path is a relative
+symlink to `<config-repo>/adopt.yaml`, and the hide choice covers
+the symlink.
 
 The config repo starts with `git init` in its root. Do not add a
 remote unless the user names one.
@@ -266,14 +289,16 @@ the config repo, `.kobold/bounds.yaml` at the config repo root.
 root. When the user names no keys, write no bounds file in the
 config repo.
 
-After that write, the first commit of the config repo follows the
-`commit` key resolved at the config repo root. Name the key, the
-value, and the layer. An `auto` value commits the files that repo
-tracks. An `ask` value offers that commit. A `never` value leaves
-the files uncommitted. The project's `commit` key is not the key
-for this commit. Do not push the config repo during setup unless
-the user named a remote and the `push` key resolved at the config
-repo root allows it.
+After that write, the first commits in the config repo follow
+`set-the-bounds` at the config repo root. Resolve `commit`,
+`commit-plans`, and `commit-specs` there. Name each key, the
+value, and the layer. `commit` stages the work and leaves plans
+and specs to their own keys. Each set that is `auto` is its own
+commit. Each set that is `ask` is offered on its own. Each set
+that is `never` stays unstaged. The project's keys are not the
+keys for these commits. Do not push the config repo during setup
+unless the user named a remote and the `push` key resolved at
+the config repo root allows it.
 
 ## An empty tree
 
@@ -282,11 +307,12 @@ move's conversion. Still ask the path, the skill root, the bounds
 table, the plans and specs question, and The local repo when a
 path will stay out of the project.
 
-Create the skill root and the playbook directory. Create the plan
-directory and the spec directory. When The local repo holds one
-of those directories, create it inside the config repo, and make
-the project skill root the symlink that section names. Apply the
-hide choice. Write `.kobold/adopt.yaml`.
+Create the skill root, the playbook directory, the plan
+directory, and the spec directory. A path the config repo holds
+is a real directory inside that repo, and the project path is
+the relative symlink The local repo names. A path it does not
+hold is a real directory in the project. Apply the hide choice.
+Write `.kobold/adopt.yaml`.
 
 On the full path, create `AGENTS.md` at the repository root. Its
 body is the pointer, unless the user supplies a why sentence, in
@@ -307,8 +333,9 @@ repo after declining one. Read the sources again. Leave a skill
 or a playbook whose source would produce the same file. Convert
 a source that changed. On the shadow path, do not write
 instruction files on the second run either. A new local file goes
-into the config repo when one is recorded, and a commit of that
-file uses the config repo's bounds. An empty tree that now has
+into the config repo when one is recorded, and that commit
+resolves `commit`, `commit-plans`, and `commit-specs` at the
+config repo root. An empty tree that now has
 the folders and the record is done. Name those files.
 
 The choice stops before the questions when this repository is the
