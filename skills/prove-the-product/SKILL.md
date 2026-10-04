@@ -13,12 +13,11 @@ not that drive.
 
 When the repo has no app a user drives, say so and stop. Name the
 scripted check the repo already has, and run it when it can be
-run. In this plugin that check is `tests/check_plugin.py`. Do not
-write a verification skill for that repo.
+run.
 
-When the repo already has that drive, name it and stop. Do not
-write a second one. When it does not, write a project-local
-verification skill that is the drive. The skill lives in the
+When the repo already has that drive, name it and stop. When it
+does not, write a project-local verification skill that is the
+drive. The skill lives in the
 project that owns the app. It is not a file under this plugin's
 `skills/` directory.
 
@@ -49,8 +48,8 @@ the command or the actions, and the result.
 
 When a step drives a browser, `browser` is the key. When a step
 reaches the network, `shell-network` is the key. `set-the-bounds`
-resolves the key. This skill does not loosen it. A key that stops
-the step stops the proof. Say the key, the value, and the layer.
+resolves the key. A key that stops the step stops the proof. Say
+the key, the value, and the layer.
 
 A failed step stops the proof. The skill file stays, and the
 reply names the step and the result. A proof that finishes shows
@@ -66,7 +65,6 @@ matches those steps.
 
 ## The same map
 
-A second run reads the features and the skill file again. A step
-that already matches a feature, and whose last run still
-describes the app, can be cited. Name that run. Run a step that
-is new or whose feature changed.
+A second run reads the features and the skill file again. Each
+step is a part under `kobold-codex`. Its inputs are the feature
+and whether the last run still describes the app.

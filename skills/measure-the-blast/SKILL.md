@@ -8,8 +8,7 @@ description: Use before a small diff ships. Name what else could break outside t
 ## The diff
 
 Prove the safety claim for the diff the user named. A named
-branch, a named range, a pull request, or a named set of files is
-that diff.
+change is the change `review-the-diff` reviews.
 
 When the user names none, the diff is the uncommitted work. When
 there is no uncommitted work, the diff is the current branch
@@ -56,6 +55,5 @@ The result stays in the reply. Shipping the diff follows
 ## The same diff
 
 A second run measures the diff as it is now. The new claim
-replaces the earlier claim. A surface whose code and whose
-command are unchanged can be cited from the earlier result. Name
-that result. Run a surface that changed.
+replaces the earlier claim. Each surface is a part under
+`kobold-codex`, and its inputs are the code and the command.

@@ -33,9 +33,7 @@ keeps section bodies out.
 ## The sentences
 
 Write sentences a new reader can follow without the session
-transcript. Name the path, the command, or the result the reader
-needs. `kobold-codex` is the voice. This skill does not restate
-it.
+transcript. `kobold-codex` is the voice.
 
 The edit follows `scope-the-edit`.
 

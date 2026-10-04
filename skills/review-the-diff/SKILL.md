@@ -20,17 +20,17 @@ when there is one. The request is what the user asked for.
 
 ## The request and the checks
 
-A missing piece of the request is a finding. A change the request
+On the request, a missing piece is a finding. A change the request
 did not ask for is a finding.
 
-Run the checks the plan or the change named, when they can be run.
-A failed check is a finding. A check that cannot be run is a
-finding, and the finding names the reason. A check that passes
-without reaching the behavior it claims is a finding.
+On the checks, run the checks the plan or the change named, when
+they can be run. A failed check is a finding. A check that cannot
+be run is a finding, and the finding names the reason. A check that
+passes without reaching the behavior it claims is a finding.
 
-A defect in a line the diff adds or changes is a finding when the
-request and the checks do not already state it. A problem in a line
-the diff does not touch stays out of the findings.
+On a changed line, a defect is a finding when the request and the
+checks do not already state it. A problem in a line the diff does
+not touch stays out of the findings.
 
 ## Findings
 
