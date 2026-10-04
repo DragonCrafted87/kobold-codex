@@ -4,7 +4,7 @@
 
 **Goal:** Ship `adopt-the-repo`, the skill that joins Kobold to another repository on one of two paths, and bump the plugin to `0.10.0`.
 
-**Architecture:** The new spec is the record of the decision. The skill file is the copy a session loads. `adopt-the-repo` owns the two paths, the split of an instruction file into why versus what and how, the project skill and playbook files, the adopt record, and the ignore rules for a shadow and for local plans or specs. `set-the-bounds` still writes the bounds layer and still owns the ignore line for `.kobold/bounds.local.yaml`. `write-the-plan` still owns where a plan file goes. `leave-a-trail` still owns the ignore line for `.kobold/trail.md`. `run-the-play` keeps the match, and its match also includes a project playbook directory this skill records. `write-a-skill` still owns skills in this plugin and `docs/specs/` for this plugin. The work stays on `feat/adopt-the-repo`, cut from `main` at `d0212db`. No worktree.
+**Architecture:** The new spec is the record of the decision. The skill file is the copy a session loads. `adopt-the-repo` owns the two paths, the split of an instruction file into why versus what and how, the project skill and playbook files, the adopt record, and the choice of how a path stays out of the project repository. That choice is gitignore or git exclude. When the specs stay out of the project, the skill also asks whether a local config repository should keep the history of the skills and the config, and that repository has its own bounds. `set-the-bounds` still writes each bounds layer and still owns the ignore line for `.kobold/bounds.local.yaml`. It writes the project layer at the project root and the config-repo layer at the config repo root. `write-the-plan` still owns where a plan file goes. `leave-a-trail` still owns the ignore line for `.kobold/trail.md`. `run-the-play` keeps the match, and its match also includes a project playbook directory this skill records. `write-a-skill` still owns skills in this plugin and `docs/specs/` for this plugin. The work stays on `feat/adopt-the-repo`, cut from `main` at `d0212db`. No worktree.
 
 **Tech Stack:** Markdown skills, JSON manifests, Python 3 standard library, `grok plugin validate`.
 
@@ -20,7 +20,7 @@ What will change is the goal above. What the change touches is the architecture 
 
 - The skill name is `adopt-the-repo`. Plugin name and marketplace name stay `kobold-codex`.
 - `adopt-the-repo` description is one physical line: `Use when adding Kobold to a repository. Convert its instructions into skills and playbooks, either by minimizing the root instruction files or by leaving those files alone, and ask which bounds fit what the files already say.`
-- Heading names, in order: `The choice`, `The sources`, `The move`, `The bounds`, `An empty tree`, `The same repo`. The skill title is `Adopt the repo`.
+- Heading names, in order: `The choice`, `The sources`, `The move`, `The bounds`, `The local repo`, `An empty tree`, `The same repo`. The skill title is `Adopt the repo`.
 - Plugin and marketplace description stay the stable sentence: `Principles and workflow skills for DragonCrafted87's agents on Grok and Claude Code.`
 - Version becomes `0.10.0` in `.claude-plugin/plugin.json` and in the one plugin entry inside `.claude-plugin/marketplace.json`. The marketplace object has no version field. Leave it that way. License, author, repository, and marketplace `source` stay as they are. `0.10.0` is a minor bump because the change adds a skill. `0.9.2` is the version on `main`.
 - The skill names no host tool. It adds no hooks. The repo has no `hooks/` directory and no `hooks.json`.
@@ -34,16 +34,16 @@ What will change is the goal above. What the change touches is the architecture 
 
 ## The behavior the spec records
 
-The spec's Decisions section records the notes below. The spec's Skill section turns them into the six section bodies. Wording follows `kobold-codex`. A paragraph taken from another skillset does not ship.
+The spec's Decisions section records the notes below. The spec's Skill section turns them into the seven section bodies. Wording follows `kobold-codex`. A paragraph taken from another skillset does not ship.
 
 ### The choice
 
 Two paths. Ask which one, unless `.kobold/adopt.yaml` already records it.
 
 - **Full.** Convert the sources. Rewrite each instruction file so it keeps the why and loses the what and the how. The root instruction file points at the `kobold-codex` plugin and at the project skill root. Minimize means the why stays, in sentences, and the procedures and the subject facts do not remain underneath a pointer.
-- **Shadow.** Convert the sources into skills and playbooks. Do not edit the repository's instruction files. The converted files are local: the skill root and the playbook directory are ignored when that root has no tracked files yet. When the root already has tracked files, ignore each new skill directory and each new playbook file, and do not ignore the root.
+- **Shadow.** Convert the sources into skills and playbooks. Do not edit the repository's instruction files. The converted files stay out of the project repository. The hide choice in The local repo covers the skill root and the playbook directory when that root has no tracked files yet. When the root already has tracked files, the hide choice covers each new skill directory and each new playbook file, and it does not cover the root.
 
-The record is `.kobold/adopt.yaml` at the repository root. It names `mode`, `skill-root`, `playbooks`, `plans`, `specs`, `plans-tracked`, and `specs-tracked`. Full mode tracks that file. Shadow mode ignores `.kobold/adopt.yaml`.
+The record is `.kobold/adopt.yaml` at the repository root. It names `mode`, `skill-root`, `playbooks`, `plans`, `specs`, `plans-tracked`, `specs-tracked`, `hide`, and `config-repo`. `hide` is `gitignore` or `exclude`, and it is absent when every Kobold path is tracked. `config-repo` is the path of the local repository, or absent when the user declines one. The adopt record is tracked with the project when every Kobold path it names is tracked. When any of those paths stays out, the record stays out with them.
 
 Suggest `.kobold/bounds.yaml` as the bounds layer on the full path, because the sources are team instructions. Suggest `.kobold/bounds.local.yaml` on the shadow path. The user can name the other writable layer. `set-the-bounds` writes the file. This skill does not write a bounds key itself.
 
@@ -51,7 +51,7 @@ Suggest `.kobold/bounds.yaml` as the bounds layer on the full path, because the 
 
 Read instruction files and skills. Do not sweep the repository for every Markdown file. A README, a contributing guide, and a doc are sources only when the user names them.
 
-Instruction file names, at the repository root and in subdirectories: `AGENTS.md`, `AGENT.md`, `Agents.md`, `CLAUDE.md`, `Claude.md`, `CLAUDE.local.md`, plus `.claude/CLAUDE.md` and `.claude/CLAUDE.local.md`. Also every Markdown file placed directly in `.grok/rules/`, `.claude/rules/`, or `.cursor/rules/`. A session skips a gitignored instruction file, so a shadow must not depend on one for the converted what and how.
+Instruction file names, at the repository root and in subdirectories: `AGENTS.md`, `AGENT.md`, `Agents.md`, `CLAUDE.md`, `Claude.md`, `CLAUDE.local.md`, plus `.claude/CLAUDE.md` and `.claude/CLAUDE.local.md`. Also every Markdown file placed directly in `.grok/rules/`, `.claude/rules/`, or `.cursor/rules/`. A session skips an instruction file that git is ignoring, including a file matched from `.git/info/exclude`. A shadow must not depend on one of those files for the converted what and how.
 
 Skill files are `SKILL.md` under a directory the project already uses for skills a session loads. Command files are Markdown files placed directly in a `commands/` directory beside such a skill root. Those are sources too.
 
@@ -77,18 +77,9 @@ A sentence that sets a bound stays in the source until The bounds has recorded t
 
 Show the file map before writing. The map names each source, each skill or playbook it will become, and each instruction file the full path will edit. Write after the user accepts the map. The choice of path is part of that acceptance.
 
-Ignore rules this skill adds, and no others:
+When the user marks plans or specs tracked, leave that directory visible to the project repository. When the directory is empty and tracked, add a `.gitkeep` so the folder stays in git. A local directory is created on disk and hidden by The local repo, with no `.gitkeep`.
 
-- Shadow, and the skill root has no tracked files: one pattern for the skill root, one for the playbook directory, and `.kobold/adopt.yaml`.
-- Shadow, and the skill root already has tracked files: one pattern per new skill directory and per new playbook file, and `.kobold/adopt.yaml`. Do not ignore the skill root.
-- Plans the user marked local: the plan directory.
-- Specs the user marked local: the spec directory.
-
-Append a pattern when that path is not already ignored. When the repository has no ignore file, create it with those patterns as its lines. Do not add `.kobold/bounds.local.yaml`. Do not add `.kobold/trail.md`.
-
-When the user marks plans or specs tracked, do not ignore that directory. When the directory is empty and tracked, add a `.gitkeep` so the folder stays in git. A local directory is created on disk and ignored, with no `.gitkeep`.
-
-The plan directory is the one `write-the-plan` would use. The spec directory is the one the project already uses for design specs. When the project has neither, the paths are `docs/plans/` and `docs/specs/`. When a directory already has tracked files, record it as tracked and do not ask. Ask only when the directory is absent or untracked. Suggest local for plans, because `commit-plans` defaults to `never`. Suggest tracked for specs, because `commit-specs` defaults to `ask` and a spec is the record of a decision.
+The plan directory is the one `write-the-plan` would use. The spec directory is the one the project already uses for design specs. When the project has neither, the paths are `docs/plans/` and `docs/specs/` until a config repo takes the local ones. When a directory already has tracked files, record it as tracked and do not ask. Ask only when the directory is absent or untracked. Suggest local for plans, because `commit-plans` defaults to `never`. Suggest tracked for specs, because `commit-specs` defaults to `ask` and a spec is the record of a decision.
 
 ### The bounds
 
@@ -107,13 +98,38 @@ Suggest a key only when a sentence is about the action that key controls.
 
 A branch policy the keys cannot express is not a suggestion. It stays a skill or a playbook, and the reply names the sentence. Two sentences that suggest different values for one key are both shown. Do not pick one silently. A key with no sentence has no suggestion. Its row shows the inherited value.
 
-Ask which layer, with the suggestion from The choice, and which keys to write. Then `set-the-bounds` writes only the keys the user named, on the one layer they named. When the user names no keys, write no bounds file. That includes a user who keeps the inherited values.
+Ask which layer, with the suggestion from The choice, and which keys to write. Then `set-the-bounds` writes only the keys the user named, on the one layer they named, at the project root. When the user names no keys, write no project bounds file. That includes a user who keeps the inherited values.
+
+### The local repo
+
+When the user keeps the specs out of the project repository, ask two more questions before writing. Ask the same two questions when the specs are tracked and another Kobold path is staying out, so the choice is made once for every path this run keeps out of the project. When every Kobold path is tracked, skip this section.
+
+The first question is how the project repository should leave those paths alone.
+
+- **Gitignore.** Put the patterns in the project's ignore file. That file is committed with the project, so the team receives the patterns.
+- **Git exclude.** Put the patterns in `.git/info/exclude` for this clone. That file stays in the clone. It is not a commit in the project.
+
+One answer covers every path this run is keeping out. The paths are the local spec directory, the local plan directory, the shadow skill root or the new skill directories, the shadow playbook paths, `.kobold/adopt.yaml` when the record stays out, and the config repo directory when one is created. Append a pattern when that path is not already ignored. Gitignore creates the ignore file when the repository has none. Exclude appends to `.git/info/exclude`. Do not write the same pattern in both places. Do not add `.kobold/bounds.local.yaml`. Do not add `.kobold/trail.md`. A path that is already tracked is not hidden. This skill does not untrack it.
+
+The second question is whether a separate git repository should keep the history of the skills and the config. Suggest `.kobold/local` as its root. The user can name another directory. That directory is the repository root. The same hide choice covers it. Decline leaves the local files in place in the project tree, hidden and without their own history.
+
+The config repo tracks the Kobold files this run is keeping out of the project: local specs, local plans, local skills, local playbooks, and the adopt record. Skills that the project repository tracks stay there. The config repo has its own root so its bounds file is not the project's bounds file.
+
+A session loads skills from a scanned skill root. When the skills live in the config repo, the skill root in the project is a symlink to `<config-repo>/skills`. The hide choice covers that symlink. The recorded playbook directory is `<config-repo>/playbooks`. The recorded spec directory is `<config-repo>/specs` when the specs are local. The recorded plan directory is `<config-repo>/plans` when the plans are local. The adopt record that sessions read stays `.kobold/adopt.yaml`. When the record lives in the config repo, that path is a symlink to `<config-repo>/adopt.yaml`, and the hide choice covers the symlink.
+
+The config repo starts with `git init` in its root. Do not add a remote unless the user names one.
+
+Its bounds are a second table, for that repository only. The project's bounds do not govern it. Its bounds do not govern the project. The machine bounds file still sits behind both, and a key written in the config repo replaces the machine value for that repo only. Suggest these keys, because the repo exists to record local history: `commit: auto`, `commit-specs: auto` when the specs live there, `commit-plans: auto` when the plans live there, `push: never`, `pull-request: never`, `merge: never`, and `force-push: never`. Leave every other key with no suggestion and show the inherited value. Do not copy a suggestion that came from the project's instruction files into this table.
+
+Ask which of those keys to write. Suggest the committed layer of the config repo, `.kobold/bounds.yaml` at the config repo root. `set-the-bounds` writes only the keys the user named, at that root. When the user names no keys, write no bounds file in the config repo.
+
+After that write, the first commit of the config repo follows the `commit` key resolved at the config repo root. Name the key, the value, and the layer. An `auto` value commits the files that repo tracks. An `ask` value offers that commit. A `never` value leaves the files uncommitted. The project's `commit` key is not the key for this commit. Do not push the config repo during setup unless the user named a remote and the `push` key resolved at the config repo root allows it.
 
 ### An empty tree
 
-When the read finds no instruction files and no skills, skip The move's conversion. Still ask the path, the skill root, the bounds table, and the plans and specs question.
+When the read finds no instruction files and no skills, skip The move's conversion. Still ask the path, the skill root, the bounds table, the plans and specs question, and The local repo when a path will stay out of the project.
 
-Create the skill root and the playbook directory. Create the plan directory and the spec directory. Apply the ignore rules. Write `.kobold/adopt.yaml`.
+Create the skill root and the playbook directory. Create the plan directory and the spec directory. Apply the hide choice. Write `.kobold/adopt.yaml`.
 
 On the full path, create `AGENTS.md` at the repository root. Its body is the pointer, unless the user supplies a why sentence, in which case the why comes first and the pointer follows. Do not invent a product purpose. On the shadow path, create no instruction file.
 
@@ -121,7 +137,7 @@ The bounds table on an empty tree has no file sentences. Every row shows the inh
 
 ### The same repo
 
-A second run reads `.kobold/adopt.yaml`. The recorded path stays. Ask again only when the user names the other path. Read the sources again. Leave a skill or a playbook whose source would produce the same file. Convert a source that changed. On the shadow path, do not write instruction files on the second run either. An empty tree that now has the folders and the record is done. Name those files.
+A second run reads `.kobold/adopt.yaml`. The recorded path, the hide choice, and the config repo stay. Ask again only when the user names a different path, a different hide choice, or a config repo after declining one. Read the sources again. Leave a skill or a playbook whose source would produce the same file. Convert a source that changed. On the shadow path, do not write instruction files on the second run either. A new local file goes into the config repo when one is recorded, and a commit of that file uses the config repo's bounds. An empty tree that now has the folders and the record is done. Name those files.
 
 When the repository is this plugin, stop before the questions.
 
@@ -151,6 +167,9 @@ The existing rules then apply to both directories. Do not add a second copy of t
 - The shadow path edits an instruction file. That behavior must fail the review.
 - The full path leaves a procedure or a subject-fact in a root instruction file. That behavior must fail the review.
 - An ignore pattern for `.kobold/bounds.local.yaml` or `.kobold/trail.md` is added by this skill. That behavior must fail the review.
+- Specs the user kept out of the project are hidden with gitignore after the user chose exclude, or hidden in both places. That behavior must fail the review.
+- A config repo is created after the user declined one, or its bounds keys are written into the project's bounds file. That behavior must fail the review.
+- The first commit in the config repo uses the project's `commit` key. That behavior must fail the review.
 - A public file names a machine or a home path. The needle scan must fail.
 - The skill names a host tool. That wording must fail the review.
 
@@ -165,13 +184,13 @@ The existing rules then apply to both directories. Do not add a second copy of t
 **Interfaces:**
 
 - Consumes: this plan's Goal, Architecture, Global Constraints, and "The behavior the spec records".
-- Produces: a spec whose Skill heading has the six sections, with the description on one physical line. The Decisions heading holds the discovery notes: a session loads the instruction names listed in The sources and skips a gitignored instruction file; a session loads a skill under `.grok/skills/`, `.agents/skills/`, `.claude/skills/`, and `.cursor/skills/` even when that directory is ignored. The spec does not bump the version. The catalog is not edited.
+- Produces: a spec whose Skill heading has the seven sections, with the description on one physical line. The Decisions heading holds the discovery notes: a session loads the instruction names listed in The sources and skips an instruction file git is ignoring, including a match from `.git/info/exclude`; a session loads a skill under `.grok/skills/`, `.agents/skills/`, `.claude/skills/`, and `.cursor/skills/` even when that directory is ignored. The spec does not bump the version. The catalog is not edited.
 
 - [ ] **Step 1: Write the spec**
 
-Write `docs/specs/2026-10-04-adopt-the-repo-design.md` in the shape of `docs/specs/2026-10-03-write-the-doc-design.md`: a title, a purpose, the decisions, where the words live, and a Skill heading whose subsection bodies are the text that will ship. The six subsection titles are the heading names in Global Constraints. The description under Skill is the one line in Global Constraints.
+Write `docs/specs/2026-10-04-adopt-the-repo-design.md` in the shape of `docs/specs/2026-10-03-write-the-doc-design.md`: a title, a purpose, the decisions, where the words live, and a Skill heading whose subsection bodies are the text that will ship. The seven subsection titles are the heading names in Global Constraints. The description under Skill is the one line in Global Constraints.
 
-The check is a read of that file. Done means the six titles are present, the description is that one line, and the bodies cover the two paths, the why split, the bounds table, the empty tree, and the second run.
+The check is a read of that file. Done means the seven titles are present, the description is that one line, and the bodies cover the two paths, the why split, the project bounds table, the hide choice, the config repo and its own bounds, the empty tree, and the second run.
 
 - [ ] **Step 2: Commit the spec**
 
@@ -250,15 +269,15 @@ Done means `python3 tests/check_plugin.py` exits 0, and `grok plugin validate .`
 
 - [ ] **Step 1: Commit the plan**
 
-When this plan is already committed, mark this step done.
+When this plan is already committed and the committed file matches the worktree, mark this step done.
 
-Otherwise resolve `commit-plans` and commit only this file when that value allows it. The subject is `Add the plan for adopt-the-repo`. Checkboxes that Task 1 and Task 2 have finished are marked in this commit only when those tasks are already done. A commit of the plan made before the work stays as it is, and the checkbox update is a later `commit-plans` commit. The subject of that later commit is `Mark the finished adopt-the-repo plan steps`.
+When the worktree plan differs from the committed plan, resolve `commit-plans` and commit only this file when that value allows it. The subject of the first plan commit is `Add the plan for adopt-the-repo`. The subject of a revision before the work is `Revise the adopt-the-repo plan`. The subject of the checkbox update is `Mark the finished adopt-the-repo plan steps`. Checkboxes that Task 1 and Task 2 have finished are marked only in the checkbox commit.
 
 - [ ] **Step 2: Commit the work**
 
 When the skill, the match paragraph, the manifests, and the map are already committed, mark this step done.
 
-Otherwise resolve `commit` and commit those files when that value allows it. Leave the spec and this plan out of that commit. The subject is `Add the adopt-the-repo skill`. The body says the skill joins a repository on the full path or the shadow path, `run-the-play` can match a project playbook directory, and the plugin is `0.10.0`. Include a test plan that names the two checks from Task 2 Step 5 and the result you observed.
+Otherwise resolve `commit` and commit those files when that value allows it. Leave the spec and this plan out of that commit. The subject is `Add the adopt-the-repo skill`. The body says the skill joins a repository on the full path or the shadow path, a local spec can stay out through gitignore or git exclude, a config repo keeps its own bounds, `run-the-play` can match a project playbook directory, and the plugin is `0.10.0`. Include a test plan that names the two checks from Task 2 Step 5 and the result you observed.
 
 - [ ] **Step 3: Push and open the pull request**
 
