@@ -10,6 +10,12 @@ description: Use when a task should follow a playbook. Match it to one playbook,
 Match the task to one file in the `playbooks` directory beside
 this skill.
 
+The match also includes a project playbook directory when
+`adopt-the-repo` has recorded one for this repository. A file
+there is a file the match can use. There means the plugin
+directory and that project directory. The four plugin playbooks
+stay the files for the task kinds they already name.
+
 When the user names one of those files, or names its title, use
 that file. When the name is not a file there, name the files that
 are there, and stop.
