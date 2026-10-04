@@ -1,6 +1,6 @@
 ---
 name: write-a-skill
-description: Use when authoring or revising a skill in this plugin. Write one trigger description, original wording, and a check that the skill file matches its spec.
+description: Use when authoring or revising a skill in this plugin. Write one trigger description and original wording, and keep the manifest check current.
 ---
 
 # Write a skill
@@ -12,8 +12,7 @@ when the skill applies and what the session does. A second line in
 the frontmatter is a broken trigger.
 
 The wording is original. A paragraph taken from another skillset
-does not ship. `kobold-codex` is the voice. This skill does not
-restate those principles.
+does not ship. `kobold-codex` is the voice.
 
 The skill names no host tool. It adds no hooks.
 
@@ -25,7 +24,8 @@ the date and the skill name, matching the specs already there.
 
 The spec holds the description on one physical line, and it holds
 the section bodies that ship. Those bodies are the headings under
-the spec's Skill heading.
+the spec's Skill heading. A later revision of the skill file does
+not rewrite that spec.
 
 ## The file
 
@@ -34,13 +34,12 @@ frontmatter. `name` is the skill name. `description` is that same
 line.
 
 The title is the skill name with hyphens written as spaces and the
-first letter capitalized. Copy each section body from the spec,
-including line breaks. Do not rewrap a copied line.
+first letter capitalized. Copy each section body from the spec.
 
 ## The check
 
-`tests/check_plugin.py` pins those bodies to that spec, the same
-way it pins the skills already shipped. Update the check in the
+`tests/check_plugin.py` checks the manifests, and it requires a
+branch off main to be ahead on version. Update the check in the
 same change that adds the file.
 
 The plugin version bumps in that change. The manifest description
@@ -49,12 +48,11 @@ README does not gain a link to the spec, and it does not restate a
 section body. `docs/skills.md` links the skill and the spec, and
 it does not restate a section body.
 
-A revision changes the spec and the skill file together. A new
-heading is added in both, in the same order.
+A revision edits the skill file. The dated spec stays the record
+of the decision that shipped. A new heading is added to the skill
+file.
 
 ## The same skill
 
-A second run reads the spec and the skill file. When the bodies
-already match and the check already pins them, leave both files.
-When a section differs, copy the spec's body into the skill file.
-The spec is the record.
+A second run reads the skill file. When it already has the wording
+this revision calls for, leave it.

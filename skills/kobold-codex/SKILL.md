@@ -40,10 +40,11 @@ caller runs into the same behavior.
 ## Re-running converges
 
 An operation should be safe to run again. A second run that starts from
-a finished state stays on that state. A run that stopped halfway is a
-valid place to start, and finishing it reaches the same result as a run
-that succeeded the first time. Role installers already work this way:
-running the role again is how a machine picks up changes.
+a finished state stays on that state. A part whose inputs are unchanged
+can be cited from the earlier result. Name that result. Run a part whose
+inputs changed. A run that stopped halfway is a valid place to start,
+and finishing it reaches the same result as a run that succeeded the
+first time.
 
 ## Data shape before logic
 

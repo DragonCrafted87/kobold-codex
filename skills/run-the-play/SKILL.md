@@ -27,6 +27,27 @@ there and stop.
 A file that no rule above names stays unused until the user names
 it.
 
+## The shared steps
+
+`feature` and `refactor` share the scope step, the shape step, and
+the build step. `refactor` calls the build step Reshape.
+
+In the scope step, `scope-the-edit` names the scope before the
+first edit. For a small or intermediate scope, follow that skill,
+including the edit it requires. An architectural scope only names
+the scope in this step. Writing the plan is the shape step.
+
+The shape step writes the plan when the scope is architectural.
+`write-the-plan` writes it. That step is done when the plan file
+is written. The later steps stay waiting until the user approves
+that plan. When the scope is small or intermediate, leave this
+step out. The reason is that scope.
+
+The build step stays out when the scope step already made the
+edit. The reason is that scope. When a plan is required and it is
+not approved yet, stop and leave this step waiting. When the user
+has approved the plan, `carry-out-the-plan` runs it.
+
 ## The list
 
 Copy that playbook's steps into the working list, in the order of
@@ -60,24 +81,17 @@ entry with no reason stays waiting.
 
 When the user is away, or has asked the session to continue
 without them, resolve `unattended` before the first step.
-`set-the-bounds` is that rule. This skill does not loosen it.
+`set-the-bounds` is that rule.
 
 Do not start a step the resolved value does not allow. Leave that
 step and the later steps waiting, and stop. Name the key, the
 value, and the layer that set it.
 
 `stop-at-plan` may start a step that names a scope or writes a
-plan. It does not start a step that edits when the work has no
-plan, and it stops once the plan is written. `safe-steps` may
-start a step that reads, edits, runs a check, or writes a plan or
-a trail. It does not start a step that publishes or uses a named
-tool. `through-publish` and `auto` may start a publishing step as
-far as that step's key allows. A named tool stays on its own key.
+plan.
 
-While the user is directing the next step, the publishing keys and
-the tool keys decide. A step that commits, pushes, opens a pull
-request, merges, force-pushes, or uses a named tool follows
-`set-the-bounds`.
+A step that commits, pushes, opens a pull request, merges,
+force-pushes, or uses a named tool follows `set-the-bounds`.
 
 ## The same task
 

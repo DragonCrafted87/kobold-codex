@@ -12,10 +12,7 @@ user asks for one. A long run is one that will outlast this
 sitting, or one a reviewer will need to read afterward.
 
 A large migration that has no narrower playbook still gets this
-log. This skill does not write that playbook.
-
-The working list in `run-the-play` is not this log. The
-checkboxes in a plan are not this log.
+log.
 
 ## The row
 

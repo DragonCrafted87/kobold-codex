@@ -22,11 +22,6 @@ When the kind of split is named and the pieces are not, name up to
 three pieces and run those. A wider set waits until the extra
 pieces are named.
 
-`carry-out-the-plan` splits tasks inside one plan.
-`stress-the-change` runs the three review passes.
-`try-several-shapes` runs the candidates for one change. This
-skill is the split those three do not already cover.
-
 ## The workers
 
 Resolve `subagents` before starting another agent. When that key
@@ -42,10 +37,8 @@ When `model` is absent, the worker uses the model already running
 the session.
 
 While the user is away, `unattended` still applies.
-`set-the-bounds` is that rule. `stop-at-plan` and `safe-steps`
-do not start another agent. Run the pieces in this session, or
-stop before a worker. `through-publish` and `auto` leave a named
-tool on its own key.
+`set-the-bounds` is that rule. When that rule blocks another
+agent and still allows the work, run the pieces in this session.
 
 A worker that does not return leaves the report unfinished. Name
 the missing piece and stop. Leave the finished pieces unmerged.
@@ -62,6 +55,5 @@ The report stays in the reply. A request to post it follows
 ## The same split
 
 A second run splits the work as it stands now. The new report
-replaces the earlier report. A piece whose result is already
-recorded, and whose inputs are unchanged, can be cited from that
-record. Name the record. Run a piece whose inputs changed.
+replaces the earlier report. Each piece is a part under
+`kobold-codex`. Its inputs are the ones named for that piece.

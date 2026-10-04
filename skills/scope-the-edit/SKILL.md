@@ -31,14 +31,11 @@ When two checks would change the work, stop and ask which one to run.
 
 ## Architectural
 
-Write a plan the reviewer can read. Say what will change, which parts
-of the system it touches, what the tests will cover, and what stays
-the same. Write the plan where the project keeps plans. When the
-project has nowhere for it, use docs/plans/. Stop after the plan.
+`write-the-plan` writes the plan. Stop after that plan.
 Implementation starts after an explicit yes to that plan. A yes names
 this plan. "Yes", "do it", or the choice the plan just offered counts.
 Approval of an earlier piece of work does not carry forward. Once the
-conversation has that yes, do the work.
+conversation has that yes, `carry-out-the-plan` runs the plan.
 
 ## Real code
 

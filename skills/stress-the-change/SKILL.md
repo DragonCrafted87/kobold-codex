@@ -7,37 +7,26 @@ description: Use when a diff needs several independent reviews. Run separate pas
 
 ## The diff
 
-Review the change the user named. A named branch, a named range, a
-pull request, or a named set of files is that change. Review that
-change on its own.
-
-When the user names none, review the current branch against the
-branch it would merge into. Include uncommitted work in that
-review, and say in the report that it is uncommitted.
-
-Read the request, and the plan when there is one. The request is
-what the user asked for. The checks are the ones the plan or the
-change named.
+Review the change `review-the-diff` would review. That skill's rule
+for a named change, for an unnamed one, and for the request, the
+plan, and the checks, is the rule here.
 
 ## Three passes
 
 Run three passes on that same diff. A pass sees the diff, the
 request, the checks, and its own angle. A pass does not see another
-pass's findings. A finding from a pass names the file, the line,
-what is wrong, and why it matters.
+pass's findings. A finding from a pass uses the finding
+`review-the-diff` defines.
 
-The first pass is the request. A missing piece of the request is a
-finding. A change the request did not ask for is a finding.
+The first pass is the request. Apply the request findings in
+`review-the-diff`.
 
-The second pass is the checks. Run the checks when they can be run.
-A failed check is a finding. A check that cannot be run is a
-finding, and the finding names the reason. A check that passes
-without reaching the behavior it claims is a finding. The other
-passes do not run the checks.
+The second pass is the checks. Apply the check findings in
+`review-the-diff`. The other passes do not run the checks.
 
-The third pass is the changed lines. A defect in a line the diff
-adds or changes is a finding. A problem in a line the diff does not
-touch stays out of this pass.
+The third pass is the changed lines. Apply the changed-line
+findings in `review-the-diff`. A pass does not drop a finding
+because another pass would also raise it.
 
 When only one model is available, run the three passes one after
 another. Each pass starts without the other passes' findings.
@@ -59,19 +48,16 @@ missing pass and stop. Leave the passes unmerged.
 ## One list
 
 Merge the finished passes into one list in the reply. A finding
-names the file, the line, what is wrong, why it matters, and which
-passes raised it. The same file, line, and fault from more than one
-pass is one finding. A finding only one pass raised stays on the
-list. When one pass calls a line wrong and another pass calls that
-line fine, keep the finding and name the passes on each side.
+follows `review-the-diff`, and it names which passes raised it.
+The same file, line, and fault from more than one pass is one
+finding. A finding only one pass raised stays on the list. When
+one pass calls a line wrong and another pass calls that line fine,
+keep the finding and name the passes on each side.
 
 Order the list by file, then by line. When a pass raised nothing,
 say so.
 
-A check finding that has no line stays in the list. Name the
-command and the reason in place of the line. When some other item
-has no line, say what the pass looked at, and leave that item out
-of the list.
+A finding with no line follows `review-the-diff`.
 
 ## Leave the tree
 
@@ -82,4 +68,4 @@ A second run reviews the diff as it is now. The new list replaces
 the earlier list.
 
 The list stays in the reply. A request to post it follows
-`github-write`. This skill stops at the list.
+`review-the-diff`. This skill stops at the list.

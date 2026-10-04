@@ -35,8 +35,8 @@ in the current checkout. `allow` and `auto` create it. When another
 skill names a set of checkouts, each checkout still needs a yes
 that names it.
 
-While the user is away, `unattended` still applies. This skill does
-not loosen it.
+While the user is away, `unattended` still applies.
+`set-the-bounds` is that rule.
 
 ## The checkout
 
@@ -52,8 +52,6 @@ current checkout as it is.
 
 Say the path in the reply. The worktree record for that branch is
 the record `ship-the-branch` uses when it removes the checkout.
-
-This skill does not remove the checkout.
 
 ## The same work
 

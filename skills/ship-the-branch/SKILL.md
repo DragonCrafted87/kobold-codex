@@ -20,7 +20,7 @@ that cannot be run stops the ship, and the reply names the reason.
 When no check is named, stop and ask which check to run.
 
 When the user is away, `unattended` still decides how far the ship
-goes. `set-the-bounds` is that rule. This skill does not loosen it.
+goes. `set-the-bounds` is that rule.
 
 The reply names each action this run took and each one it skipped.
 Name the key that governed it. A ship that stops on the checks does
@@ -45,17 +45,18 @@ commit fails, stop the ship, and say what failed.
 
 ## The remote
 
-Push the branch under `push`, then open one pull request under
-`pull-request`, then merge that pull request under `merge`. Say the
-key, the value, and the layer that set it before the action.
+Push the branch under `push`, including a force-push under
+`force-push`, then open one pull request under `pull-request`,
+then merge that pull request under `merge`. Say the key, the
+value, and the layer that set it before the action.
 
 `ask` stops for a yes that names this action. A yes does it, and
 the ship continues. A no skips it and stops the ship. `never`
 skips that action, and the ship continues. `auto` and `open`
 proceed.
 
-This skill does not force-push. A push the remote rejects stops
-the ship. Say what was rejected, and leave the remote as it is.
+A push the remote rejects stops the ship. Say what was rejected,
+and leave the remote as it is.
 
 When `push` did not update the remote, and the remote does not
 have the commits this ship would push, stop before the pull

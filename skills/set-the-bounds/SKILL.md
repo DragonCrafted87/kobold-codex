@@ -39,10 +39,10 @@ is a YAML mapping, one key per line.
 | Key | Default | Description |
 | --- | --- | --- |
 | `commit` | `ask` | Work commit. Changed and untracked files outside the plan directory and the spec directory. |
-| `commit-plans` | `never` | Commit of plan files, in the project's plans directory or `docs/plans/`. |
-| `commit-specs` | `ask` | Commit of spec files. In this plugin, `docs/specs/`. |
+| `commit-plans` | `never` | Commit of plan files, in the directory `write-the-plan` uses. |
+| `commit-specs` | `ask` | Commit of spec files, in the directory the project uses for design specs. |
 | `push` | `ask` | Update the remote branch. |
-| `pull-request` | `ask` | Open a pull request. `open` and `auto` do this without a fresh ask. |
+| `pull-request` | `ask` | Open a pull request. |
 | `merge` | `never` | Merge the pull request. |
 | `force-push` | `never` | Rewrite the remote branch. Also requires `push` to be `ask` or `auto`. |
 | `shell-network` | `ask` | A shell command that reaches the network. |
@@ -60,8 +60,7 @@ or `never`. `pull-request` is `never`, `ask`, `open`, or `auto`.
 `merge` and `force-push` are `never` or `ask`. A tool key is `ask`,
 `allow`, `auto`, or `deny`. The tool keys in the default set are
 `shell-network`, `browser`, `github-write`, `subagents`, and
-`worktrees`. A bounds file may add a tool name. `github-write` is
-comments, labels, issues, and review submission. `unattended` is
+`worktrees`. A bounds file may add a tool name. `unattended` is
 `stop-at-plan`, `safe-steps`, `through-publish`, or `auto`.
 
 `auto` on `pull-request` opens one pull request without a fresh ask,
@@ -80,21 +79,15 @@ the value from the layer behind that file.
 `commit` stages the work, which is every changed or untracked file
 outside the plan directory and the spec directory. `commit-plans`
 stages plan files. `commit-specs` stages spec files. A plan file sits
-in the directory the project uses for plans. When the project has
-nowhere else, that directory is `docs/plans/`. A spec file sits in the
-directory the project uses for design specs. In this plugin that
-directory is `docs/specs/`. When a path matches both directories, it
-is a spec.
+in the directory the `commit-plans` row names. A spec file sits in
+the directory the `commit-specs` row names. When a path matches both
+directories, it is a spec.
 
 `commit: auto` leaves plans and specs to their own keys. Each set that
 is `auto` is its own commit. Each set that is `ask` is offered on its
 own. Each set that is `never` stays unstaged. An empty set is skipped.
 A second run leaves a finished commit as it is and commits only a set
 that is still uncommitted and still allowed.
-
-`auto` on `push` pushes without a fresh ask. `open` on `pull-request`
-opens one pull request without a fresh ask. Force-push runs only when
-`force-push` is `ask` and `push` is `ask` or `auto`.
 
 ## Unattended
 
@@ -110,8 +103,7 @@ plan and the trail. Publishing and named tools stay outside that list.
 
 `through-publish` may commit the work, the plans, and the specs, then
 push, open a pull request, or merge, only as far as those keys already
-allow. An `ask` still asks. A `never` still stops. Force-push and a
-named tool stay on their own keys.
+allow. Force-push and a named tool stay on their own keys.
 
 ## Revise a layer
 

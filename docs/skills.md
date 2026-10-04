@@ -1,6 +1,6 @@
 # Skills
 
-Kobold Codex is a set of skills. A session uses the one whose description matches the task. This page is the map. The spec linked from each skill is the record of the wording that shipped.
+Kobold Codex is a set of skills. A session uses the one whose description matches the task. This page is the map. The spec linked from each skill is the record of the decision that shipped. Later wording lives in the skill file.
 
 ## Which skill applies
 
