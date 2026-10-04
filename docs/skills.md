@@ -52,6 +52,8 @@ A pass over prose or a diff for narration, stock phrasing, and comments that res
 
 A README, a spec, a pull request, or a commit message uses [skills/write-the-doc/SKILL.md](../skills/write-the-doc/SKILL.md).
 
+Adding Kobold to a repository uses [skills/adopt-the-repo/SKILL.md](../skills/adopt-the-repo/SKILL.md). The skill converts the repository's instructions into project skills and playbooks, or lays the folder and bounds foundation when the repository has none.
+
 ## Records
 
 - [skills/kobold-codex/SKILL.md](../skills/kobold-codex/SKILL.md) is recorded in [docs/specs/2026-10-01-kobold-codex-design.md](specs/2026-10-01-kobold-codex-design.md).
@@ -78,3 +80,4 @@ A README, a spec, a pull request, or a commit message uses [skills/write-the-doc
 - [skills/write-a-skill/SKILL.md](../skills/write-a-skill/SKILL.md) is recorded in [docs/specs/2026-10-03-write-a-skill-design.md](specs/2026-10-03-write-a-skill-design.md).
 - [skills/cut-the-slop/SKILL.md](../skills/cut-the-slop/SKILL.md) is recorded in [docs/specs/2026-10-03-cut-the-slop-design.md](specs/2026-10-03-cut-the-slop-design.md).
 - [skills/write-the-doc/SKILL.md](../skills/write-the-doc/SKILL.md) is recorded in [docs/specs/2026-10-03-write-the-doc-design.md](specs/2026-10-03-write-the-doc-design.md).
+- [skills/adopt-the-repo/SKILL.md](../skills/adopt-the-repo/SKILL.md) is recorded in [docs/specs/2026-10-04-adopt-the-repo-design.md](specs/2026-10-04-adopt-the-repo-design.md).
