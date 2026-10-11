@@ -56,7 +56,7 @@ Kind: design
 - Consumes: the approved design and the review answers.
 - Produces: the committed spec at `fbb3e5a`.
 
-- [ ] **Step 1: Confirm the spec is committed**
+- [x] **Step 1: Confirm the spec is committed**
 
 The check is `git log --oneline -- docs/specs/2026-10-11-model-tier-routing-design.md`. Done means the log shows `6f7c4a1` and `fbb3e5a`, and `git status` shows no change to the spec.
 
@@ -81,13 +81,13 @@ Kind: docs-or-config
 - Consumes: the eight `## Skill: <name>` regions of the spec.
 - Produces: eight skill files whose named sections match the spec, and one Records bullet.
 
-- [ ] **Step 1: Replace and add the sections**
+- [x] **Step 1: Replace and add the sections**
 
 For each region, replace each named `##` section body with the `###` body from the spec. In `carry-out-the-plan`, add `The fast model` and `The brief` after `Beside this session`, add `A failed run` after `The check`, and replace the description with the line in Global Constraints. The `write-a-skill` region carries the fix for the stale line about the check.
 
 The check is a script that reads each region from the spec and compares each `###` body with the `##` body of the same heading in the skill file. Done means every body matches, and `git diff main -- skills/` shows changes only in the named sections and in the one description.
 
-- [ ] **Step 2: Add the Records bullet**
+- [x] **Step 2: Add the Records bullet**
 
 In `docs/skills.md`, under Records, add this bullet after the `adopt-the-repo` bullet:
 
@@ -97,7 +97,7 @@ In `docs/skills.md`, under Records, add this bullet after the `adopt-the-repo` b
 
 The check is `git diff main -- docs/skills.md`. Done means the diff is that one line.
 
-- [ ] **Step 3: Commit the skills and the map**
+- [x] **Step 3: Commit the skills and the map**
 
 Resolve `commit`. Commit the eight skill files and `docs/skills.md` when that value allows it. Leave the manifests and this plan out of that commit. The subject is in Global Constraints. The body names the routing, the plan-run yes, the gate, the model rows, and the stale-line fix.
 
@@ -117,19 +117,19 @@ Kind: follow-a-pattern
 - Consumes: the manifests at `1.0.0`. The version bump commit `Mark the plugin at 1.0.0` is the pattern.
 - Produces: both manifests at `1.1.0` with the stable description.
 
-- [ ] **Step 1: Bump the manifests**
+- [x] **Step 1: Bump the manifests**
 
 Set `version` to `1.1.0` in `.claude-plugin/plugin.json` and in the plugin entry in `.claude-plugin/marketplace.json`. Leave both descriptions as the stable sentence.
 
 The check is a read of both `version` fields. Done means both are `1.1.0`.
 
-- [ ] **Step 2: Run the checks**
+- [x] **Step 2: Run the checks**
 
 Run `python3 tests/check_plugin.py` from the repository root. Then run the spec's Implementation check: compare each region with its skill file, read the `carry-out-the-plan` heading order and description, grep `skills/` for host tool names and model brand names, run `git diff --stat main` over the files Global Constraints lists as not edited, confirm the repo has no `hooks/` directory and no `hooks.json`, and scan tracked files for a hostname, a home-directory path, or a machine name. Then run `grok plugin validate .`.
 
 Done means `python3 tests/check_plugin.py` exits 0 with no stderr, with `1.1.0` ahead of `1.0.0` on `main`, and every Implementation check item holds. There is no new function in the check, so the real-code bar in `scope-the-edit` has no branch to cover. If `grok` is not on the path, say so and leave that check open.
 
-- [ ] **Step 3: Commit the version**
+- [x] **Step 3: Commit the version**
 
 Resolve `commit`. Commit the two manifests when that value allows it. The subject is in Global Constraints.
 
@@ -146,7 +146,7 @@ Kind: docs-or-config
 - Consumes: Tasks 1 to 3 finished.
 - Produces: the finished checkboxes, committed under `commit-plans`.
 
-- [ ] **Step 1: Mark and commit the finished steps**
+- [x] **Step 1: Mark and commit the finished steps**
 
 Mark each finished step `- [x]`. Resolve `commit-plans` and commit only this file. The subject is in Global Constraints. Do not push. `push` is `ask`, and this run has no yes for it.
 
