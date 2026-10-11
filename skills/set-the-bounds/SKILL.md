@@ -18,9 +18,11 @@ are ordinary work. Those actions have no key.
 action does not carry. `auto`, `open`, and `allow` proceed. `never`
 and `deny` stop the action.
 
-One `ask` covers more than one action in one place. Under
+One `ask` covers more than one action in two places. Under
 `subagents: ask`, a yes that names a plan file covers every agent
-`carry-out-the-plan` starts in that run of the plan. A later run
+`carry-out-the-plan` starts in that run of the plan. A yes that
+names a review covers every pass, reviewer, and verifier
+`stress-the-change` starts in that run of the review. A later run
 asks again.
 
 ## Layers

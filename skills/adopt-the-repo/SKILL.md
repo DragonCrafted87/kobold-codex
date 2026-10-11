@@ -211,6 +211,64 @@ named, on the layer they named for each, at the project root.
 When the user names no keys, write no project bounds file. That
 includes a user who keeps the inherited values.
 
+## The rigor level
+
+Suggest how much review the project needs, from a fixed scale:
+
+- `standard`: a break is an inconvenience.
+- `elevated`: a break costs users data, money, or time they cannot
+  get back.
+- `safety-critical`: a break can harm a person, or a safety class
+  or a regulation governs the project's failures.
+
+For the suggestion, read the README and the other docs at the
+repository root, and the instruction files The sources read. Do
+not read deeper into the tree. Those docs inform the level only.
+They stay out of The move.
+
+Suggest the level the read supports, and name the sentences it
+rests on. A source that names harm to a person or a safety class
+suggests `safety-critical`. A source that names a regulation, a
+certification, or an audit suggests at least `elevated`. When
+nothing points higher, or there is nothing to read, suggest
+`standard` and say so.
+
+Ask which level, in the same question set as The bounds. The
+user's answer is the level. Write nothing for the level before
+that answer.
+
+The level lives in the `project-review` skill, on its own line.
+Bounds hold what a session may do. The level is a review rule. A
+project with no `project-review` skill is at `standard`.
+
+## The review skill
+
+The confirmed level decides the suggestion for the `project-review`
+skill under the skill root. It is the skill `review-the-diff`
+reads.
+
+At `standard`, suggest no `project-review` skill. When a source
+states review rules, such as paths a review skips, suggest the
+skill with those rules and the level.
+
+At `elevated`, suggest the skill with the level, what blocks the
+merge, a nit cap of ten, and reviewers for `stress-the-change`.
+
+At `safety-critical`, suggest the same parts with a nit cap of
+five, and a line that gives every finding three verifiers.
+
+Each reviewer names a goal to break the change, the paths it
+covers, and what blocks the merge for it. Propose a reviewer for a
+failure the sources show the project can have, and name the
+sentence behind it. Do not add what a regulation requires beyond
+what the source says. The user keeps, edits, or drops each part.
+
+Review rules a source already states land in this skill, as the
+what for the subject of review. The skill goes in the file map, and
+it is written only when the user accepts the map. When the project
+already has a `project-review` skill, leave it, and show the
+suggestion beside it.
+
 ## The local repo
 
 When the user keeps the specs out of the project repository, ask
@@ -315,8 +373,8 @@ the config repo root allows it.
 
 When the read finds no instruction files and no skills, skip The
 move's conversion. Still ask the path, the skill root, the bounds
-table, the plans and specs question, and The local repo when a
-path will stay out of the project.
+table, the rigor level, the plans and specs question, and The
+local repo when a path will stay out of the project.
 
 Create the skill root, the playbook directory, the plan
 directory, and the spec directory. A path the config repo holds
@@ -342,7 +400,10 @@ A second run reads `.kobold/adopt.yaml`. The recorded path, the
 hide choice, and the config repo stay. Ask again only when the
 user names a different path, a different hide choice, or a config
 repo after declining one. Read the sources again. Leave a skill
-or a playbook whose source would produce the same file. Convert
+or a playbook whose source would produce the same file. The rigor
+level in `project-review` stays, and a project with no such skill
+stays at `standard`. Ask the level again only when the read
+suggests a different one or the user names one. Convert
 a source that changed. On the shadow path, do not write
 instruction files on the second run either. A new local file goes
 into the config repo when one is recorded, and that commit

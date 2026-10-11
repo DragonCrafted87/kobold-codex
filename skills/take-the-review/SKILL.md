@@ -16,6 +16,10 @@ and a line is unclear. Ask about that note before you edit it. When
 two notes are about the same lines, ask before you edit either. A
 clear note that shares no lines with an unclear one can proceed.
 
+Take the notes that block the merge first, then the nits. A note
+with no severity is taken with the nits. Within each group, keep
+the order the notes came in.
+
 ## Against the code
 
 Read the code at the file and line before you edit. The note holds
@@ -39,6 +43,15 @@ When the note holds, and it is about the change, make the fix the
 note describes. `scope-the-edit` decides the plan and the proof for
 that edit. Run the check that shows the note no longer holds.
 Record the result you observed.
+
+Then read the fix's diff from the tree yourself. A summary of the
+fix is not that diff. State three claims, each with the line, the
+check, or the run that shows it. The fix is targeted: each changed
+line traces to the note. Behavior outside the note is unchanged:
+the checks that reach the changed code pass, or the claim says that
+code is untested. Nothing is weakened: no check, guard, or test was
+removed or loosened to make the note go away. A claim that does not
+hold is a failed check.
 
 Finish that note before you start the next. Read the next note
 against the code after the fix.
