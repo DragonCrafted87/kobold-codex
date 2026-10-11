@@ -35,13 +35,13 @@ Kind: docs-or-config
 - Modify: `skills/review-the-diff/SKILL.md`
 - Modify: `docs/skills.md`
 
-- [ ] **Step 1: Replace and add the sections**
+- [x] **Step 1: Replace and add the sections**
 
 Copy each `###` body from the spec into its skill file. Add Read the request after Voice in `kobold-codex`.
 
 The check is a script that compares each `###` body with the `##` body of the same heading. Done means every body matches and `git diff main -- skills/` shows only those sections.
 
-- [ ] **Step 2: Add the Records bullet**
+- [x] **Step 2: Add the Records bullet**
 
 In `docs/skills.md`, under Records, add after the adversarial review bullet:
 
@@ -51,7 +51,7 @@ In `docs/skills.md`, under Records, add after the adversarial review bullet:
 
 The check is `git diff main -- docs/skills.md`. Done means the diff is that one line.
 
-- [ ] **Step 3: Commit the skills and the map**
+- [x] **Step 3: Commit the skills and the map**
 
 Commit the two skill files and `docs/skills.md`. The subject is in Global Constraints.
 
@@ -65,17 +65,17 @@ Kind: follow-a-pattern
 - Modify: `.claude-plugin/marketplace.json`
 - Test: `python3 tests/check_plugin.py`
 
-- [ ] **Step 1: Bump the manifests**
+- [x] **Step 1: Bump the manifests**
 
 Set `version` to `1.3.0` in both manifests, following `Mark the plugin at 1.2.0`. The check is a read of both fields.
 
-- [ ] **Step 2: Run the checks**
+- [x] **Step 2: Run the checks**
 
 Run `python3 tests/check_plugin.py`, then the spec's Implementation check: the region comparison, the `kobold-codex` heading order, the brand and host-tool grep over `skills/`, `git diff --stat main` over every other skill, the earlier specs, and the README, the hooks check, and the hostname scan. Then `grok plugin validate .`; if `grok` is not on the path, say so and leave it open.
 
 Done means the checker exits 0 with `1.3.0` ahead of `1.2.0` on `main`, and every Implementation check item holds.
 
-- [ ] **Step 3: Commit the version**
+- [x] **Step 3: Commit the version**
 
 Commit the two manifests. The subject is in Global Constraints.
 
@@ -87,7 +87,7 @@ Kind: docs-or-config
 
 - Modify: `docs/plans/2026-10-11-surgical-changes.md`
 
-- [ ] **Step 1: Mark, commit, and open the pull request**
+- [x] **Step 1: Mark, commit, and open the pull request**
 
 Mark each finished step `- [x]` and commit only this file. Push `surgical-changes` and open a pull request against `main`.
 
