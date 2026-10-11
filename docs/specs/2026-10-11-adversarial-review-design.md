@@ -16,7 +16,9 @@ reaches the list, and no pass is told to break the change. This
 change gives each pass a goal to break the change, sends each
 merged finding to a fresh verifier that tries to disprove it, and
 lets a project add its own reviewers when its work needs more
-rigor.
+rigor. `adopt-the-repo` suggests a rigor level and confirms it with
+the user. A review of someone else's change comes out as comments
+ready to paste.
 
 The ideas come from these sources, read on 2026-10-11:
 
@@ -175,14 +177,81 @@ look. `project-review` under the project's skill root is that
 place. A project that already has review rules elsewhere moves
 them there through `adopt-the-repo`.
 
-`adopt-the-repo` suggests the skill. When a source names a
-regulation, a safety class, a certification, an audit, or a rule
-for how changes are reviewed, the session proposes a
-`project-review` skill with the parts the sources support. The
-skill is a project skill, so it goes in the file map, and it is
-written only when the user accepts the map. The suggestion states
-only what the source says. The plugin does not assert what any
-regulation requires.
+The request pass checks project rules too. An instruction file or
+a project skill can set a rule for the paths it covers. A changed
+line that breaks such a rule is a request finding, and it quotes
+the rule. An instruction file's rules cover its own directory and
+the directories below it. A project skill's rules cover the paths
+it names, or the whole project when it names none. The skill text
+says instruction files and project skills, and names no host file.
+
+Nits are verified up to the cap. A list of forty nits would
+otherwise start forty verifiers for findings the report would cut.
+When `project-review` sets a nit cap, the verifiers take the nits
+in list order until that many are verified. The rest are counted,
+not verified and not listed. With no cap, every nit gets its one
+verifier.
+
+One `model` covers every review stage. Passes, project reviewers,
+and verifiers use `model`, or the session's model when it is
+absent. A reviewer does not name its own model. A model name is a
+host fact, and a team repo is opened from either host, so a model
+per reviewer in a committed skill would break on the other host.
+
+`adopt-the-repo` suggests a rigor level. The scale has three
+levels. `standard` is a project where a break is an inconvenience,
+such as a game mod. `elevated` is one where a break costs users
+data, money, or time they cannot get back. `safety-critical` is one
+where a break can harm a person, or a safety class or a regulation
+governs its failures. Three levels are enough to choose between
+the plugin default and two stricter settings. A finer scale would
+ask the user to make a distinction nothing reads.
+
+The read for the level is shallow. The session reads the README
+and the other docs at the repository root, and the instruction
+files it already reads. It does not scan the tree. The user knows
+the level better than any scan, so the read only has to produce a
+starting suggestion, and the confirmation does the rest. The
+suggestion names the sentences it rests on. A source that names
+harm to a person or a safety class suggests `safety-critical`. A
+source that names a regulation, a certification, or an audit
+suggests at least `elevated`. With nothing to read, the suggestion
+is `standard`. This runs with or without instruction files,
+including on an empty tree. Nothing about the level is written
+before the user answers.
+
+The level lives in `project-review`, not in bounds. Bounds say what
+a session may do: commit, push, start an agent. The level says how
+hard a review looks, which is a review rule, and `review-the-diff`
+already reads `project-review` for its rules. One place keeps the
+level and the settings it produced together. A project with no
+`project-review` skill is at `standard`, so the default writes
+nothing.
+
+The confirmed level decides the suggestion. At `standard`,
+`adopt-the-repo` suggests no `project-review` skill, unless a
+source states review rules of its own. At `elevated`, it suggests
+the skill with what blocks the merge, reviewers, and a nit cap of
+ten. At `safety-critical`, the cap is five, and every finding gets
+three verifiers, not only the blockers. A lower cap keeps a strict
+review's blockers from drowning in nits. A reviewer is proposed for
+a failure the sources show the project can have, and the user
+keeps, edits, or drops each one. The skill is a project skill, so
+it goes in the file map, and it is written only when the user
+accepts the map. The suggestion states only what the source says.
+The plugin does not assert what any regulation requires.
+
+`take-the-review` takes blocking notes first. A blocker fixed late
+can change the lines a nit was about. A note with no severity is
+taken with the nits, in the order it came.
+
+A review of someone else's change is written to paste. The user
+reviews teammates' changes and posts the result in the review
+tool. When the change is someone else's, each finding becomes a
+comment: the path and line, the severity, and a body addressed to
+the author that says what is wrong, the evidence, and a fix. One
+summary paragraph comes first. The session does not post them.
+The skill text names no code host and no review tool.
 
 This revises the stress-the-change spec. That spec says the three
 angles are the whole review and a fourth angle was set aside
@@ -268,8 +337,9 @@ pass's findings. A finding from a pass uses the finding
 Each pass has one goal: to break the change from its side.
 
 The first pass is the request. Its goal is to show what the change
-fails to do that the request asked for, or does that the request
-did not ask for. Apply the request findings in `review-the-diff`.
+fails to do that the request asked for, does that the request did
+not ask for, or does against a project rule for a changed path.
+Apply the request findings in `review-the-diff`.
 
 The second pass is the checks. Its goal is to show that a check
 fails, cannot run, or passes without reaching the behavior it
@@ -345,6 +415,11 @@ When a verifier did not return, its finding stays on the list
 marked unverified. When anything did not return or was not
 reached, do not call the review complete.
 
+When the change is someone else's work, write the surviving
+findings as the review comments `review-the-diff` defines. Its
+summary comment also names the passes and reviewers that ran and
+how many findings the refutation dropped.
+
 A finding with no line follows `review-the-diff`.
 
 ### The refutation
@@ -360,14 +435,18 @@ line for each part of the claim, under the evidence rule in
 refute a finding, the verifier cites the code that stops the
 fault. A comment that claims the code is safe does not stop it.
 
-A nit gets one verifier. A finding that would block the merge gets
-three, each with one focus. The first asks whether the input the
-finding names can reach the faulty line. The second asks whether
-the fault breaks the request or a check. The third asks whether
-code already in place stops the fault. The finding stays when two
-of the three keep it. It stays blocking only when two verifiers
-call it blocking. Otherwise it stays as a nit. A verifier can
-lower the severity and never raises it.
+A nit gets one verifier. When `project-review` sets a nit cap,
+verify the nits in list order until that many are verified. Count
+the rest, and verify and list none of them. A finding that would
+block the merge gets three verifiers, each with one focus. The
+first asks whether the input the finding names can reach the faulty
+line. The second asks whether the fault breaks the request or a
+check. The third asks whether code already in place stops the
+fault. The finding stays when two of the three keep it. It stays
+blocking only when two verifiers call it blocking. Otherwise it
+stays as a nit. A verifier can lower the severity and never raises
+it. When `project-review` gives every finding three verifiers, a
+nit gets three under the same tally.
 
 A failed check, and a check that cannot run, go to no verifier.
 The run is the evidence.
@@ -385,12 +464,20 @@ session.
 The frontmatter stays. The diff and Leave the tree stay. The
 request and the checks and Findings are replaced. Never flag and
 The evidence are new, placed after The request and the checks, in
-that order. The project's rules is new, placed after Findings.
+that order. For another author and The project's rules are new,
+placed after Findings, in that order.
 
 ### The request and the checks
 
 On the request, a missing piece is a finding. A change the request
 did not ask for is a finding.
+
+The project's instruction files and project skills set rules for
+the paths they cover. An instruction file covers its own directory
+and the directories below it. A project skill covers the paths it
+names, or the whole project when it names none. A changed line
+that breaks such a rule is a request finding. The finding quotes
+the rule and names the file it came from.
 
 On the checks, run the checks the plan or the change named, when
 they can be run. A failed check is a finding. A check that cannot
@@ -455,18 +542,40 @@ After the findings, name anything you considered and left out
 because it sits outside the diff. One line each, with the reason.
 When you left nothing out, say so.
 
+### For another author
+
+When the change is someone else's work, write each finding as a
+review comment the user can paste. The change is someone else's
+when the user says so, or when it is a pull request another person
+opened.
+
+A comment starts with the path and line, then the severity. Its
+body speaks to the author in a few sentences: what is wrong, the
+evidence, and a suggested fix. A finding marked unverified says so
+in its body. A finding with no line goes in the summary.
+
+Before the comments, write one summary comment of one paragraph.
+It names the change reviewed, the number of blocking findings and
+nits, the findings with no line, and what the review did not
+reach. It gives no verdict.
+
+This session does not post the comments. The user pastes them.
+
 ### The project's rules
 
 A project can keep its review rules in one project skill named
 `project-review`, under its skill root. When that skill exists,
-read it before the review. When it does not, this skill's rules
-are the whole review.
+read it before the review. When it does not, the project is at the
+`standard` rigor level and this skill's rules are the whole
+review.
 
-That skill can say what blocks the merge in the project, which
-paths the review skips, how many nits a review reports, and how a
-later review of the same change behaves. It can list reviewers for
-`stress-the-change`. Each reviewer names a goal to break the
-change, the paths it covers, and what blocks the merge for it.
+That skill names the project's rigor level. It can say what blocks
+the merge in the project, which paths the review skips, how many
+nits a review reports, whether every finding gets three verifiers,
+and how a later review of the same change behaves. It can list
+reviewers for `stress-the-change`. Each reviewer names a goal to
+break the change, the paths it covers, and what blocks the merge
+for it.
 
 A skipped path gets no findings, and the left-out list names it.
 When the nits pass the cap, report that many and count the rest.
@@ -476,7 +585,23 @@ project rule does not drop a failed check. It stays a finding.
 
 ## Skill: take-the-review
 
-The frontmatter stays. One note at a time is replaced.
+The frontmatter stays. The notes and One note at a time are
+replaced.
+
+### The notes
+
+Start from the notes the user handed you. When the user names none,
+use the findings the latest review in this session reported. When
+there are none, stop and ask which notes to take.
+
+Read the notes before you edit. A note you cannot place on a file
+and a line is unclear. Ask about that note before you edit it. When
+two notes are about the same lines, ask before you edit either. A
+clear note that shares no lines with an unclear one can proceed.
+
+Take the notes that block the merge first, then the nits. A note
+with no severity is taken with the nits. Within each group, keep
+the order the notes came in.
 
 ### One note at a time
 
@@ -546,31 +671,112 @@ asks again.
 
 ## Skill: adopt-the-repo
 
-The frontmatter stays. The review skill is new, placed after The
-bounds. The other sections stay.
+The frontmatter stays. The rigor level and The review skill are
+new, placed after The bounds, in that order. An empty tree and The
+same repo are replaced. The other sections stay.
+
+### The rigor level
+
+Suggest how much review the project needs, from a fixed scale:
+
+- `standard`: a break is an inconvenience.
+- `elevated`: a break costs users data, money, or time they cannot
+  get back.
+- `safety-critical`: a break can harm a person, or a safety class
+  or a regulation governs the project's failures.
+
+For the suggestion, read the README and the other docs at the
+repository root, and the instruction files The sources read. Do
+not read deeper into the tree. Those docs inform the level only.
+They stay out of The move.
+
+Suggest the level the read supports, and name the sentences it
+rests on. A source that names harm to a person or a safety class
+suggests `safety-critical`. A source that names a regulation, a
+certification, or an audit suggests at least `elevated`. When
+nothing points higher, or there is nothing to read, suggest
+`standard` and say so.
+
+Ask which level, in the same question set as The bounds. The
+user's answer is the level. Write nothing for the level before
+that answer.
+
+The level lives in the `project-review` skill, on its own line.
+Bounds hold what a session may do. The level is a review rule. A
+project with no `project-review` skill is at `standard`.
 
 ### The review skill
 
-When a source names a regulation, a safety class, a certification,
-an audit, or a rule for how changes are reviewed, suggest a
-`project-review` skill under the skill root. It is the skill
-`review-the-diff` reads. Show the suggestion in the same question
-set as The bounds, and name the sentence behind each part.
+The confirmed level decides the suggestion for the `project-review`
+skill under the skill root. It is the skill `review-the-diff`
+reads.
 
-The suggestion can hold what blocks the merge, the paths the review
-skips, a cap on nits, a rule for a later review, and reviewers for
-`stress-the-change`. Each reviewer names a goal to break the
-change, the paths it covers, and what blocks the merge for it.
-Suggest only what a source sentence supports. Do not add what a
-regulation requires beyond what the source says.
+At `standard`, suggest no `project-review` skill. When a source
+states review rules, such as paths a review skips, suggest the
+skill with those rules and the level.
+
+At `elevated`, suggest the skill with the level, what blocks the
+merge, a nit cap of ten, and reviewers for `stress-the-change`.
+
+At `safety-critical`, suggest the same parts with a nit cap of
+five, and a line that gives every finding three verifiers.
+
+Each reviewer names a goal to break the change, the paths it
+covers, and what blocks the merge for it. Propose a reviewer for a
+failure the sources show the project can have, and name the
+sentence behind it. Do not add what a regulation requires beyond
+what the source says. The user keeps, edits, or drops each part.
 
 Review rules a source already states land in this skill, as the
 what for the subject of review. The skill goes in the file map, and
-it is written only when the user accepts the map.
+it is written only when the user accepts the map. When the project
+already has a `project-review` skill, leave it, and show the
+suggestion beside it.
 
-When no source has such a sentence, suggest no review skill. When
-the project already has a `project-review` skill, leave it, and
-show the suggestion beside it.
+### An empty tree
+
+When the read finds no instruction files and no skills, skip The
+move's conversion. Still ask the path, the skill root, the bounds
+table, the rigor level, the plans and specs question, and The
+local repo when a path will stay out of the project.
+
+Create the skill root, the playbook directory, the plan
+directory, and the spec directory. A path the config repo holds
+is a real directory inside that repo, and the project path is
+the relative symlink The local repo names. A path it does not
+hold is a real directory in the project. Apply the hide choice.
+Write `.kobold/adopt.yaml`.
+
+On the full path, create `AGENTS.md` at the repository root. Its
+body is the pointer, unless the user supplies a why sentence, in
+which case the why comes first and the pointer follows. Do not
+invent a product purpose. On the shadow path, create no
+instruction file.
+
+The bounds table on an empty tree has no file sentences. Every
+row other than `model` and `model-fast` shows the inherited value
+and no suggestion. The two model rows show the host's suggestions.
+Writing still waits for keys the user names.
+
+### The same repo
+
+A second run reads `.kobold/adopt.yaml`. The recorded path, the
+hide choice, and the config repo stay. Ask again only when the
+user names a different path, a different hide choice, or a config
+repo after declining one. Read the sources again. Leave a skill
+or a playbook whose source would produce the same file. The rigor
+level in `project-review` stays, and a project with no such skill
+stays at `standard`. Ask the level again only when the read
+suggests a different one or the user names one. Convert
+a source that changed. On the shadow path, do not write
+instruction files on the second run either. A new local file goes
+into the config repo when one is recorded, and that commit
+resolves `commit`, `commit-plans`, and `commit-specs` at the
+config repo root. An empty tree that now has
+the folders and the record is done. Name those files.
+
+The choice stops before the questions when this repository is the
+`kobold-codex` plugin. A second run stops there too.
 
 ## What this skill does not do
 
@@ -585,6 +791,15 @@ a project without a `project-review` skill gets the three passes.
 
 It does not state what any regulation requires. `adopt-the-repo`
 suggests only what the project's sources say.
+
+It does not scan the tree for the rigor level, write a level the
+user did not confirm, or keep the level in a bounds file.
+
+It does not give a reviewer its own model.
+
+It does not verify nits past the project's nit cap.
+
+It does not post review comments. The user pastes them.
 
 It does not add a fourth general angle, walk callers outside the
 diff, or post the list. `measure-the-blast` and `github-write`
@@ -613,6 +828,11 @@ focus first, then at the evidence rule. When a project's list
 keeps a kind of noise, add a rule to its `project-review` skill
 before changing the never-flag rules here.
 
+When users keep correcting the suggested level, change the
+sentences that raise it in The rigor level. When a level's
+settings keep being edited the same way, change that level's
+suggestion in The review skill.
+
 A project that wants a reviewer writes it in its own
 `project-review` skill. For example, a silent-failure reviewer has
 the goal of finding a changed path where an error is caught,
@@ -639,10 +859,15 @@ The build is done when all of these are true:
   passes, Project reviewers, One list, The refutation, Leave the
   tree.
 - `skills/review-the-diff/SKILL.md` sections run The diff, The
-  request and the checks, Never flag, The evidence, Findings, The
-  project's rules, Leave the tree.
-- `skills/adopt-the-repo/SKILL.md` places The review skill after
-  The bounds and names no regulation.
+  request and the checks, Never flag, The evidence, Findings, For
+  another author, The project's rules, Leave the tree.
+- `skills/take-the-review/SKILL.md` sections run The notes,
+  Against the code, One note at a time, A note that does not hold,
+  The same notes.
+- `skills/adopt-the-repo/SKILL.md` sections run The choice, The
+  sources, The move, The bounds, The rigor level, The review skill,
+  The local repo, An empty tree, The same repo. It names no
+  regulation and no code host.
 - No skill file names a Grok tool, a Claude tool, a model by brand,
   or a host review file. The repo has no `hooks/` directory and no
   `hooks.json`.
