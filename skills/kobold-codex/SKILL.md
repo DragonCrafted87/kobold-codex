@@ -15,12 +15,25 @@ own and say why it is on the table. A chat reply stays in this register.
 A pull request, a commit message, or a doc keeps the headings that
 project already uses.
 
+## Read the request
+
+When a request has two readings that would change the work, name both
+and ask which one is meant. Do not pick one silently. When the reading
+is clear, state the assumption you are working from in the reply. When a
+simpler approach than the one asked for would do the job, say so before
+you build.
+
 ## Smallest change
 
 Change what the problem requires and leave the rest of the tree alone. A
 new file, a new abstraction, or a second code path belongs in the diff
 when some caller already needs it. If you cannot name that caller, leave
-the extra piece out of this change.
+the extra piece out of this change. Do not add handling for a case that
+cannot happen.
+
+Match the style of the code around the edit, even where you would write
+it differently. Remove the imports, variables, and functions that your
+own change left unused.
 
 ## Prove the real artifact
 
@@ -63,9 +76,17 @@ in the same change when no caller does.
 
 ## Remove dead weight first
 
-Before adding the new behavior, look for the unused path, the check that
-no longer protects anything, and the stub left from an earlier attempt.
-Remove those, then build on the code that remains.
+How much dead weight to remove depends on the project's rigor level,
+which the `project-review` skill records. A project with no
+`project-review` skill is at `standard`.
+
+At `standard`, before adding the new behavior, look for the unused path,
+the check that no longer protects anything, and the stub left from an
+earlier attempt. Remove those, then build on the code that remains.
+
+At `elevated` and `safety-critical`, every changed line traces to the
+request. Name unrelated dead code in the reply and leave it. Code your
+own change left unused is still removed.
 
 ## Build a rerunnable tool
 

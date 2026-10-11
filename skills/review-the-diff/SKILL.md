@@ -21,7 +21,12 @@ when there is one. The request is what the user asked for.
 ## The request and the checks
 
 On the request, a missing piece is a finding. A change the request
-did not ask for is a finding.
+did not ask for is a finding. At the `standard` rigor level,
+removing dead code under Remove dead weight first in `kobold-codex`
+is not a finding. At `elevated` and `safety-critical`, removing dead
+code the change did not leave unused is a change the request did not
+ask for. Removing code the change itself left unused is never a
+finding.
 
 The project's instruction files and project skills set rules for
 the paths they cover. An instruction file covers its own directory
