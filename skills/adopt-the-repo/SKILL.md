@@ -161,7 +161,7 @@ the suggested value, the file and the sentence that suggested it,
 and the value that applies if this repository writes nothing.
 
 Suggest a key only when a sentence is about the action that key
-controls.
+controls. `model` and `model-fast` are the exception below.
 
 A file that forbids commits outright suggests `commit: never`. A
 file that says to commit without asking suggests `commit: auto`.
@@ -188,15 +188,26 @@ still requires an ask suggests `subagents: ask`. The same three
 readings apply to `browser`, `shell-network`, `github-write`,
 and `worktrees`.
 
+The suggestions for `model` and `model-fast` come from the host
+this session runs on. Name models from the list that host offers.
+Suggest the strongest for `model`, and a faster, cheaper one for
+`model-fast`. The source column names the host's list. When the
+session cannot read that list, the two rows show no suggestion,
+and the reply says so. A source sentence that names a model is
+shown beside the host's suggestion. Ask which value.
+
 A branch policy the keys cannot express is not a suggestion. It
 stays a skill or a playbook, and the reply names the sentence.
 Two sentences that suggest different values for one key are both
-shown. Ask which value. A key with no sentence has no
-suggestion. Its row shows the inherited value.
+shown. Ask which value. A key with no sentence, other than the two
+model keys, has no suggestion. Its row shows the inherited value.
 
 Ask which layer, with the suggestion from The choice, and which
-keys to write. Then `set-the-bounds` writes only the keys the
-user named, on the one layer they named, at the project root.
+keys to write. For `model` and `model-fast`, suggest
+`.kobold/bounds.local.yaml`, because a name one host offers may
+not exist on the other. The user can name the committed layer
+instead. Then `set-the-bounds` writes only the keys the user
+named, on the layer they named for each, at the project root.
 When the user names no keys, write no project bounds file. That
 includes a user who keeps the inherited values.
 
@@ -321,8 +332,9 @@ invent a product purpose. On the shadow path, create no
 instruction file.
 
 The bounds table on an empty tree has no file sentences. Every
-row shows the inherited value and no suggestion. Writing still
-waits for keys the user names.
+row other than `model` and `model-fast` shows the inherited value
+and no suggestion. The two model rows show the host's suggestions.
+Writing still waits for keys the user names.
 
 ## The same repo
 

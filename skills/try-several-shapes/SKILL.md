@@ -39,8 +39,11 @@ picked.
 
 When each candidate has its own checkout, the candidates share no
 files. This skill builds each candidate in its checkout. When
-`subagents` allows it, those builds may run together. This skill
-reads each result, then picks the base and folds.
+`subagents` allows it, those builds may run together. A build in
+another agent uses `model`. When `model` is absent, it uses the
+model already running the session. A candidate is design work, so
+it does not go to the fast model. This skill reads each result,
+then picks the base and folds.
 
 The candidate sentences, and a checkout the key allows, are the
 exploration. `scope-the-edit` applies to the fold.

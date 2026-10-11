@@ -47,6 +47,21 @@ a screen, or a file the reviewer can run or read. A task is one
 change and that check. When a task needs an earlier task finished,
 it names that task.
 
+Each task names one work kind, on a line of its own under the task,
+written `Kind: follow-a-pattern`. The kinds are `rename-or-move`,
+`follow-a-pattern`, `docs-or-config`, `new-logic`, `debugging`, and
+`design`. `rename-or-move` renames or moves code and changes no
+behavior. `follow-a-pattern` repeats a change the code already has,
+and the task names the existing code it copies. `docs-or-config`
+edits prose, comments, or configuration and changes no code.
+`new-logic` adds a decision the code does not have yet. `debugging`
+finds the cause of a failure. `design` picks a structure. Use no
+other kind.
+
+A fast kind needs a clear fit. When the kind is unclear, or when a
+second kind also fits, name the kind of the hardest part of the
+task. `carry-out-the-plan` says which kinds go to the fast model.
+
 A task that changes a function names a check that reaches the bar in
 `scope-the-edit`. Write the command and the result in the task.
 

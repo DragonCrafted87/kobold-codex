@@ -18,6 +18,11 @@ are ordinary work. Those actions have no key.
 action does not carry. `auto`, `open`, and `allow` proceed. `never`
 and `deny` stop the action.
 
+One `ask` covers more than one action in one place. Under
+`subagents: ask`, a yes that names a plan file covers every agent
+`carry-out-the-plan` starts in that run of the plan. A later run
+asks again.
+
 ## Layers
 
 The same keys exist at every layer. A missing key inherits from the
@@ -52,6 +57,7 @@ is a YAML mapping, one key per line.
 | `worktrees` | `ask` | An isolated checkout. |
 | `unattended` | `stop-at-plan` | How far a session goes while the user is away. |
 | `model` | absent | Optional model name for routed work. Absent keeps the session's current model. |
+| `model-fast` | absent | Optional model name for fast work. Absent falls back to `model`, then to the session's current model. |
 
 ## Values
 
@@ -71,8 +77,8 @@ as `through-publish`.
 A setting line is a key, a colon, and a value. Blank lines are skipped.
 A line that is not a setting stays in the file and sets nothing. A
 value outside the set for a key that has one does not resolve. `model`
-takes a name, so that check skips it. Tell the user the line, and keep
-the value from the layer behind that file.
+and `model-fast` take a name, so that check skips them. Tell the user
+the line, and keep the value from the layer behind that file.
 
 ## Publishing sets
 

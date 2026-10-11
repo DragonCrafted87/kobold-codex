@@ -19,6 +19,17 @@ later action in this skill. A failed check stops the ship. A check
 that cannot be run stops the ship, and the reply names the reason.
 When no check is named, stop and ask which check to run.
 
+Before those checks, run the narrow checks. Those are the project's
+lint and type checks on the files the branch changes, then the
+tests most relevant to those files. After the named checks, run the
+gate. The gate is a filtered test list when the project has a way
+to produce one: the tests selected for the changed files or for the
+affected area. A project skill, an instruction file, or the
+project's test tool can name that way. When none does, the gate is
+the full suite. Say which gate ran. A gate that already passed on
+the same tree can be cited. Name that run. A narrow check or a gate
+that fails stops the ship the same way a failed check does.
+
 When the user is away, `unattended` still decides how far the ship
 goes. `set-the-bounds` is that rule.
 

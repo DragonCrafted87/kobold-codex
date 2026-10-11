@@ -34,7 +34,9 @@ after another in this session, and say that the run was serial.
 
 When `model` is set, a worker in another agent uses that model.
 When `model` is absent, the worker uses the model already running
-the session.
+the session. A piece that is a task of a fast kind in
+`write-the-plan` uses the fast model instead. The rules for fast
+work in `carry-out-the-plan` apply to that piece.
 
 While the user is away, `unattended` still applies.
 `set-the-bounds` is that rule. When that rule blocks another
