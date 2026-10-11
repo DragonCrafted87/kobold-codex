@@ -77,9 +77,10 @@ The worker changes only the files the brief names. It does not
 commit, push, or edit the plan file. It returns its diff and the
 output of the check.
 
-Read the diff before marking the checkbox. A diff that changes a
-file the brief did not name, or that misses a change the brief
-asked for, is a failed check.
+Read the diff from the tree yourself before marking the checkbox.
+The worker's account of its change is not that diff. A diff that
+changes a file the brief did not name, or that misses a change the
+brief asked for, is a failed check.
 
 ## The check
 
