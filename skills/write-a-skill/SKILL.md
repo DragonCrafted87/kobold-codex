@@ -39,8 +39,8 @@ first letter capitalized. Copy each section body from the spec.
 ## The check
 
 `tests/check_plugin.py` checks the manifests, and it requires a
-branch off main to be ahead on version. Update the check in the
-same change that adds the file.
+branch off main to be ahead on version. It reads no skill file.
+When a change needs a new check, add it in the same change.
 
 The plugin version bumps in that change. The manifest description
 stays the sentence the catalog's ship rule records. The root

@@ -81,3 +81,4 @@ Adding Kobold to a repository uses [skills/adopt-the-repo/SKILL.md](../skills/ad
 - [skills/cut-the-slop/SKILL.md](../skills/cut-the-slop/SKILL.md) is recorded in [docs/specs/2026-10-03-cut-the-slop-design.md](specs/2026-10-03-cut-the-slop-design.md).
 - [skills/write-the-doc/SKILL.md](../skills/write-the-doc/SKILL.md) is recorded in [docs/specs/2026-10-03-write-the-doc-design.md](specs/2026-10-03-write-the-doc-design.md).
 - [skills/adopt-the-repo/SKILL.md](../skills/adopt-the-repo/SKILL.md) is recorded in [docs/specs/2026-10-04-adopt-the-repo-design.md](specs/2026-10-04-adopt-the-repo-design.md).
+- The model tier routing revision of `set-the-bounds`, `write-the-plan`, `carry-out-the-plan`, `fan-out`, `try-several-shapes`, `ship-the-branch`, `adopt-the-repo`, and `write-a-skill` is recorded in [docs/specs/2026-10-11-model-tier-routing-design.md](specs/2026-10-11-model-tier-routing-design.md).
