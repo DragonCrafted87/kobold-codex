@@ -113,3 +113,4 @@ Adding Kobold to a repository uses [skills/setup/adopt-the-repo/SKILL.md](../ski
 - The status and plan opening revision of `carry-out-the-plan`, `leave-a-trail`, `pick-up-the-work`, `write-the-plan`, `set-the-bounds`, and `review-the-week` is recorded in [docs/specs/2026-10-12-status-and-plan-opening-design.md](specs/2026-10-12-status-and-plan-opening-design.md).
 - The isolate-the-work trigger lesson is recorded in [docs/specs/2026-10-13-isolate-the-work-trigger-design.md](specs/2026-10-13-isolate-the-work-trigger-design.md).
 - The carry-out-the-plan noted-bug lesson is recorded in [docs/specs/2026-10-13-carry-out-the-plan-noted-bug-design.md](specs/2026-10-13-carry-out-the-plan-noted-bug-design.md).
+- The changes-off-the-tree heading in `ship-the-branch` is recorded in [docs/specs/2026-10-13-changes-off-the-tree-design.md](specs/2026-10-13-changes-off-the-tree-design.md).
