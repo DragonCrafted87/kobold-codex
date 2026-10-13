@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the plugin manifests, and require a version bump off main."""
+"""Validate the plugin manifests and skill layout, and require a version bump off main."""
 
 import json
 import subprocess
@@ -133,8 +133,60 @@ def check_ahead(version):
         fail(f"version {current} is not ahead of main {main}")
 
 
+def skill_name(path):
+    lines = path.read_text(encoding="utf-8").splitlines()
+    if not lines or lines[0] != "---":
+        fail(f"{path.relative_to(ROOT)} has no frontmatter")
+    for line in lines[1:]:
+        if line == "---":
+            break
+        if line.startswith("name:"):
+            return line[len("name:"):].strip()
+    fail(f"{path.relative_to(ROOT)} has no name")
+
+
+def check_layout():
+    plugin = load_json(PLUGIN)
+    skills_root = ROOT / "skills"
+    listed = require(plugin, "skills", "plugin.json")
+    if not isinstance(listed, list):
+        fail("plugin.json skills must be a list")
+    listed_groups = set()
+    for entry in listed:
+        if not isinstance(entry, str) or not entry.startswith("./skills/"):
+            fail(f"plugin.json skills entry {entry!r} must start with ./skills/")
+        group = entry[len("./skills/"):].strip("/")
+        if not group or "/" in group:
+            fail(f"plugin.json skills entry {entry!r} must name one group")
+        if not (skills_root / group).is_dir():
+            fail(f"plugin.json lists {entry} but it does not exist")
+        listed_groups.add(group)
+    seen = {}
+    groups = set()
+    for path in sorted(skills_root.rglob("SKILL.md")):
+        parts = path.relative_to(skills_root).parts
+        if len(parts) != 3:
+            fail(f"{path.relative_to(ROOT)} must sit at skills/<group>/<name>/SKILL.md")
+        group, folder, _ = parts
+        name = skill_name(path)
+        if name != folder:
+            fail(f"{path.relative_to(ROOT)} name {name!r} does not match its folder")
+        if name in seen:
+            fail(f"skill {name} is in both {seen[name]} and {group}")
+        seen[name] = group
+        groups.add(group)
+    for entry in sorted(p.name for p in skills_root.iterdir() if p.is_dir()):
+        if entry not in groups:
+            fail(f"skills/{entry} holds no skill")
+        if entry not in listed_groups:
+            fail(f"skills/{entry} is missing from the plugin.json skills key")
+    for group in sorted(listed_groups - groups):
+        fail(f"plugin.json lists skills/{group} but it holds no skill")
+
+
 def main():
     version = check_manifests()
+    check_layout()
     check_ahead(version)
 
 

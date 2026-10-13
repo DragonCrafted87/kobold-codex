@@ -29,9 +29,13 @@ not rewrite that spec.
 
 ## The file
 
-The skill file is `skills/<name>/SKILL.md`. It starts with
-frontmatter. `name` is the skill name. `description` is that same
-line.
+The skill file is `skills/<group>/<name>/SKILL.md`. The group is
+the phase of work the skill serves. Use a group that already
+exists. A new group is a folder under `skills/` and a path in the
+manifest's `skills` list, added in the same change.
+
+The file starts with frontmatter. `name` is the skill name, and it
+matches the folder. `description` is that same line.
 
 The title is the skill name with hyphens written as spaces and the
 first letter capitalized. Copy each section body from the spec.
