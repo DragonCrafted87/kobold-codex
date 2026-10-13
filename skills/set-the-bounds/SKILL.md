@@ -46,8 +46,9 @@ is a YAML mapping, one key per line.
 | Key | Default | Description |
 | --- | --- | --- |
 | `commit` | `ask` | Work commit. Changed and untracked files outside the plan directory and the spec directory. |
-| `commit-plans` | `never` | Commit of plan files, in the directory `write-the-plan` uses. |
+| `commit-plans` | `ask` | Commit of plan files, in the directory `write-the-plan` uses. |
 | `commit-specs` | `ask` | Commit of spec files, in the directory the project uses for design specs. |
+| `commit-reviews` | `ask` | Commit of review files, in the review directory `review-the-week` uses. |
 | `push` | `ask` | Update the remote branch. |
 | `pull-request` | `ask` | Open a pull request. |
 | `merge` | `never` | Merge the pull request. |
@@ -63,8 +64,8 @@ is a YAML mapping, one key per line.
 
 ## Values
 
-`commit`, `commit-plans`, `commit-specs`, and `push` are `ask`, `auto`,
-or `never`. `pull-request` is `never`, `ask`, `open`, or `auto`.
+`commit`, `commit-plans`, `commit-specs`, `commit-reviews`, and
+`push` are `ask`, `auto`, or `never`. `pull-request` is `never`, `ask`, `open`, or `auto`.
 `merge` and `force-push` are `never` or `ask`. A tool key is `ask`,
 `allow`, `auto`, or `deny`. The tool keys in the default set are
 `shell-network`, `browser`, `github-write`, `subagents`, and
@@ -85,13 +86,15 @@ the line, and keep the value from the layer behind that file.
 ## Publishing sets
 
 `commit` stages the work, which is every changed or untracked file
-outside the plan directory and the spec directory. `commit-plans`
-stages plan files. `commit-specs` stages spec files. A plan file sits
-in the directory the `commit-plans` row names. A spec file sits in
-the directory the `commit-specs` row names. When a path matches both
-directories, it is a spec.
+outside the plan, spec, and review directories. `commit-plans`
+stages plan files. `commit-specs` stages spec files.
+`commit-reviews` stages review files. A plan file sits in the
+directory the `commit-plans` row names. A spec file sits in the
+directory the `commit-specs` row names. A review file sits in the
+directory the `commit-reviews` row names. When a path matches both
+the plan and the spec directories, it is a spec.
 
-`commit: auto` leaves plans and specs to their own keys. Each set that
+`commit: auto` leaves plans, specs, and reviews to their own keys. Each set that
 is `auto` is its own commit. Each set that is `ask` is offered on its
 own. Each set that is `never` stays unstaged. An empty set is skipped.
 A second run leaves a finished commit as it is and commits only a set
