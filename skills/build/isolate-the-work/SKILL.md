@@ -1,13 +1,17 @@
 ---
 name: isolate-the-work
-description: Use when feature work, or the execution of a plan, should sit in its own checkout. Create that checkout when worktrees allows it, and record the path so ship-the-branch can remove it.
+description: Use when feature work, a fix meant for a pull request, or the execution of a plan should sit in its own checkout, and always when the current checkout holds other work in progress or another agent. Create that checkout when worktrees allows it, and record the path so ship-the-branch can remove it.
 ---
 
 # Isolate the work
 
 ## The work
 
-Isolate feature work, or the execution of a plan, into its own
+Isolate feature work, a fix meant for a pull request, or the
+execution of a plan, into its own checkout. Do this before the
+first edit, without waiting for the user to ask. When the current
+checkout already holds uncommitted work, another branch's work in
+progress, or another agent, the new work always gets its own
 checkout. The branch is the one the user named. When another skill
 in this plugin asks for the checkout, the branch it named is the
 branch. When nobody named a branch, keep the branch that is already
