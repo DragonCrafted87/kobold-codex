@@ -29,6 +29,17 @@ decided. The lines are `Why:`, `Evidence:`, and `Result:`.
 Evidence names a command, a file, or a result you observed. Write
 the row when the decision is made.
 
+## The status
+
+A run with no plan keeps a Status block at the top of the run's
+section, before the rows. When the work has a plan, the block is in
+the plan, and `carry-out-the-plan` keeps it.
+
+The block is a `## Status` heading and three lines: `Current:`,
+`Blocker:`, and `Next:`. `Blocker: none` when nothing blocks.
+Rewrite the block in place when the status changes, at the moment
+it changes. The rows below it stay append-only.
+
 ## Where it lives
 
 The log is `.kobold/trail.md` at the repository root. Append to

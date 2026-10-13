@@ -13,16 +13,21 @@ The transcript is the one the user pointed at. The trail is
 `.kobold/trail.md` when that file exists. When the user points at
 another log, read that log as the trail.
 
+Read the Status block first, when the plan or the trail has one.
+When it disagrees with the plan's checkboxes, the checkbox wins.
+Say so in the brief.
+
 When a source is missing, say so. When the branch, the transcript,
 and the trail are all missing, stop and ask what to read.
 
 ## The brief
 
 Write a short brief in the reply. Name the branch. Name the
-commits and the uncommitted files that are this work. When a plan
-is in progress, name the plan file and the first checkbox still
-marked `- [ ]`. When a trail exists, name the last row. Name the
-next step.
+commits and the uncommitted files that are this work. When a
+Status block names a blocker, name it. When a plan is in
+progress, name the plan file and the first checkbox still marked
+`- [ ]`. When a trail exists, name the last row. Name the next
+step.
 
 The brief uses only what those sources say. A gap stays a gap.
 Say what you could not find.
