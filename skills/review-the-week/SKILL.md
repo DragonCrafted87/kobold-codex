@@ -17,8 +17,9 @@ date and `weekly-review`.
 The newest report in a repo is that repo's last run. It records the
 time that review started, in UTC, on one line near the top. This
 run reads sessions written after that time. A repo with no report
-reads the last seven days. Seven days is the guide. When the user
-names a longer window, read that window instead.
+reads the window `review-window` sets: a number of days, or every
+session the host still keeps when it is `all`. A window the user
+names for this run overrides the bound.
 
 Sessions run in this plugin's own repo are skipped and counted. A
 review of them would feed its lessons back into the skill that
