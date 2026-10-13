@@ -45,7 +45,7 @@ Kind: docs-or-config
 - [x] **Step 1:** Add the Status paragraph to The check in `carry-out-the-plan`, and The status to `leave-a-trail` after The row.
 - [x] **Step 2:** Add the paragraph and the sentence to `pick-up-the-work`.
 - [x] **Step 3:** Add the two paragraphs to What the reviewer reads in `write-the-plan`.
-- [x] **Step 4:** Add the Publishing sets paragraph to `set-the-bounds`: a changed Status block sends the whole plan file with the work commit.
+- [x] **Step 4:** Add the Publishing sets paragraph to `set-the-bounds`: a changed Status block sends the whole plan file with the work commit when `commit-plans` is `auto`; `ask` and `never` still hold.
 - [x] **Step 5:** Add the sentence to The report in `review-the-week`.
 - [x] **Step 6:** `rg -n "Status" skills` shows each addition once.
 

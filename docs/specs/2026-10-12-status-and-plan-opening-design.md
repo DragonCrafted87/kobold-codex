@@ -51,13 +51,15 @@ limited to long or unattended runs. The rule lives in
 that is the skill that works from a plan. `leave-a-trail` keeps the
 block for a run with no plan.
 
-When a plan's Status block changed, the whole plan file goes with
-the next work commit, under `commit`, as one commit. There is no
-partial staging. A plan file whose status changes every sitting
-would otherwise make a plan commit every sitting, and splitting one
-file across two commits is fragile. When the Status block did not
-change, the plan file follows `commit-plans`. `set-the-bounds` names
-this.
+When a plan's Status block changed and `commit-plans` is `auto`,
+the whole plan file goes with the next work commit, under `commit`,
+as one commit. There is no partial staging. A plan file whose status
+changes every sitting would otherwise make a plan commit every
+sitting, and splitting one file across two commits is fragile. This
+only reduces the number of commits. `commit-plans` still decides
+whether a plan file is committed: `ask` still asks, and `never`
+leaves it unstaged. When the Status block did not change, the plan
+file follows `commit-plans`. `set-the-bounds` names this.
 
 `write-the-plan` writes the block when it writes a plan:
 `Current: not started`, `Blocker: none`, and the first task as
@@ -156,10 +158,13 @@ In Publishing sets, this paragraph is added after the first.
 
 ### Publishing sets
 
-When a plan file's Status block changed, the whole plan file is
-work. It stages with the next commit under `commit`, as one commit,
-not under `commit-plans`. Do not stage part of a file. When the
-Status block did not change, the plan file follows `commit-plans`.
+When a plan file's Status block changed and `commit-plans` is
+`auto`, the whole plan file stages with the next commit under
+`commit`, as one commit. That saves a plan commit. It does not widen
+what `commit-plans` allows. When `commit-plans` is `ask`, the plan
+file is offered on its own. When it is `never`, the plan file stays
+unstaged. Do not stage part of a file. When the Status block did not
+change, the plan file follows `commit-plans`.
 
 ## Skill: review-the-week
 
