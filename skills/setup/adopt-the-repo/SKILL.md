@@ -102,6 +102,14 @@ the skill applies. The wording is original and follows
 skills in this plugin, and they do not bump this plugin's
 version.
 
+Group the project skills by this plugin's phases: ground,
+investigate, plan, build, review, ship, session, learn, write, and
+setup. A skill that fits none takes a group named for its subject.
+The skill directories stay one level under the skill root, because
+a host may not find a project skill nested deeper. Name each
+skill's group when you report what was written. When the project
+keeps a list of its skills, the groups are its headings.
+
 A project playbook is a Markdown file in the playbook directory.
 It has a title and headings. The text under a heading is the
 procedure. It has no frontmatter. The files in the plugin
