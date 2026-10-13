@@ -28,7 +28,7 @@ tasks.
 
 ## Decisions
 
-The Status block is three lines with fixed keys: `Now:`,
+The Status block is three lines with fixed keys: `Current:`,
 `Blocker:`, and `Next:`. One line each. `Blocker: none` when nothing
 blocks. It sits under a `## Status` heading.
 
@@ -60,11 +60,11 @@ change, the plan file follows `commit-plans`. `set-the-bounds` names
 this.
 
 `write-the-plan` writes the block when it writes a plan:
-`Now: not started`, `Blocker: none`, and the first task as
+`Current: not started`, `Blocker: none`, and the first task as
 `Next:`.
 
 A plan with no spec opens with three lines after the Status block:
-`Current state:` what is true today, `Expected state:` what is true
+`Starting state:` what is true today, `Expected state:` what is true
 when the work is done, and `Reason:` why the change is needed. One
 sentence each. A plan
 that links a spec skips them, because the spec holds the why. Specs
@@ -99,7 +99,7 @@ In The check, this paragraph is added after the second.
 
 Rewrite the plan's Status block when the status changes, at the
 moment it changes: a task starts or ends, a blocker appears or
-clears, or the next step moves. `Now:` names the task and step.
+clears, or the next step moves. `Current:` names the task and step.
 `Blocker:` names what stops the work, or `none`. `Next:` names the
 next step. When the block disagrees with the checkboxes, the
 checkbox wins. Rewrite the block to match.
@@ -114,7 +114,7 @@ A run with no plan keeps a Status block at the top of the run's
 section, before the rows. When the work has a plan, the block is in
 the plan, and `carry-out-the-plan` keeps it.
 
-The block is a `## Status` heading and three lines: `Now:`,
+The block is a `## Status` heading and three lines: `Current:`,
 `Blocker:`, and `Next:`. `Blocker: none` when nothing blocks.
 Rewrite the block in place when the status changes, at the moment
 it changes. The rows below it stay append-only.
@@ -141,11 +141,11 @@ first.
 ### What the reviewer reads
 
 A new plan opens with a Status block, after the title: a `## Status`
-heading and three lines. `Now: not started`. `Blocker: none`.
+heading and three lines. `Current: not started`. `Blocker: none`.
 `Next:` the first task. `carry-out-the-plan` keeps it current.
 
 When no spec records the change, three lines follow the Status
-block: `Current state:` what is true today, `Expected state:` what
+block: `Starting state:` what is true today, `Expected state:` what
 is true when the work is done, and `Reason:` why the change is
 needed. One sentence each.
 When a spec records the change, link it and skip the three lines.

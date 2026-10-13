@@ -34,11 +34,11 @@ transcript. What will change. Which parts of the system the change
 touches. What stays the same. What the checks cover.
 
 A new plan opens with a Status block, after the title: a `## Status`
-heading and three lines. `Now: not started`. `Blocker: none`.
+heading and three lines. `Current: not started`. `Blocker: none`.
 `Next:` the first task. `carry-out-the-plan` keeps it current.
 
 When no spec records the change, three lines follow the Status
-block: `Current state:` what is true today, `Expected state:` what
+block: `Starting state:` what is true today, `Expected state:` what
 is true when the work is done, and `Reason:` why the change is
 needed. One sentence each.
 When a spec records the change, link it and skip the three lines.

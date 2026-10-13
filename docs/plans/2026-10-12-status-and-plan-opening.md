@@ -4,11 +4,11 @@
 
 ## Status
 
-Now: done
+Current: done
 Blocker: none
 Next: review of the pull request
 
-**Goal:** Add the Status block to long work and the Current state, Expected state, and Reason lines to plans with no spec. The plugin becomes `1.5.0`.
+**Goal:** Add the Status block to long work and the Starting state, Expected state, and Reason lines to plans with no spec. The plugin becomes `1.5.0`.
 
 **Architecture:** The spec is the only source for the text that ships. The work goes on `status-and-plan-opening`, cut from `main` at `3d596ac`, after PR #20 merged. No worktree.
 
@@ -65,4 +65,4 @@ Kind: docs-or-config
 
 - [x] **Step 1:** Set `1.5.0` in both manifests.
 - [x] **Step 2:** `python3 tests/check_plugin.py` exits 0.
-- [x] **Step 3:** Rewrite this plan's Status block to `Now: done`.
+- [x] **Step 3:** Rewrite this plan's Status block to `Current: done`.

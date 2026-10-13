@@ -96,7 +96,7 @@ observed. Mark the checkbox for that step `- [x]`.
 
 Rewrite the plan's Status block when the status changes, at the
 moment it changes: a task starts or ends, a blocker appears or
-clears, or the next step moves. `Now:` names the task and step.
+clears, or the next step moves. `Current:` names the task and step.
 `Blocker:` names what stops the work, or `none`. `Next:` names the
 next step. When the block disagrees with the checkboxes, the
 checkbox wins. Rewrite the block to match.
