@@ -46,6 +46,8 @@ A new session continuing work already in progress uses [skills/pick-up-the-work/
 
 A lesson from a session that stumbled, or from a preference worth keeping, uses [skills/learn-from-the-session/SKILL.md](../skills/learn-from-the-session/SKILL.md).
 
+A weekly pass over the session transcripts since the last review uses [skills/review-the-week/SKILL.md](../skills/review-the-week/SKILL.md).
+
 Authoring or revising a skill in this plugin uses [skills/write-a-skill/SKILL.md](../skills/write-a-skill/SKILL.md).
 
 A pass over prose or a diff for narration, stock phrasing, and comments that restate the code uses [skills/cut-the-slop/SKILL.md](../skills/cut-the-slop/SKILL.md).
@@ -84,3 +86,4 @@ Adding Kobold to a repository uses [skills/adopt-the-repo/SKILL.md](../skills/ad
 - The model tier routing revision of `set-the-bounds`, `write-the-plan`, `carry-out-the-plan`, `fan-out`, `try-several-shapes`, `ship-the-branch`, `adopt-the-repo`, and `write-a-skill` is recorded in [docs/specs/2026-10-11-model-tier-routing-design.md](specs/2026-10-11-model-tier-routing-design.md).
 - The adversarial review revision of `stress-the-change`, `review-the-diff`, `take-the-review`, `carry-out-the-plan`, `set-the-bounds`, and `adopt-the-repo` is recorded in [docs/specs/2026-10-11-adversarial-review-design.md](specs/2026-10-11-adversarial-review-design.md).
 - The surgical changes revision of `kobold-codex` and `review-the-diff` is recorded in [docs/specs/2026-10-11-surgical-changes-design.md](specs/2026-10-11-surgical-changes-design.md).
+- [skills/review-the-week/SKILL.md](../skills/review-the-week/SKILL.md) is recorded in [docs/specs/2026-10-12-review-the-week-design.md](specs/2026-10-12-review-the-week-design.md). The same spec records the `commit-reviews` key and the `commit-plans` default in `set-the-bounds`, `adopt-the-repo`, and `ship-the-branch`.

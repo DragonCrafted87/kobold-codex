@@ -40,7 +40,8 @@ not commit, push, open a pull request, merge, or remove a checkout.
 ## Three commits
 
 Commit the specs under `commit-specs`, then the plans under
-`commit-plans`, then the work under `commit`. Each set is its own
+`commit-plans`, then the reviews under `commit-reviews`, then the
+work under `commit`. Each set is its own
 commit. `set-the-bounds` says which files belong in each set and
 which value applies. Say the key, the value, and the layer that
 set it before the commit.

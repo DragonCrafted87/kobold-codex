@@ -149,9 +149,10 @@ and `docs/specs/`. A config repo keeps those paths and holds the
 local files behind the symlinks in The local repo. When a
 directory already has tracked files, record it as tracked and
 do not ask. Ask only when the directory is absent or untracked.
-Suggest local for plans, because `commit-plans` defaults to
-`never`. Suggest tracked for specs, because `commit-specs`
-defaults to `ask` and a spec is the record of a decision.
+Suggest tracked for plans, because `commit-plans` defaults to
+`ask` and a plan is how the next session finds the work. Suggest
+tracked for specs, because `commit-specs` defaults to `ask` and a
+spec is the record of a decision.
 
 ## The bounds
 
