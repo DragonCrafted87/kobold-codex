@@ -276,10 +276,9 @@ specs. When the project has neither, the paths are `docs/plans/`
 and `docs/specs/` until a config repo takes the local ones. When
 a directory already has tracked files, record it as tracked and
 do not ask. Ask only when the directory is absent or untracked.
-Suggest tracked for plans, because `commit-plans` defaults to
-`ask` and a plan is how the next session finds the work. Suggest
-tracked for specs, because `commit-specs` defaults to `ask` and a
-spec is the record of a decision.
+Suggest local for plans, because `commit-plans` defaults to
+`never`. Suggest tracked for specs, because `commit-specs`
+defaults to `ask` and a spec is the record of a decision.
 
 ### The bounds
 

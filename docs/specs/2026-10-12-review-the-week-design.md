@@ -86,10 +86,9 @@ review files to their own key.
 `commit-plans` moves from `never` to `ask`. A plan that never leaves
 the checkout is lost with it, and reviews and status point at plans.
 `adopt-the-repo` suggested local plans because of the old default.
-It now suggests tracked plans, and the paragraph changes in the
-skill and in its spec together. The table pinned in
-`2026-10-11-model-tier-routing-design.md` is a dated record and
-stays. This spec now holds the Defaults rows for these two keys.
+It now suggests tracked plans. Past specs are records and do not
+change, so `2026-10-04-adopt-the-repo-design.md` and the table in
+`2026-10-11-model-tier-routing-design.md` keep the old default. This spec now holds the Defaults rows for these two keys.
 
 `ship-the-branch` commits review files under `commit-reviews`,
 between the plans and the work.
@@ -106,7 +105,6 @@ skills/set-the-bounds/SKILL.md
 skills/adopt-the-repo/SKILL.md
 skills/ship-the-branch/SKILL.md
 docs/specs/2026-10-12-review-the-week-design.md
-docs/specs/2026-10-04-adopt-the-repo-design.md
 docs/plans/2026-10-12-review-the-week.md
 docs/skills.md
 ```
@@ -136,7 +134,8 @@ date and `weekly-review`.
 The newest report in a repo is that repo's last run. It records the
 time that review started, in UTC, on one line near the top. This
 run reads sessions written after that time. A repo with no report
-reads the last seven days.
+reads the last seven days. Seven days is the guide. When the user
+names a longer window, read that window instead.
 
 Sessions run in this plugin's own repo are skipped and counted. A
 review of them would feed its lessons back into the skill that
@@ -330,7 +329,7 @@ The build is done when all of these are true:
 
 - `skills/review-the-week/SKILL.md` carries the frontmatter and the
   seven sections above.
-- `set-the-bounds`, `adopt-the-repo`, its spec, and `ship-the-branch`
+- `set-the-bounds`, `adopt-the-repo`, and `ship-the-branch`
   carry the revisions above.
 - `docs/skills.md` links the skill and this spec.
 - Plugin version is `1.4.0` in both manifests, with the stable

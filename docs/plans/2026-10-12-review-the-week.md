@@ -42,7 +42,6 @@ Kind: docs-or-config
 
 - Modify: `skills/set-the-bounds/SKILL.md`
 - Modify: `skills/adopt-the-repo/SKILL.md`
-- Modify: `docs/specs/2026-10-04-adopt-the-repo-design.md`
 - Modify: `skills/ship-the-branch/SKILL.md`
 - Modify: `docs/skills.md`
 
