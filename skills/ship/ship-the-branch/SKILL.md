@@ -37,6 +37,17 @@ The reply names each action this run took and each one it skipped.
 Name the key that governed it. A ship that stops on the checks does
 not commit, push, open a pull request, merge, or remove a checkout.
 
+## Changes made off the tree
+
+Before the commits, name every change this work made outside the
+repository: a router or host setting applied live, a script run in
+place, a tool or config kept in another folder. Each one is written
+into the repository that serves that system or that app, in the
+place that repository keeps such files, and it ships with this
+branch. When no repository serves it, name it in the reply and ask
+where it lives. A value that is a secret is left out and named by
+its kind.
+
 ## Four commits
 
 Commit the specs under `commit-specs`, then the plans under

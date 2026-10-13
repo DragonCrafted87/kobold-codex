@@ -110,6 +110,11 @@ checkbox empty.
 When a task names no check, stop and ask for the check before
 starting the task.
 
+A bug you find while running a task, inside the files that task
+changes, is fixed in that task. Do not leave it only in your notes.
+A bug outside those files is named in the reply, with the question
+of whether to fix it now.
+
 Before each commit of the work, run the gate. The gate is a
 filtered test list when the project has a way to produce one: the
 tests selected for the changed files or for the affected area. A
