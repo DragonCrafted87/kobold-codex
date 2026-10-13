@@ -36,10 +36,10 @@ a check, belongs to `write-a-skill`. Name that, and stop.
 ## The edit
 
 Edit the home so the next session meets the lesson. When the
-paragraph is pinned to a spec, change the paragraph in the spec
-and in the skill or the playbook, so the two bodies still match.
-Leave the spec's decisions in place. The commit message names the
-lesson.
+paragraph is pinned to a spec, change it in the skill or the
+playbook, and write a new dated spec that records the new
+paragraph and the lesson. A past spec does not change. The commit
+message names the lesson.
 
 A personal skill is one file outside this plugin. The description
 is the lesson's trigger, on one physical line. The body is the

@@ -48,9 +48,11 @@ README does not gain a link to the spec, and it does not restate a
 section body. `docs/skills.md` links the skill and the spec, and
 it does not restate a section body.
 
-A revision edits the skill file. The dated spec stays the record
-of the decision that shipped. A new heading is added to the skill
-file.
+A revision edits the skill file and writes a new dated spec. The
+new spec records the changed sections and why. A past spec never
+changes, even when a paragraph it records is out of date. The
+newest spec that records a section is the one the skill matches. A
+new heading is added to the skill file.
 
 ## The same skill
 

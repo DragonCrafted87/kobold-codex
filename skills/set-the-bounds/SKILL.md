@@ -58,6 +58,7 @@ is a YAML mapping, one key per line.
 | `github-write` | `ask` | Comments, labels, issues, and review submission. |
 | `subagents` | `ask` | Starting other agents. |
 | `worktrees` | `ask` | An isolated checkout. |
+| `review-window` | `7` | Days the weekly review reads in a repo with no report yet. |
 | `unattended` | `stop-at-plan` | How far a session goes while the user is away. |
 | `model` | absent | Optional model name for routed work. Absent keeps the session's current model. |
 | `model-fast` | absent | Optional model name for fast work. Absent falls back to `model`, then to the session's current model. |
@@ -71,6 +72,7 @@ is a YAML mapping, one key per line.
 `shell-network`, `browser`, `github-write`, `subagents`, and
 `worktrees`. A bounds file may add a tool name. `unattended` is
 `stop-at-plan`, `safe-steps`, `through-publish`, or `auto`.
+`review-window` is a positive whole number of days, or `all`.
 
 `auto` on `pull-request` opens one pull request without a fresh ask,
 the same as `open`. `auto` on a tool key proceeds, the same as
