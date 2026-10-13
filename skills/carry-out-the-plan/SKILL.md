@@ -94,6 +94,13 @@ A task's check is done when you have run the check the plan names
 and the result is the one the plan describes. Record the result you
 observed. Mark the checkbox for that step `- [x]`.
 
+Rewrite the plan's Status block when the status changes, at the
+moment it changes: a task starts or ends, a blocker appears or
+clears, or the next step moves. `Now:` names the task and step.
+`Blocker:` names what stops the work, or `none`. `Next:` names the
+next step. When the block disagrees with the checkboxes, the
+checkbox wins. Rewrite the block to match.
+
 When a fast worker's check fails, this session takes that task over
 once, on its own model, starting from the worker's diff. When that
 check fails too, or when a task this session ran fails its check,

@@ -33,6 +33,16 @@ Say four things, in prose a reviewer can follow without the session
 transcript. What will change. Which parts of the system the change
 touches. What stays the same. What the checks cover.
 
+A new plan opens with a Status block, after the title: a `## Status`
+heading and three lines. `Now: not started`. `Blocker: none`.
+`Next:` the first task. `carry-out-the-plan` keeps it current.
+
+When no spec records the change, three lines follow the Status
+block: `Current state:` what is true today, `Expected state:` what
+is true when the work is done, and `Reason:` why the change is
+needed. One sentence each.
+When a spec records the change, link it and skip the three lines.
+
 When the project already has headings for a plan, use those headings
 and put the four things under them. When the project has no plan
 yet, head those four things What will change, What it touches, What

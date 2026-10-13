@@ -96,6 +96,11 @@ directory the `commit-specs` row names. A review file sits in the
 directory the `commit-reviews` row names. When a path matches both
 the plan and the spec directories, it is a spec.
 
+When a plan file's Status block changed, the whole plan file is
+work. It stages with the next commit under `commit`, as one commit,
+not under `commit-plans`. Do not stage part of a file. When the
+Status block did not change, the plan file follows `commit-plans`.
+
 `commit: auto` leaves plans, specs, and reviews to their own keys. Each set that
 is `auto` is its own commit. Each set that is `ask` is offered on its
 own. Each set that is `never` stays unstaged. An empty set is skipped.
