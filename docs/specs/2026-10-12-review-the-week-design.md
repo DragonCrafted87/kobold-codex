@@ -296,10 +296,11 @@ spec is the record of a decision.
 
 ## Revision: ship-the-branch
 
-In Three commits, the first sentence reads "Commit the specs under
-`commit-specs`, then the plans under `commit-plans`, then the
-reviews under `commit-reviews`, then the work under `commit`." The
-heading stays.
+The heading Three commits becomes Four commits. Its first sentence
+reads "Commit the specs under `commit-specs`, then the plans under
+`commit-plans`, then the reviews under `commit-reviews`, then the
+work under `commit`." The 2026-10-03 spec keeps the old heading as
+its record.
 
 ## What this skill does not do
 

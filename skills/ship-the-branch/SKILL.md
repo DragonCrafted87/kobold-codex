@@ -37,7 +37,7 @@ The reply names each action this run took and each one it skipped.
 Name the key that governed it. A ship that stops on the checks does
 not commit, push, open a pull request, merge, or remove a checkout.
 
-## Three commits
+## Four commits
 
 Commit the specs under `commit-specs`, then the plans under
 `commit-plans`, then the reviews under `commit-reviews`, then the
