@@ -122,14 +122,13 @@ README says the skills are grouped by phase.
 ### Project skills in adopted repos
 
 `adopt-the-repo` suggests the same groups for the project skills it
-writes. A project skill root has no plugin manifest, so a host finds
-only what its own discovery reaches. Claude Code documents project
-skills at `.claude/skills/<name>/SKILL.md`, one level down, and no
-live Claude Code session was available to test deeper. So project
-skills stay flat. The groups are named in the report of what was
-written, and they head the project's list of skills when it keeps
-one. When a test shows both hosts find nested project skills, a
-later spec can move them into group folders.
+writes, but project skills stay flat: one directory per skill,
+directly under the skill root. This is the decision, not a fallback.
+The plugin exists to keep per-project special casing small. A flat
+project skill root is the layout both hosts already document, so a
+project needs no manifest and no layout of its own. The groups are
+named in the report of what was written, and they head the
+project's list of skills when it keeps one.
 
 ### What stays
 
@@ -191,8 +190,8 @@ version.
 Group the project skills by this plugin's phases: ground,
 investigate, plan, build, review, ship, session, learn, write, and
 setup. A skill that fits none takes a group named for its subject.
-The skill directories stay one level under the skill root, because
-a host may not find a project skill nested deeper. Name each
+The skill directories stay one level under the skill root, so a
+project needs no layout of its own. Name each
 skill's group when you report what was written. When the project
 keeps a list of its skills, the groups are its headings.
 

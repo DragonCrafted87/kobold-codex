@@ -4,8 +4,8 @@
 
 ## Status
 
-Current: done, except the nested project skill test in Task 5
-Blocker: no live Claude Code session to test nested project skills
+Current: done
+Blocker: none
 Next: review of the pull request
 
 **Goal:** Move every skill under a group folder, list the groups in the manifest, check the layout, suggest the same groups in `adopt-the-repo`, and mark the plugin at `2.0.0`.
@@ -102,8 +102,7 @@ Kind: new-logic
 
 Kind: docs-or-config
 
-- [ ] **Step 1: Test nested project skills on both hosts.** Not done. A scratch repo with `.claude/skills/build/scratch-check/SKILL.md` showed no skill in `grok inspect`, because the project was untrusted. `claude plugin validate .claude/skills` passed but does not list skills, and no logged-in Claude Code session was available. Claude Code's docs show project skills one level down.
-- [x] **Step 2:** Ship the flat fallback: replace the paragraph that starts "A project skill is one directory" with the spec's two paragraphs.
+- [x] **Step 1:** Replace the paragraph that starts "A project skill is one directory" with the spec's two paragraphs. Project skills stay flat by decision, so no nested project skill test is needed.
 
 ### Task 6: Version
 

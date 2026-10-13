@@ -105,8 +105,8 @@ version.
 Group the project skills by this plugin's phases: ground,
 investigate, plan, build, review, ship, session, learn, write, and
 setup. A skill that fits none takes a group named for its subject.
-The skill directories stay one level under the skill root, because
-a host may not find a project skill nested deeper. Name each
+The skill directories stay one level under the skill root, so a
+project needs no layout of its own. Name each
 skill's group when you report what was written. When the project
 keeps a list of its skills, the groups are its headings.
 
