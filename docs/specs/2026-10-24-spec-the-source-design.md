@@ -25,6 +25,15 @@ shares the scope, the IDs, the spec format, the checklist, and the
 progress file; only the inputs and the citations differ. One skill
 also keeps the contamination rule beside the mode it guards.
 
+A second review pass added the `UI` and `PERM` kinds and limited
+requirement language to an RFC 2119 subset: SHALL, SHALL NOT,
+RECOMMENDED, NOT RECOMMENDED, and OPTIONAL, uppercase only when
+normative per RFC 8174. Specs live in target repos, so the skill
+carries a one-line search the agent runs on its own output; a script
+would need installing in every host. The plugin's check reads this
+one skill file and fails when an excluded keyword appears outside
+the line that lists them, so the template cannot drift.
+
 ## Description
 
 ```text
@@ -87,17 +96,46 @@ out of the source tree.
 
 ### Requirement IDs
 
-Every rule, API shape, data object, and behavior case gets a stable
-ID of the form `<MODULE>-<KIND>-<NNN>`. MODULE is a short uppercase
-name for the module. KIND is `RULE`, `API`, `DATA`, or `CASE`. NNN
-is a zero-padded number, counted per module and kind. When the
-target repo already has an ID scheme, follow it instead.
+Every requirement gets a stable ID of the form
+`<MODULE>-<KIND>-<NNN>`. MODULE is a short uppercase name for the
+module. NNN is a zero-padded number, counted per module and kind.
+KIND is one of these.
+
+- `RULE`: a domain rule, such as an invariant, a state transition,
+  a trigger, or a computed field.
+- `API`: one route or operation, with its request, responses, and
+  errors.
+- `DATA`: one table, store, or record shape.
+- `UI`: a screen, a flow, or a behavior a user sees.
+- `PERM`: a permission or access rule: who can see or do what.
+- `CASE`: a behavior case in given, when, then.
+
+When the target repo already has an ID scheme, follow it instead.
 
 An ID is never renumbered or reused. A requirement found to be wrong
 is marked withdrawn and keeps its ID; a new one gets the next free
 number. The progress file records the next free number for each
 kind. The IDs let the specs be imported into a requirements manager
 later.
+
+### Requirement language
+
+Specs use the requirement keywords of RFC 2119, limited to this
+set: SHALL, SHALL NOT, RECOMMENDED, NOT RECOMMENDED, and OPTIONAL.
+A keyword is uppercase only when it is normative, as RFC 8174
+clarifies; the same word in lowercase is plain English. Every
+`RULE`, `API`, `DATA`, `UI`, and `PERM` requirement carries exactly
+one keyword. A `CASE` stays given, when, then, with no keyword.
+
+The other RFC 2119 keywords are not used. This line lists them so
+they can be found: MUST, MUST NOT, REQUIRED, SHOULD, SHOULD NOT, MAY.
+
+Before reporting a slice, search the specs for them and fix each
+hit:
+
+```sh
+rg -nw -e MUST -e SHOULD -e MAY -e REQUIRED <spec-dir>
+```
 
 ### Index first
 
@@ -164,7 +202,7 @@ unclear, record the wording and tag the open point UNKNOWN. Every
 header ends with one line saying that the license notes are not
 legal advice.
 
-The spec has four parts, each requirement under its ID.
+The spec has these parts, each requirement under its ID.
 
 - Domain rules: invariants, state transitions and their guards,
   triggers and side effects, computed fields, and permission checks.
@@ -179,6 +217,9 @@ The spec has four parts, each requirement under its ID.
   migrations before calling a shape final; until then, tag the
   final shape UNKNOWN. In clean-room mode, the model is what the API
   and the UI expose.
+- Screens and flows (`UI`): what a user sees and does, step by step.
+- Permissions (`PERM`): who can see or do each thing, and what
+  happens to someone who cannot.
 - Behavior cases: given, when, then, in language-neutral terms. In
   source mode, port each existing test and name the test it came
   from. In clean-room mode, write each case from an observation or a
@@ -186,6 +227,43 @@ The spec has four parts, each requirement under its ID.
 
 The spec names behavior, not the source language's classes. A class
 name appears only in a source-mode citation.
+
+### The template
+
+A spec looks like this. The values are an example.
+
+```markdown
+---
+mode: source
+inputs: <source revision and paths, or doc URLs, capture dates, and instance version>
+source-license: <the license as the source states it>
+license-note: <copyleft carry-over in source mode, or "written without reading the source">
+requirement-language: RFC 2119 keywords as clarified by RFC 8174, limited to SHALL, SHALL NOT, RECOMMENDED, NOT RECOMMENDED, and OPTIONAL; uppercase only when normative.
+caveat: The license notes are not legal advice.
+---
+
+# ORDERS: order lifecycle
+
+ORDERS-RULE-001. An order SHALL NOT move from cancelled to any other
+state. SEEN src/orders/state.ext:41-48
+
+ORDERS-API-001. `DELETE /orders/{id}` SHALL answer 404 when the order
+does not exist. SEEN src/orders/routes.ext:120
+
+ORDERS-DATA-001. An order record SHALL hold a non-null status.
+SEEN schema/orders.sql:12
+
+ORDERS-UI-001. It is RECOMMENDED that the order page show the cancel
+button only while cancelling is allowed. INFERRED from ORDERS-RULE-001
+
+ORDERS-PERM-001. Only the order's owner or an admin SHALL cancel it.
+SEEN src/orders/policy.ext:22-30
+
+ORDERS-CASE-001 (from test_cancel_twice, tests/orders.ext:88)
+  Given a cancelled order
+  When the owner cancels it again
+  Then the request is refused and the order stays cancelled
+```
 
 ### Done
 

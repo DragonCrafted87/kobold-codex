@@ -31,6 +31,7 @@ Kind: docs-or-config
 
 - [x] **Step 1:** Copy the frontmatter and the sections from the spec's Skill region. Headings become `##`.
 - [x] **Step 2:** Add clean-room mode, contamination, the output location, and the requirement IDs from the revised spec.
+- [x] **Step 3:** Add the `UI` and `PERM` kinds, the requirement language section, and the template.
 
 ### Task 2: Map
 
@@ -42,7 +43,17 @@ Kind: docs-or-config
 
 - [x] **Step 1:** Add the skill line under Investigate and the Records bullet.
 
-### Task 3: Version
+### Task 3: Requirement language check
+
+Kind: code
+
+**Files:**
+
+- Modify: `tests/check_plugin.py`
+
+- [x] **Step 1:** Fail when the spec-the-source skill uses MUST, SHOULD, MAY, or REQUIRED outside the line that lists them and the search command.
+
+### Task 4: Version
 
 Kind: docs-or-config
 
