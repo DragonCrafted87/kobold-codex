@@ -22,7 +22,7 @@ Reading a subsystem before changing it uses [skills/investigate/how-it-fits/SKIL
 
 A behavior or a threshold that needs a reason uses [skills/investigate/why-it-is/SKILL.md](../skills/investigate/why-it-is/SKILL.md).
 
-A rewrite or a port that needs specs taken from existing source uses [skills/investigate/spec-the-source/SKILL.md](../skills/investigate/spec-the-source/SKILL.md).
+A rewrite or a port that needs specs from an existing system, from its source or clean-room from docs and a running instance, uses [skills/investigate/spec-the-source/SKILL.md](../skills/investigate/spec-the-source/SKILL.md).
 
 ### Plan
 
