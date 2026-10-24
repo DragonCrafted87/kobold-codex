@@ -2,6 +2,12 @@
 
 > **For agentic workers:** Steps use checkbox (`- [ ]`) syntax for tracking.
 
+## Status
+
+Current: done
+Blocker: none
+Next: the review of this pull request
+
 **Goal:** Ship `spec-the-source` in the investigate group and mark the plugin at `2.2.0`.
 
 **Architecture:** The spec is the record of the decision and the only source for the text that ships. The skill body is copied from the spec's Skill region. The work stays on `spec-the-source`, cut from `main` at `56d84a6`.
@@ -32,6 +38,7 @@ Kind: docs-or-config
 - [x] **Step 1:** Copy the frontmatter and the sections from the spec's Skill region. Headings become `##`.
 - [x] **Step 2:** Add clean-room mode, contamination, the output location, and the requirement IDs from the revised spec.
 - [x] **Step 3:** Add the `UI` and `PERM` kinds, the requirement language section, and the template.
+- [x] **Step 4:** Apply the review notes from the revised spec.
 
 ### Task 2: Map
 

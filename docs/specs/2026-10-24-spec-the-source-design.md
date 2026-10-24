@@ -9,8 +9,9 @@ A rewrite or a port of a large codebase needs specs taken from the
 source: the rules, the API, the data, and the behavior its tests
 pin down. Tools built to reverse-engineer compiled software do not
 fit, because the source and its tests are already in hand. The
-evidence tags SEEN, INFERRED, and UNKNOWN are adapted from the
-leanrea skill (MIT). The wording here is original.
+evidence tags SEEN, INFERRED, and UNKNOWN, and the rule that a
+behavior not found is unknown rather than absent, are adapted from
+the leanrea skill (MIT). The wording here is original.
 
 The skill was trialed on one slice of a large PHP tracker module.
 The trial added: locate symbols by definition, not by path;
@@ -34,6 +35,18 @@ would need installing in every host. The plugin's check reads this
 one skill file and fails when an excluded keyword appears outside
 the line that lists them, so the template cannot drift.
 
+A third pass applied the pull request's review notes: source mode
+does not run the program or its tests, and, at the owner's
+direction, clean-room mode does not read the tests or their output.
+The checklist gained a left mark with a reason, and one finishing
+rule covers the slice and the module. The progress file records the
+revision, license, slice, and output directory, and a changed
+revision reopens the checklist. The batching rule taken from leanrea
+was dropped. A module without a UI, a store, or HTTP routes marks
+those parts left, and its API shape is the surface it has. The
+license note follows the source license's own terms. Each evidence
+tag is stated as one rule.
+
 ## Description
 
 ```text
@@ -48,10 +61,11 @@ The skill runs in one of two modes, chosen before the first read and
 recorded in every spec.
 
 - Source mode reads the module's source and its tests.
-- Clean-room mode never reads the source. It reads only public
-  documentation, such as archived official docs, and observes a
-  running instance from outside: UI walkthroughs, API requests and
-  their responses, and the behavior a user can see.
+- Clean-room mode never reads the source, the tests, or the tests'
+  output. It reads only public documentation, such as archived
+  official docs, and observes a running instance from outside: UI
+  walkthroughs, API requests and their responses, and the behavior a
+  user can see.
 
 Both modes share the scope, the IDs, the spec format, the checklist,
 and the progress file. They differ in their inputs and their
@@ -72,7 +86,7 @@ whether it has read the source, it treats itself as having read it.
 Extract one module at a time: a plugin, a package, or a bounded
 directory or feature area the user names. Before reading, write
 down the mode, the module, the source license, and the slice this
-run covers. In source mode, code outside the module is read only to
+run covers, and the source revision. In source mode, code outside the module is read only to
 resolve a call the module makes, and it is cited, not specced.
 
 The source is read-only. Write nothing inside it: no build, no
@@ -80,7 +94,10 @@ install, no generated index, no formatter. Reach no network beyond
 the model the session already uses, except, in clean-room mode, the
 public docs and the running instance the user named. Do not read or
 use a repo token, a user token, or a secret found in the source or
-the docs. A clean-room session logs in to the instance only with a
+the docs. In source mode, do not run the program or its tests; a
+run can write caches, coverage, or database rows, and the spec comes
+from reading. In clean-room mode, do not read the tests or any test
+output, logs, or reports. A clean-room session logs in to the instance only with a
 test account the user provides for that purpose.
 
 ### Where the specs go
@@ -103,8 +120,9 @@ KIND is one of these.
 
 - `RULE`: a domain rule, such as an invariant, a state transition,
   a trigger, or a computed field.
-- `API`: one route or operation, with its request, responses, and
-  errors.
+- `API`: one operation on the module's surface, such as an HTTP
+  route, a command, an event, or an exported call, with its inputs,
+  outputs, and errors.
 - `DATA`: one table, store, or record shape.
 - `UI`: a screen, a flow, or a behavior a user sees.
 - `PERM`: a permission or access rule: who can see or do what.
@@ -140,14 +158,15 @@ rg -nw -e MUST -e SHOULD -e MAY -e REQUIRED <spec-dir>
 ### Index first
 
 Index before reading. In source mode, list the files, count them,
-and locate the entry points with `rg` or `ctags`: the routes and API
-handlers, the domain services, the workflow and permission rules,
-the schema and its migrations, and each tier of tests. Locate a
+and locate the entry points with the search on hand, such as `rg` or
+`ctags`: the surface the module exposes (routes, commands, events,
+or exported calls), the domain logic, the permission rules, any
+store and its migrations, and each tier of tests. A missing search
+program does not stop the index; use what the host has. Locate a
 symbol by searching for its definition. A file path that a namespace
 or a convention suggests is a guess until a search confirms it. Read
 in slices. Open a large file at the lines the index points to, not
-whole. Batch independent searches into one command with a marker
-between them, and cap each output.
+whole.
 
 In clean-room mode, the index is the docs' table of contents, the
 published API reference, and the screens and menus of the running
@@ -156,35 +175,43 @@ instance.
 ### The coverage checklist
 
 From the index, write a checklist into the progress file: one line
-per entry point or screen, per rule-bearing area, per data object,
-and per test file or documented example. Mark each line done,
-partial, or not started. The module is extracted when every line is
-done or carries a reason it was left. A line is never dropped to
+per entry point or screen, per area that holds rules, per data
+object, and, in source mode, per test file, or in clean-room mode,
+per documented example. Add one line per spec part. Mark each line
+done, partial, not started, or left; a left line carries its reason
+on the same line. A slice is finished, and so is the module, when
+every line in its scope is done or left. A line is never dropped to
 make the list shorter.
 
 ### The progress file
 
-The progress file records the mode, the module, the index counts,
-the checklist, the next free ID for each kind, the open unknowns,
-and the next inputs to read. Update it after each slice. A new
-session resumes from it and does not re-read what it marks done. A
-clean-room session resumes only from a clean-room progress file.
+The progress file records the mode, the module, the source revision
+(or, in clean-room mode, the doc capture dates and the instance
+version), the source license, the slice, the output directory, the
+index counts, the checklist, the next free ID for each kind, the
+open unknowns, and the next inputs to read. Update it after each
+slice. A new session resumes from it and does not re-read what it
+marks done. When the revision or the instance version differs from
+the one recorded, mark the affected checklist lines not started and
+read them again. A clean-room session resumes only from a clean-room
+progress file.
 
 ### Evidence
 
 Tag every claim in a spec.
 
-- SEEN: read or observed. In source mode, cite `file:line` or a line
-  range. In clean-room mode, cite the doc URL with its section, or
-  the observed request and response, or the UI steps and what the
-  screen showed.
-- INFERRED: reasoned from SEEN evidence. Name what it rests on.
-- UNKNOWN: not found yet. Say what to read or try to settle it.
+- SEEN cites what was read or observed. In source mode, that is
+  `file:line` or a line range. In clean-room mode, it is the doc URL
+  with its section, the observed request and response, or the UI
+  steps and what the screen showed.
+- INFERRED names the SEEN evidence it rests on. A claim about order
+  or timing is INFERRED from the code path, or the sequence of
+  observations, that produces it.
+- UNKNOWN is a behavior that was not found. It names the files, docs,
+  or observations already checked, and it never becomes "absent".
 
-A behavior that was not found is UNKNOWN, not absent. A spec states
-no behavior the evidence does not show. Reading code is not running
-it, and a doc is not the behavior it describes. When a doc and an
-observation disagree, record both and tag the conflict.
+A spec states no behavior without one of these tags. When a doc and
+an observation disagree, record both and tag the conflict.
 
 ### The spec
 
@@ -194,27 +221,32 @@ one. The header records the provenance: the mode, the inputs used
 the instance's version), the source license as its files or docs
 state it, and a license note.
 
-In source mode, the license note says a spec derived from source
-under a copyleft license such as the GPL keeps that license for a
-rewrite built from it. In clean-room mode, the note says the spec
-was written without reading the source. When the license wording is
-unclear, record the wording and tag the open point UNKNOWN. Every
+In source mode, the license note says a rewrite built from the spec
+follows the terms the source files state, including the share-alike
+scope those terms name and any notice they require. In clean-room
+mode, the note says the spec was written without reading the source
+or its tests. When the license wording is unclear, the note stays
+UNKNOWN and the rewrite waits on it. Every
 header ends with one line saying that the license notes are not
 legal advice.
 
-The spec has these parts, each requirement under its ID.
+The spec has these parts, each requirement under its ID. A part the
+module does not have, such as a UI or a store, is one checklist line
+marked left with the reason, not an invented section.
 
 - Domain rules: invariants, state transitions and their guards,
   triggers and side effects, computed fields, and permission checks.
-- API shapes: each route in an OpenAPI-style block, with method,
-  path, parameters, request body, each response and error status
-  and its cause, and headers. Look for effects on every exit path,
+- API shapes: the surface that exists. An HTTP route is an
+  OpenAPI-style block, with method, path, parameters, request body,
+  each response and error status and its cause, and headers. A
+  command, an event, or an exported call lists its inputs, outputs,
+  and errors. Look for effects on every exit path,
   including error paths. In source mode, errors come from the code
-  and from the route's annotations; cite both and say which is
+  and from any annotations on it; cite both and say which is
   which.
 - Data model: tables or stores, columns, keys, nullability, and
-  defaults. In source mode, reconcile the base schema with its
-  migrations before calling a shape final; until then, tag the
+  defaults. In source mode, when the store has migrations, reconcile
+  the base schema with them before calling a shape final; until then, tag the
   final shape UNKNOWN. In clean-room mode, the model is what the API
   and the UI expose.
 - Screens and flows (`UI`): what a user sees and does, step by step.
@@ -237,7 +269,7 @@ A spec looks like this. The values are an example.
 mode: source
 inputs: <source revision and paths, or doc URLs, capture dates, and instance version>
 source-license: <the license as the source states it>
-license-note: <copyleft carry-over in source mode, or "written without reading the source">
+license-note: <the source license's terms for a rewrite in source mode, or "written without reading the source or its tests">
 requirement-language: RFC 2119 keywords as clarified by RFC 8174, limited to SHALL, SHALL NOT, RECOMMENDED, NOT RECOMMENDED, and OPTIONAL; uppercase only when normative.
 caveat: The license notes are not legal advice.
 ---
@@ -267,7 +299,8 @@ ORDERS-CASE-001 (from test_cancel_twice, tests/orders.ext:88)
 
 ### Done
 
-A slice is done when its checklist lines are done, each requirement
+A slice is done when every checklist line in its scope is done or
+left, each requirement
 has an ID and each claim a tag, and its UNKNOWNs are listed in the
 progress file. Report the mode, the spec paths, the convention
 followed, the checklist counts, and the open UNKNOWNs.
