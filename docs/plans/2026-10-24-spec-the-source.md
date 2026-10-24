@@ -17,6 +17,7 @@ If a sentence in this plan disagrees with the spec, the spec wins.
 - One skill is added. No skill is renamed. Every existing description stays.
 - Version becomes `2.2.0` in `.claude-plugin/plugin.json` and in the plugin entry in `.claude-plugin/marketplace.json`.
 - The skill names no project, host tool, or model.
+- Source mode and clean-room mode live in the one skill.
 
 ---
 
@@ -29,6 +30,7 @@ Kind: docs-or-config
 - Create: `skills/investigate/spec-the-source/SKILL.md`
 
 - [x] **Step 1:** Copy the frontmatter and the sections from the spec's Skill region. Headings become `##`.
+- [x] **Step 2:** Add clean-room mode, contamination, the output location, and the requirement IDs from the revised spec.
 
 ### Task 2: Map
 
