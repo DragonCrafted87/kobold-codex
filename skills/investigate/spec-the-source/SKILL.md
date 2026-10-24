@@ -82,8 +82,9 @@ When the target repo already has an ID scheme, follow it instead.
 
 An ID is never renumbered or reused. A requirement found to be wrong
 is marked withdrawn and keeps its ID; a new one gets the next free
-number. The progress file records the next free number for each
-kind. The IDs let the specs be imported into a requirements manager
+number. When a requirement is split, the original ID keeps one half
+and each other half gets the next free number. The progress file
+records the next free number for each kind. The IDs let the specs be imported into a requirements manager
 later.
 
 ## Requirement language
@@ -94,6 +95,27 @@ A keyword is uppercase only when it is normative, as RFC 8174
 clarifies; the same word in lowercase is plain English. Every
 `RULE`, `API`, `DATA`, `UI`, and `PERM` requirement carries exactly
 one keyword. A `CASE` stays given, when, then, with no keyword.
+
+One keyword per requirement follows the practice of singular
+requirements in INCOSE's guide to writing requirements and in
+ISO/IEC/IEEE 29148, not RFC 2119 itself. A rule with a SHALL half
+and a SHALL NOT half is two requirements with two IDs.
+
+A requirement can carry a data block, such as YAML, a schema, or a
+table, when the details are vital to the behavior. The keyword stays
+in the requirement's sentence, and the block defines the details. An
+`API` item states the operation in one sentence with its keyword and
+its shape in a block. Each response behavior that matters on its
+own, such as success, refused, or not found, is its own `API`
+requirement.
+
+## Status
+
+A `DATA` item carries a status, draft or final. It stays draft until
+its shape is reconciled with the store's migrations, or until the
+module is found to have none. Any other item whose evidence includes
+an UNKNOWN can carry the same status, and it moves to final when the
+UNKNOWN is settled.
 
 The other RFC 2119 keywords are not used. This line lists them so
 they can be found: MUST, MUST NOT, REQUIRED, SHOULD, SHOULD NOT, MAY.
@@ -229,11 +251,29 @@ caveat: The license notes are not legal advice.
 ORDERS-RULE-001. An order SHALL NOT move from cancelled to any other
 state. SEEN src/orders/state.ext:41-48
 
-ORDERS-API-001. `DELETE /orders/{id}` SHALL answer 404 when the order
+ORDERS-RULE-002. A cancelled order SHALL keep its cancellation time.
+SEEN src/orders/state.ext:50
+
+ORDERS-API-001. `DELETE /orders/{id}` SHALL accept the shape below.
+SEEN src/orders/routes.ext:110-130
+
+    DELETE /orders/{id}:
+      params: { id: integer (path) }
+      responses: [204, 403, 404]
+
+ORDERS-API-002. `DELETE /orders/{id}` SHALL answer 204 with an empty
+body when the order is deleted. SEEN src/orders/routes.ext:128
+
+ORDERS-API-003. `DELETE /orders/{id}` SHALL answer 404 when the order
 does not exist. SEEN src/orders/routes.ext:120
 
-ORDERS-DATA-001. An order record SHALL hold a non-null status.
-SEEN schema/orders.sql:12
+ORDERS-DATA-001. An order record SHALL hold the fields below.
+Status: draft. SEEN schema/orders.sql:10-14; migrations not yet
+reconciled, UNKNOWN.
+
+    | field  | type    | null |
+    | id     | integer | no   |
+    | status | text    | no   |
 
 ORDERS-UI-001. It is RECOMMENDED that the order page show the cancel
 button only while cancelling is allowed. INFERRED from ORDERS-RULE-001
