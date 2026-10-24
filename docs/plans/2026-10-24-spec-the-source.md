@@ -39,6 +39,7 @@ Kind: docs-or-config
 - [x] **Step 2:** Add clean-room mode, contamination, the output location, and the requirement IDs from the revised spec.
 - [x] **Step 3:** Add the `UI` and `PERM` kinds, the requirement language section, and the template.
 - [x] **Step 4:** Apply the review notes from the revised spec.
+- [x] **Step 5:** Add singular requirements, data blocks, per-response API items, and the Status section.
 
 ### Task 2: Map
 
