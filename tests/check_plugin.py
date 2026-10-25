@@ -2,6 +2,7 @@
 """Validate the plugin manifests and skill layout, and require a version bump off main."""
 
 import json
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -184,9 +185,28 @@ def check_layout():
         fail(f"plugin.json lists skills/{group} but it holds no skill")
 
 
+EXCLUDED_KEYWORDS = re.compile(r"\b(MUST|SHOULD|MAY|REQUIRED)\b")
+KEYWORD_SKILL = ROOT / "skills/investigate/spec-the-source/SKILL.md"
+KEYWORD_LIST_MARKER = "This line lists them so"
+
+
+def check_requirement_language():
+    """spec-the-source uses only its RFC 2119 subset, outside the line that lists the rest."""
+    lines = KEYWORD_SKILL.read_text().splitlines()
+    for number, line in enumerate(lines, 1):
+        previous = lines[number - 2] if number > 1 else ""
+        if KEYWORD_LIST_MARKER in previous or KEYWORD_LIST_MARKER in line:
+            continue
+        if line.lstrip().startswith("rg -nw"):
+            continue
+        if EXCLUDED_KEYWORDS.search(line):
+            fail(f"{KEYWORD_SKILL.relative_to(ROOT)}:{number} uses an excluded RFC 2119 keyword")
+
+
 def main():
     version = check_manifests()
     check_layout()
+    check_requirement_language()
     check_ahead(version)
 
 
