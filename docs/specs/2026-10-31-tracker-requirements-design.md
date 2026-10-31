@@ -28,9 +28,13 @@ keeps older wording.
   once, in `kobold-codex`. The other skills point at it.
 - MCP first, then REST through the OpenAPI document by
   `operationId`.
-- The token is read from an environment variable named after the
-  token's item in the user's vault. Each agent has its own token. It
-  is never printed.
+- Each agent has its own vault and its own token. The token is read
+  from an environment variable derived from the agent's vault name:
+  uppercase, hyphens to underscores, then `_TRACKER_TOKEN`. The
+  agent's own instructions can name a different variable. The
+  repository record names none, since one repository-level name
+  cannot fit every agent. The token is never printed.
+- `ship-the-branch`'s description names the Implements links.
 - No offline export. A read that fails after one retry marks the
   claims that depend on it UNKNOWN. A write that fails is queued
   outside the repository, and the user is told.
@@ -64,10 +68,13 @@ its REST API: read the OpenAPI document at `openapi` and call each
 operation by its `operationId`, not by a path written from memory.
 `transport` can change that order.
 
-The tracker token is read from the environment variable that
-`token-env` names. That name is the name of the token's item in
-the user's vault, so one name finds the secret in both places.
-Each agent has its own token. The token goes only into the
+Each agent has its own token, kept in its own vault. The token is
+read from an environment variable named after that vault: the
+vault name in uppercase, each hyphen turned into an underscore,
+then `_TRACKER_TOKEN`. A vault named `kobold-example` gives
+`KOBOLD_EXAMPLE_TRACKER_TOKEN`. When the agent's own instructions
+name a different variable, that name wins. The repository record
+names no variable, because each agent reading it has its own. The token goes only into the
 request's authorization header. It is not printed, logged,
 committed, written into a tracked file, or asked for in chat. When
 the variable is unset, stop and ask the user to set it. A 401 or a
@@ -109,12 +116,11 @@ The `requirements` key is a mapping. `source` is `markdown` or
 `tracker`. For `markdown`, `path` is the directory, `specs` when
 the user names none, and `tracked` is `true` or `false`. For
 `tracker`, `url` is the tracker's base address, `project` is the
-project key, and `token-env` is the environment variable that holds
-the token, named after the token's item in the vault. `transport`
+project key. The record names no token and no token variable;
+each agent finds its own as `kobold-codex` says. `transport`
 is optional and defaults to `[mcp, rest]`. `mcp-url` defaults to
 `<url>/mcp`, and `openapi` defaults to `/api/openapi.json`. The
-record holds the variable's name and never the token. A tracker
-source creates no directory. The key is omitted when the project
+tracker source creates no directory. The key is omitted when the project
 has no requirements. `kobold-codex` says how a session reads them.
 
 ## Skill: set-the-bounds
@@ -139,6 +145,12 @@ item's body. The progress file stays where this section puts it.
 With `source: markdown`, the specs go under `path`.
 
 ## Skill: ship-the-branch
+
+The description becomes:
+
+```text
+description: Use when the checks pass and the branch should be integrated. Commit the specs, the plans, and the work under their own keys, then push, open a pull request, or merge, add Implements links on the tracker items the branch carries out, and remove the worktree, each as the resolved bounds allow.
+```
 
 A new heading before The worktree.
 
@@ -188,6 +200,7 @@ that uses the plugin.
 - Plugin version is `2.3.0` in both manifests.
 - `python3 tests/check_plugin.py` passes, including the new checks:
   no project or host names in a skill, the `requirements` keys in
-  `adopt-the-repo`, no command that prints a token, `operationId`
+  `adopt-the-repo` with no `token-env` or `export-path`, the vault
+  derivation rule in `kobold-codex`, no command that prints a token, `operationId`
   only in `kobold-codex`, and the RFC 2119 subset in the new
   Requirements heading.

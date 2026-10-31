@@ -6,7 +6,7 @@
 
 Current: done
 Blocker: none
-Next: the review of this pull request
+Next: the review of this pull request, after the per-agent token rule and the ship-the-branch description from review
 
 **Goal:** Let a project keep its requirements in a tracker, cut duplication between specs, plans, and skills, and mark the plugin at `2.3.0`.
 
@@ -33,4 +33,10 @@ If a sentence in this plan disagrees with the spec, the spec wins.
 - [x] Extend `tests/check_plugin.py` with the checks the spec lists.
 - [x] Link the spec from `docs/skills.md`.
 - [x] Bump both manifests to `2.3.0`.
+- [x] `python3 tests/check_plugin.py` passes.
+
+### Task 3: Review fixes
+
+- [x] Derive the token variable from the agent's vault name; drop `token-env` from the record.
+- [x] Name the Implements links in the ship-the-branch description.
 - [x] `python3 tests/check_plugin.py` passes.
