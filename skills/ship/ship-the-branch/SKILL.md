@@ -1,6 +1,6 @@
 ---
 name: ship-the-branch
-description: Use when the checks pass and the branch should be integrated. Commit the specs, the plans, and the work under their own keys, then push, open a pull request, or merge, and remove the worktree, each as the resolved bounds allow.
+description: Use when the checks pass and the branch should be integrated. Commit the specs, the plans, and the work under their own keys, then push, open a pull request, or merge, add Implements links on the tracker items the branch carries out, and remove the worktree, each as the resolved bounds allow.
 ---
 
 # Ship the branch
