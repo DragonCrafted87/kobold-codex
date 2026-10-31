@@ -207,7 +207,7 @@ PROJECT_NAMES = re.compile(r"forgeledger|stealthdragonland|\bFL-\d", re.IGNORECA
 TOKEN_PRINT = re.compile(r"\b(echo|printf|print|cat)\b[^\n]*\$\{?\w*TOKEN", re.IGNORECASE)
 ADOPT_SKILL = ROOT / "skills/setup/adopt-the-repo/SKILL.md"
 CODEX_SKILL = ROOT / "skills/ground/kobold-codex/SKILL.md"
-REQUIREMENTS_KEYS = ["source", "path", "tracked", "url", "project", "transport", "mcp-url", "openapi"]
+REQUIREMENTS_KEYS = ["source", "path", "tracked", "url", "project", "transport", "mcp-url", "openapi", "token-env"]
 
 
 def skill_files():
@@ -230,11 +230,11 @@ def check_requirements_keys():
     for key in REQUIREMENTS_KEYS:
         if f"`{key}`" not in text:
             fail(f"adopt-the-repo does not name the requirements key {key}")
-    for removed in ("export-path", "token-env"):
-        if removed in text:
-            fail(f"adopt-the-repo names {removed}, which was removed")
-    if "_TRACKER_TOKEN" not in CODEX_SKILL.read_text():
-        fail("kobold-codex does not state the vault-name token rule")
+    if "export-path" in text:
+        fail("adopt-the-repo names export-path, which was removed")
+    for path in skill_files():
+        if "_TRACKER_TOKEN" in path.read_text():
+            fail(f"{path.relative_to(ROOT)} derives a token variable; use token-env")
 
 
 def check_token_hygiene():

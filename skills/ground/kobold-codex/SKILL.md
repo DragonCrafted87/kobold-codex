@@ -112,13 +112,10 @@ its REST API: read the OpenAPI document at `openapi` and call each
 operation by its `operationId`, not by a path written from memory.
 `transport` can change that order.
 
-Each agent has its own token, kept in its own vault. The token is
-read from an environment variable named after that vault: the
-vault name in uppercase, each hyphen turned into an underscore,
-then `_TRACKER_TOKEN`. A vault named `kobold-example` gives
-`KOBOLD_EXAMPLE_TRACKER_TOKEN`. When the agent's own instructions
-name a different variable, that name wins. The repository record
-names no variable, because each agent reading it has its own. The token goes only into the
+The tracker token is read from the environment variable that
+`token-env` names. The repository picks one neutral name, and each
+agent working in it exports its own credential under that same
+name in its own setup. The token goes only into the
 request's authorization header. It is not printed, logged,
 committed, written into a tracked file, or asked for in chat. When
 the variable is unset, stop and ask the user to set it. A 401 or a

@@ -177,8 +177,10 @@ The `requirements` key is a mapping. `source` is `markdown` or
 `tracker`. For `markdown`, `path` is the directory, `specs` when
 the user names none, and `tracked` is `true` or `false`. For
 `tracker`, `url` is the tracker's base address, `project` is the
-project key. The record names no token and no token variable;
-each agent finds its own as `kobold-codex` says. `transport`
+project key, and `token-env` is the neutral name of the
+environment variable that holds the token. `token-env` is required
+for a tracker. The record holds that name and never the token; each
+agent exports its own credential under it. `transport`
 is optional and defaults to `[mcp, rest]`. `mcp-url` defaults to
 `<url>/mcp`, and `openapi` defaults to `/api/openapi.json`. The
 tracker source creates no directory. The key is omitted when the project
