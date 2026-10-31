@@ -29,7 +29,8 @@ file, and the root stays visible.
 
 The record is `.kobold/adopt.yaml` at the repository root. It
 names `mode`, `skill-root`, `playbooks`, `plans`, `specs`,
-`plans-tracked`, `specs-tracked`, `hide`, and `config-repo`.
+`plans-tracked`, `specs-tracked`, `requirements`, `hide`, and
+`config-repo`.
 `mode` is `full` or `shadow`. `hide` is `gitignore` or `exclude`,
 and it is omitted when every Kobold path is tracked.
 `config-repo` is the path of the local repository, and it is
@@ -161,6 +162,28 @@ Suggest tracked for plans, because `commit-plans` defaults to
 `ask` and a plan is how the next session finds the work. Suggest
 tracked for specs, because `commit-specs` defaults to `ask` and a
 spec is the record of a decision.
+
+## The requirements
+
+Ask where the project's requirements live: nowhere yet, in Markdown
+files, or in a requirements tracker. When a tracked directory of
+requirement files already exists, record it and do not ask. The
+`specs` key is the directory for design specs, the records of
+decisions. It never names requirements. When the repository's
+`specs` path holds requirements, say so and suggest moving that
+path to `requirements`.
+
+The `requirements` key is a mapping. `source` is `markdown` or
+`tracker`. For `markdown`, `path` is the directory, `specs` when
+the user names none, and `tracked` is `true` or `false`. For
+`tracker`, `url` is the tracker's base address, `project` is the
+project key, and `token-env` is the environment variable that holds
+the token, named after the token's item in the vault. `transport`
+is optional and defaults to `[mcp, rest]`. `mcp-url` defaults to
+`<url>/mcp`, and `openapi` defaults to `/api/openapi.json`. The
+record holds the variable's name and never the token. A tracker
+source creates no directory. The key is omitted when the project
+has no requirements. `kobold-codex` says how a session reads them.
 
 ## The bounds
 

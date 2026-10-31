@@ -203,10 +203,69 @@ def check_requirement_language():
             fail(f"{KEYWORD_SKILL.relative_to(ROOT)}:{number} uses an excluded RFC 2119 keyword")
 
 
+PROJECT_NAMES = re.compile(r"forgeledger|stealthdragonland|\bFL-\d", re.IGNORECASE)
+TOKEN_PRINT = re.compile(r"\b(echo|printf|print|cat)\b[^\n]*\$\{?\w*TOKEN", re.IGNORECASE)
+ADOPT_SKILL = ROOT / "skills/setup/adopt-the-repo/SKILL.md"
+CODEX_SKILL = ROOT / "skills/ground/kobold-codex/SKILL.md"
+REQUIREMENTS_KEYS = ["source", "path", "tracked", "url", "project", "transport", "mcp-url", "openapi", "token-env"]
+
+
+def skill_files():
+    return sorted((ROOT / "skills").glob("*/*/SKILL.md"))
+
+
+def check_no_project_names():
+    """Skills stay generic: no project, host, or tracker item names."""
+    for path in skill_files():
+        for number, line in enumerate(path.read_text().splitlines(), 1):
+            if PROJECT_NAMES.search(line):
+                fail(f"{path.relative_to(ROOT)}:{number} names a project or host")
+
+
+def check_requirements_keys():
+    """adopt-the-repo records the requirements key and every key under it, and no export path."""
+    text = ADOPT_SKILL.read_text()
+    if "`requirements`" not in text:
+        fail("adopt-the-repo does not name the requirements key")
+    for key in REQUIREMENTS_KEYS:
+        if f"`{key}`" not in text:
+            fail(f"adopt-the-repo does not name the requirements key {key}")
+    if "export-path" in text:
+        fail("adopt-the-repo names export-path, which was removed")
+
+
+def check_token_hygiene():
+    """No skill tells a session to print a token."""
+    for path in skill_files():
+        for number, line in enumerate(path.read_text().splitlines(), 1):
+            if TOKEN_PRINT.search(line):
+                fail(f"{path.relative_to(ROOT)}:{number} prints a token")
+
+
+def check_single_lookup():
+    """The tracker lookup order lives once, in kobold-codex."""
+    for path in skill_files():
+        if path != CODEX_SKILL and "operationId" in path.read_text():
+            fail(f"{path.relative_to(ROOT)} repeats the tracker lookup; link kobold-codex instead")
+
+
+def check_requirements_language():
+    """The Requirements heading in kobold-codex uses the RFC 2119 subset too."""
+    text = CODEX_SKILL.read_text()
+    section = text.split("## Requirements", 1)[-1].split("\n## ", 1)[0]
+    if EXCLUDED_KEYWORDS.search(section):
+        fail("kobold-codex Requirements uses an excluded RFC 2119 keyword")
+
+
 def main():
     version = check_manifests()
     check_layout()
     check_requirement_language()
+    check_no_project_names()
+    check_requirements_keys()
+    check_token_hygiene()
+    check_single_lookup()
+    check_requirements_language()
     check_ahead(version)
 
 

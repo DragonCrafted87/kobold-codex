@@ -95,6 +95,15 @@ so.
 
 When an action fails, stop the ship, and say what failed.
 
+## Implements links
+
+When the project's requirements live in a tracker, add an
+Implements link on each tracker item the branch carries out, as
+`write-requirements` allows. The items are the ones the plan or the
+commits cite. A link already there is left as it is. A tracker that
+does not answer follows `kobold-codex`, and the reply names each
+link still to add.
+
 ## The worktree
 
 Remove the isolated checkout for this branch when that checkout is
