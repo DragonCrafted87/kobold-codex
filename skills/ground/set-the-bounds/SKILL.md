@@ -1,6 +1,6 @@
 ---
 name: set-the-bounds
-description: Use before a commit, a push, a pull request, a merge, a force-push, an unattended stretch, or a named tool. Resolve the four bounds layers, and revise one layer when the user wants a change.
+description: Use before a commit, a push, a pull request, a merge, a force-push, an unattended stretch, a named tool, or a change to a live system such as a deploy, a migration, a backup, or a restore. Resolve the four bounds layers, and revise one layer when the user wants a change.
 ---
 
 # Set the bounds
@@ -8,8 +8,12 @@ description: Use before a commit, a push, a pull request, a merge, a force-push,
 ## Resolve first
 
 Before a commit of the work, a commit of plans, a commit of specs, a
-push, a pull request, a merge, a force-push, an unattended stretch, or
-a named tool, read the four layers and use the resolved value. Say each
+push, a pull request, a merge, a force-push, an unattended stretch,
+a named tool, or a change to a live system, read the four layers and
+use the resolved value. A deploy, an apply to a running cluster, a
+database migration, a backup, and a restore change a live system.
+They resolve the bounds even when the user asked for the change by
+name, and the tool that makes the change is the named tool. Say each
 key that governs the action, the value, and the layer that set it.
 Reading the repo, editing files, and running the project's own checks
 are ordinary work. Those actions have no key.
