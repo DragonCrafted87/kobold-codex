@@ -42,6 +42,9 @@ block: `Starting state:` what is true today, `Expected state:` what
 is true when the work is done, and `Reason:` why the change is
 needed. One sentence each.
 When a spec records the change, link it and skip the three lines.
+When the change carries out requirements, list their IDs as links
+to where they live. The plan does not copy a spec's or a
+requirement's text.
 
 When the project already has headings for a plan, use those headings
 and put the four things under them. When the project has no plan

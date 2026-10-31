@@ -27,6 +27,9 @@ the section bodies that ship. Those bodies are the headings under
 the spec's Skill heading. A later revision of the skill file does
 not rewrite that spec.
 
+The plan for a skill change links the spec for the wording and
+does not copy a section body.
+
 ## The file
 
 The skill file is `skills/<group>/<name>/SKILL.md`. The group is

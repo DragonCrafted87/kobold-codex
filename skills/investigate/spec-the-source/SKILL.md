@@ -52,6 +52,14 @@ test account the user provides for that purpose.
 
 ## Where the specs go
 
+When the target repo's `.kobold/adopt.yaml` names `requirements`,
+follow it. With `source: tracker`, each requirement is written
+straight to the tracker as an item with status Draft, as
+`write-requirements` allows. Its ID is the tracker's next free ID
+for its module and kind, and the provenance header goes in the
+item's body. The progress file stays where this section puts it.
+With `source: markdown`, the specs go under `path`.
+
 The specs go in the repo the rewrite will live in. Look there first
 for an existing spec convention: a `specs/` or `docs/specs/`
 directory, a requirements file, or a project instruction that names

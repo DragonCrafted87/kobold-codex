@@ -95,3 +95,45 @@ a migration across many call sites, a repeated check, or a sweep of
 similar edits, should leave a script or a skill behind. The next person
 runs that artifact a second time instead of reconstructing the steps
 from the last session.
+
+## Requirements
+
+Requirements are the rules a project's behavior is held to.
+`.kobold/adopt.yaml` names where they live under `requirements`.
+When the record has no `requirements` key, look for the project's
+own convention: a `specs/` or `docs/specs/` directory, a
+requirements file, or an instruction that names one.
+
+`source: markdown` means the files under `path`. `source: tracker`
+means items in a requirements tracker at `url`, in the project
+`project`. Reach the tracker through its MCP server first, at
+`mcp-url`, when the host has that server connected. Otherwise use
+its REST API: read the OpenAPI document at `openapi` and call each
+operation by its `operationId`, not by a path written from memory.
+`transport` can change that order.
+
+The tracker token is read from the environment variable that
+`token-env` names. The repository picks one neutral name, and each
+agent working in it exports its own credential under that same
+name in its own setup. The token goes only into the
+request's authorization header. It is not printed, logged,
+committed, written into a tracked file, or asked for in chat. When
+the variable is unset, stop and ask the user to set it. A 401 or a
+403 stops the work; say which one, and do not try another
+credential.
+
+When the tracker does not answer, retry once. Then go on without
+it, and mark every claim that depended on a requirement UNKNOWN. A
+write that could not reach the tracker is queued in a file outside
+the repository, and the reply names that file and what it holds.
+Requirements are never written into repository Markdown as a
+fallback. No session deletes or archives a tracker item or board.
+
+## One source of truth
+
+A fact lives in one place, and everything else links to it. A plan
+links the spec and the requirement IDs it serves and does not copy
+their text. An index links the skill and its spec and does not
+restate a section. A dated spec is the record of a decision, not a
+second copy of the skill. Git history keeps older wording, so a
+superseded file is not kept beside the current one.

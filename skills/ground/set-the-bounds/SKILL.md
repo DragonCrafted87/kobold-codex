@@ -49,6 +49,7 @@ is a YAML mapping, one key per line.
 | `commit-plans` | `ask` | Commit of plan files, in the directory `write-the-plan` uses. |
 | `commit-specs` | `ask` | Commit of spec files, in the directory the project uses for design specs. |
 | `commit-reviews` | `ask` | Commit of review files, in the review directory `review-the-week` uses. |
+| `write-requirements` | `ask` | Create or update a requirement in a tracker, or add or delete a tracker link. |
 | `push` | `ask` | Update the remote branch. |
 | `pull-request` | `ask` | Open a pull request. |
 | `merge` | `never` | Merge the pull request. |
@@ -73,6 +74,8 @@ is a YAML mapping, one key per line.
 `worktrees`. A bounds file may add a tool name. `unattended` is
 `stop-at-plan`, `safe-steps`, `through-publish`, or `auto`.
 `review-window` is a positive whole number of days, or `all`.
+`write-requirements` is `ask`, `auto`, or `never`. A tracker holds
+no files, so no commit stages requirements kept there.
 
 `auto` on `pull-request` opens one pull request without a fresh ask,
 the same as `open`. `auto` on a tool key proceeds, the same as
