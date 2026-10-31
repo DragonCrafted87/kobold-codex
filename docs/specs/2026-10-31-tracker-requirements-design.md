@@ -28,12 +28,11 @@ keeps older wording.
   once, in `kobold-codex`. The other skills point at it.
 - MCP first, then REST through the OpenAPI document by
   `operationId`.
-- Each agent has its own vault and its own token. The token is read
-  from an environment variable derived from the agent's vault name:
-  uppercase, hyphens to underscores, then `_TRACKER_TOKEN`. The
-  agent's own instructions can name a different variable. The
-  repository record names none, since one repository-level name
-  cannot fit every agent. The token is never printed.
+- The record's `token-env`, required for a tracker, names one
+  neutral environment variable for the repository. Each agent
+  exports its own credential under that name in its own setup. The
+  name has no tie to a vault or an item name. The token is never
+  printed.
 - `ship-the-branch`'s description names the Implements links.
 - No offline export. A read that fails after one retry marks the
   claims that depend on it UNKNOWN. A write that fails is queued
@@ -68,13 +67,10 @@ its REST API: read the OpenAPI document at `openapi` and call each
 operation by its `operationId`, not by a path written from memory.
 `transport` can change that order.
 
-Each agent has its own token, kept in its own vault. The token is
-read from an environment variable named after that vault: the
-vault name in uppercase, each hyphen turned into an underscore,
-then `_TRACKER_TOKEN`. A vault named `kobold-example` gives
-`KOBOLD_EXAMPLE_TRACKER_TOKEN`. When the agent's own instructions
-name a different variable, that name wins. The repository record
-names no variable, because each agent reading it has its own. The token goes only into the
+The tracker token is read from the environment variable that
+`token-env` names. The repository picks one neutral name, and each
+agent working in it exports its own credential under that same
+name in its own setup. The token goes only into the
 request's authorization header. It is not printed, logged,
 committed, written into a tracked file, or asked for in chat. When
 the variable is unset, stop and ask the user to set it. A 401 or a
@@ -116,8 +112,10 @@ The `requirements` key is a mapping. `source` is `markdown` or
 `tracker`. For `markdown`, `path` is the directory, `specs` when
 the user names none, and `tracked` is `true` or `false`. For
 `tracker`, `url` is the tracker's base address, `project` is the
-project key. The record names no token and no token variable;
-each agent finds its own as `kobold-codex` says. `transport`
+project key, and `token-env` is the neutral name of the
+environment variable that holds the token. `token-env` is required
+for a tracker. The record holds that name and never the token; each
+agent exports its own credential under it. `transport`
 is optional and defaults to `[mcp, rest]`. `mcp-url` defaults to
 `<url>/mcp`, and `openapi` defaults to `/api/openapi.json`. The
 tracker source creates no directory. The key is omitted when the project
@@ -200,7 +198,7 @@ that uses the plugin.
 - Plugin version is `2.3.0` in both manifests.
 - `python3 tests/check_plugin.py` passes, including the new checks:
   no project or host names in a skill, the `requirements` keys in
-  `adopt-the-repo` with no `token-env` or `export-path`, the vault
-  derivation rule in `kobold-codex`, no command that prints a token, `operationId`
+  `adopt-the-repo` including `token-env` and no `export-path`, no
+  derived token variable in any skill, no command that prints a token, `operationId`
   only in `kobold-codex`, and the RFC 2119 subset in the new
   Requirements heading.
