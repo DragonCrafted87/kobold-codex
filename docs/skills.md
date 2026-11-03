@@ -42,6 +42,8 @@ Feature work, or the execution of a plan, in its own checkout uses [skills/build
 
 Work that does not share state uses [skills/build/fan-out/SKILL.md](../skills/build/fan-out/SKILL.md).
 
+Changing and checking until a stated goal holds uses [skills/build/loop-to-the-goal/SKILL.md](../skills/build/loop-to-the-goal/SKILL.md).
+
 Reading or changing code in a workspace whose tools look up symbols uses [skills/build/edit-by-symbol/SKILL.md](../skills/build/edit-by-symbol/SKILL.md).
 
 A repo with no scripted way to drive the app the way a user does uses [skills/build/prove-the-product/SKILL.md](../skills/build/prove-the-product/SKILL.md).
@@ -134,3 +136,4 @@ Adding Kobold to a repository uses [skills/setup/adopt-the-repo/SKILL.md](../ski
 - The screen checks heading in `prove-the-product` is recorded in [docs/specs/2026-11-03-ui-checks-design.md](specs/2026-11-03-ui-checks-design.md).
 - The few turns, cited claims heading in `kobold-codex` is recorded in [docs/specs/2026-11-03-turn-budget-design.md](specs/2026-11-03-turn-budget-design.md).
 - [skills/investigate/keep-the-findings/SKILL.md](../skills/investigate/keep-the-findings/SKILL.md) is recorded in [docs/specs/2026-11-03-keep-the-findings-design.md](specs/2026-11-03-keep-the-findings-design.md).
+- [skills/build/loop-to-the-goal/SKILL.md](../skills/build/loop-to-the-goal/SKILL.md) is recorded in [docs/specs/2026-11-03-loop-to-the-goal-design.md](specs/2026-11-03-loop-to-the-goal-design.md).
