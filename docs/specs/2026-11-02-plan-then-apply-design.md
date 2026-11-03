@@ -22,8 +22,8 @@ A new heading before A failed run.
 When the workspace's tools can preview a change across files, such
 as a rename or a refactor that moves code, preview it first. Read the
 preview's diff against the task before applying it. A file in the
-preview that the task does not name is a failed check, so change the
-request rather than applying it.
+preview that the task does not name is a failed check, so narrow the
+change rather than apply it.
 
 Apply the previewed change as one step. When another edit changed
 one of its files after the preview, the apply is refused. Preview
