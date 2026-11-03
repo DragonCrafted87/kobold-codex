@@ -123,3 +123,4 @@ Adding Kobold to a repository uses [skills/setup/adopt-the-repo/SKILL.md](../ski
 - The live system trigger lesson in `set-the-bounds` is recorded in [docs/specs/2026-10-31-live-system-trigger-design.md](specs/2026-10-31-live-system-trigger-design.md).
 - [skills/build/edit-by-symbol/SKILL.md](../skills/build/edit-by-symbol/SKILL.md) is recorded in [docs/specs/2026-11-02-edit-by-symbol-design.md](specs/2026-11-02-edit-by-symbol-design.md).
 - The preview-then-apply heading in `carry-out-the-plan` is recorded in [docs/specs/2026-11-02-plan-then-apply-design.md](specs/2026-11-02-plan-then-apply-design.md).
+- The repo map heading in `scope-the-edit` is recorded in [docs/specs/2026-11-02-repo-map-design.md](specs/2026-11-02-repo-map-design.md).
