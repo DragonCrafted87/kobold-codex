@@ -30,6 +30,13 @@ the full suite. Say which gate ran. A gate that already passed on
 the same tree can be cited. Name that run. A narrow check or a gate
 that fails stops the ship the same way a failed check does.
 
+When the session can run only the commands a project allows, the
+narrow checks and the gate are the allowed test and lint commands.
+A check that is not allowed is a check that cannot be run. Read the
+diagnostics each one reports, warnings included, on the files the
+branch changes. A new warning on a changed line is fixed before the
+commit, or named in the reply with the reason it stays.
+
 When the user is away, `unattended` still decides how far the ship
 goes. `set-the-bounds` is that rule.
 
