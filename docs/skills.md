@@ -58,6 +58,8 @@ A small diff, before it ships, uses [skills/review/measure-the-blast/SKILL.md](.
 
 Integrating a branch after its checks pass uses [skills/ship/ship-the-branch/SKILL.md](../skills/ship/ship-the-branch/SKILL.md).
 
+Adding a dependency, a bundled file, or a tool, or cutting a release, uses [skills/ship/check-the-licenses/SKILL.md](../skills/ship/check-the-licenses/SKILL.md).
+
 ### Session
 
 A long run or an unattended run uses [skills/session/leave-a-trail/SKILL.md](../skills/session/leave-a-trail/SKILL.md).
@@ -125,3 +127,4 @@ Adding Kobold to a repository uses [skills/setup/adopt-the-repo/SKILL.md](../ski
 - The preview-then-apply heading in `carry-out-the-plan` is recorded in [docs/specs/2026-11-02-plan-then-apply-design.md](specs/2026-11-02-plan-then-apply-design.md).
 - The repo map heading in `scope-the-edit` is recorded in [docs/specs/2026-11-02-repo-map-design.md](specs/2026-11-02-repo-map-design.md).
 - The allowed checks paragraph in `ship-the-branch` is recorded in [docs/specs/2026-11-02-allowed-checks-design.md](specs/2026-11-02-allowed-checks-design.md).
+- [skills/ship/check-the-licenses/SKILL.md](../skills/ship/check-the-licenses/SKILL.md) is recorded in [docs/specs/2026-11-02-check-the-licenses-design.md](specs/2026-11-02-check-the-licenses-design.md).
