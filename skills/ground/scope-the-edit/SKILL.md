@@ -50,3 +50,14 @@ the system. Use a mock when the dependency cannot be run, such as
 hardware or a paid external service. When a branch cannot be reached
 from the system boundary, cover that branch with a focused test. Add a
 test when no existing run reaches the bar.
+
+## The repo map
+
+When the workspace's tools offer a repo map, a ranked list of the
+files and their key symbols, use it to start an architectural change
+or work in a repository this session has not read. Ask for it under
+a size budget, and read the files it ranks first.
+
+Skip the map for a small edit, and for an intermediate one whose
+file is already known. The map does not list vendored or generated
+paths. A change that has to touch one names that path itself.
