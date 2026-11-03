@@ -129,3 +129,4 @@ Adding Kobold to a repository uses [skills/setup/adopt-the-repo/SKILL.md](../ski
 - The allowed checks paragraph in `ship-the-branch` is recorded in [docs/specs/2026-11-02-allowed-checks-design.md](specs/2026-11-02-allowed-checks-design.md).
 - [skills/ship/check-the-licenses/SKILL.md](../skills/ship/check-the-licenses/SKILL.md) is recorded in [docs/specs/2026-11-02-check-the-licenses-design.md](specs/2026-11-02-check-the-licenses-design.md).
 - The edit log and excluded paths paragraph in `review-the-diff` is recorded in [docs/specs/2026-11-02-audit-and-excluded-paths-design.md](specs/2026-11-02-audit-and-excluded-paths-design.md).
+- The screen checks heading in `prove-the-product` is recorded in [docs/specs/2026-11-03-ui-checks-design.md](specs/2026-11-03-ui-checks-design.md).

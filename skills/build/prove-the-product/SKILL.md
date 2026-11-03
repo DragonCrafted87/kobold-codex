@@ -55,6 +55,30 @@ A failed step stops the proof. The skill file stays, and the
 reply names the step and the result. A proof that finishes shows
 every step and the result you observed.
 
+## A screen the user sees
+
+When a step ends on a screen, check what the user would see with a
+measurement, not a look. Run each check the app can reach in a real
+browser or on a device:
+
+- The contrast of text and controls against what is behind them, in
+  every state a control has: default, hover, focus, pressed,
+  disabled, and loading.
+- An accessibility audit of roles, names, and landmarks.
+- The keyboard: every control is reachable, the focus is visible,
+  and the order matches the screen.
+- The size of each target a user taps or clicks.
+- A narrow screen: no content scrolls sideways at the narrowest width
+  the app supports.
+- Reduced motion: when the user asks for it, nothing moves that the
+  task does not need.
+
+When the project already has a tool for one of these, the step runs
+that tool. When it has none, say which checks the drive could not
+run. Adding a tool follows `check-the-licenses` and is a change the
+user asks for. A check that fails is a failed step, the same as any
+other.
+
 ## A later pass
 
 A later pass re-reads the features and re-runs the skill. Add a
