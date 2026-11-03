@@ -56,6 +56,13 @@ from where `kobold-codex` says requirements live, and check the
 diff against it. A cited requirement the diff does not meet is a
 finding.
 
+When the change was made by an agent whose edits the project logs,
+compare that log with the commits. An edit in the log that no commit
+carries, or a changed file the log does not show, is a finding. When
+the project marks paths as vendored, generated, or otherwise
+excluded from edits, a change to one of them is a finding unless the
+request names that path.
+
 ## Never flag
 
 A fault the project's lint or type checks catch belongs to that
