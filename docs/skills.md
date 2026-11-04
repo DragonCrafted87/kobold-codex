@@ -34,6 +34,8 @@ A task that should follow a playbook uses [skills/plan/run-the-play/SKILL.md](..
 
 A change whose first shape would stick uses [skills/plan/try-several-shapes/SKILL.md](../skills/plan/try-several-shapes/SKILL.md).
 
+Work that passes between skills or agents along more than one path uses [skills/plan/map-the-handoffs/SKILL.md](../skills/plan/map-the-handoffs/SKILL.md).
+
 ### Build
 
 An approved plan uses [skills/build/carry-out-the-plan/SKILL.md](../skills/build/carry-out-the-plan/SKILL.md).
@@ -137,3 +139,4 @@ Adding Kobold to a repository uses [skills/setup/adopt-the-repo/SKILL.md](../ski
 - The few turns, cited claims heading in `kobold-codex` is recorded in [docs/specs/2026-11-03-turn-budget-design.md](specs/2026-11-03-turn-budget-design.md).
 - [skills/investigate/keep-the-findings/SKILL.md](../skills/investigate/keep-the-findings/SKILL.md) is recorded in [docs/specs/2026-11-03-keep-the-findings-design.md](specs/2026-11-03-keep-the-findings-design.md).
 - [skills/build/loop-to-the-goal/SKILL.md](../skills/build/loop-to-the-goal/SKILL.md) is recorded in [docs/specs/2026-11-03-loop-to-the-goal-design.md](specs/2026-11-03-loop-to-the-goal-design.md).
+- [skills/plan/map-the-handoffs/SKILL.md](../skills/plan/map-the-handoffs/SKILL.md) is recorded in [docs/specs/2026-11-03-map-the-handoffs-design.md](specs/2026-11-03-map-the-handoffs-design.md).
