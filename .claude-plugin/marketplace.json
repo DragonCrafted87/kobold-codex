@@ -1,6 +1,6 @@
 {
   "name": "kobold-codex",
-  "description": "Principles and workflow skills for DragonCrafted87's agents on Grok and Claude Code.",
+  "description": "Principles and workflow skills for coding agents on Grok, Claude Code, Codex, Gemini CLI, Cursor, and any host that reads Agent Skills.",
   "owner": {
     "name": "Scott Gudeman",
     "email": "24697493+DragonCrafted87@users.noreply.github.com"
@@ -8,8 +8,8 @@
   "plugins": [
     {
       "name": "kobold-codex",
-      "description": "Principles and workflow skills for DragonCrafted87's agents on Grok and Claude Code.",
-      "version": "2.8.0",
+      "description": "Principles and workflow skills for coding agents on Grok, Claude Code, Codex, Gemini CLI, Cursor, and any host that reads Agent Skills.",
+      "version": "3.0.0",
       "source": "./",
       "license": "MIT",
       "author": {

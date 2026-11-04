@@ -11,8 +11,8 @@ ROOT = Path(__file__).resolve().parents[1]
 PLUGIN = ROOT / ".claude-plugin/plugin.json"
 MARKET = ROOT / ".claude-plugin/marketplace.json"
 DESCRIPTION = (
-    "Principles and workflow skills for DragonCrafted87's agents on Grok "
-    "and Claude Code."
+    "Principles and workflow skills for coding agents on Grok, Claude Code, "
+    "Codex, Gemini CLI, Cursor, and any host that reads Agent Skills."
 )
 REPOSITORY = "https://github.com/DragonCrafted87/kobold-codex"
 BASE_BRANCHES = {"main", "master"}
@@ -146,47 +146,92 @@ def skill_name(path):
     fail(f"{path.relative_to(ROOT)} has no name")
 
 
+SKILLS_MAP = ROOT / "docs/skills.md"
+ROOT_PLUGIN = ROOT / "plugin.json"
+GEMINI = ROOT / "gemini-extension.json"
+AGENT_PLUGINS_SCHEMA = "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json"
+AGENT_PLUGINS_KEYS = {"$schema", "name", "version", "description", "author", "homepage", "repository", "license", "keywords", "extensions"}
+
+
+def skill_group(path):
+    """The group is frontmatter metadata: a `metadata:` block holding `group:`."""
+    lines = path.read_text(encoding="utf-8").splitlines()
+    in_meta = False
+    for line in lines[1:]:
+        if line == "---":
+            break
+        if line == "metadata:":
+            in_meta = True
+            continue
+        if in_meta and line.startswith("  group:"):
+            return line[len("  group:"):].strip()
+        if not line.startswith(" "):
+            in_meta = False
+    fail(f"{path.relative_to(ROOT)} has no metadata group")
+
+
+def map_groups():
+    """docs/skills.md lists the groups as headings, in the order work moves, and links each skill under its group."""
+    groups = {}
+    current = None
+    for line in SKILLS_MAP.read_text(encoding="utf-8").splitlines():
+        if line.startswith("### "):
+            current = line[4:].strip().lower()
+            groups[current] = set()
+        elif line.startswith("## "):
+            current = None
+        elif current:
+            groups[current].update(re.findall(r"\(\.\./skills/([a-z0-9-]+)/SKILL\.md\)", line))
+    return groups
+
+
 def check_layout():
     plugin = load_json(PLUGIN)
     skills_root = ROOT / "skills"
-    listed = require(plugin, "skills", "plugin.json")
-    if not isinstance(listed, list):
-        fail("plugin.json skills must be a list")
-    listed_groups = set()
-    for entry in listed:
-        if not isinstance(entry, str) or not entry.startswith("./skills/"):
-            fail(f"plugin.json skills entry {entry!r} must start with ./skills/")
-        group = entry[len("./skills/"):].strip("/")
-        if not group or "/" in group:
-            fail(f"plugin.json skills entry {entry!r} must name one group")
-        if not (skills_root / group).is_dir():
-            fail(f"plugin.json lists {entry} but it does not exist")
-        listed_groups.add(group)
-    seen = {}
-    groups = set()
+    if require(plugin, "skills", "plugin.json") != ["./skills/"]:
+        fail('plugin.json skills must be ["./skills/"]: skills sit flat, one folder each')
+    groups = map_groups()
+    if not groups:
+        fail("docs/skills.md lists no group headings")
     for path in sorted(skills_root.rglob("SKILL.md")):
         parts = path.relative_to(skills_root).parts
-        if len(parts) != 3:
-            fail(f"{path.relative_to(ROOT)} must sit at skills/<group>/<name>/SKILL.md")
-        group, folder, _ = parts
+        if len(parts) != 2:
+            fail(f"{path.relative_to(ROOT)} must sit at skills/<name>/SKILL.md")
+        folder = parts[0]
         name = skill_name(path)
         if name != folder:
             fail(f"{path.relative_to(ROOT)} name {name!r} does not match its folder")
-        if name in seen:
-            fail(f"skill {name} is in both {seen[name]} and {group}")
-        seen[name] = group
-        groups.add(group)
+        group = skill_group(path)
+        if group not in groups:
+            fail(f"{path.relative_to(ROOT)} group {group!r} is not a heading in docs/skills.md")
+        if name not in groups[group]:
+            fail(f"docs/skills.md does not link {name} under its group {group}")
     for entry in sorted(p.name for p in skills_root.iterdir() if p.is_dir()):
-        if entry not in groups:
-            fail(f"skills/{entry} holds no skill")
-        if entry not in listed_groups:
-            fail(f"skills/{entry} is missing from the plugin.json skills key")
-    for group in sorted(listed_groups - groups):
-        fail(f"plugin.json lists skills/{group} but it holds no skill")
+        if not (skills_root / entry / "SKILL.md").is_file():
+            fail(f"skills/{entry} holds no SKILL.md")
+
+
+def check_other_manifests(version):
+    """The Agent Plugins manifest and the Gemini CLI extension manifest agree with plugin.json."""
+    plugin = load_json(PLUGIN)
+    root = load_json(ROOT_PLUGIN)
+    if require(root, "$schema", "plugin.json (root)") != AGENT_PLUGINS_SCHEMA:
+        fail("root plugin.json $schema must be the Agent Plugins 1.0.0 schema")
+    extra = set(root) - AGENT_PLUGINS_KEYS
+    if extra:
+        fail(f"root plugin.json has keys outside Agent Plugins 1.0.0: {sorted(extra)}")
+    gemini = load_json(GEMINI)
+    for label, data in (("plugin.json (root)", root), ("gemini-extension.json", gemini)):
+        if require(data, "name", label) != plugin["name"]:
+            fail(f"{label} name disagrees with .claude-plugin/plugin.json")
+        if parse_version(require(data, "version", label), label) != version:
+            fail(f"{label} version disagrees with .claude-plugin/plugin.json")
+        if require(data, "description", label) != DESCRIPTION:
+            fail(f"{label} description")
 
 
 EXCLUDED_KEYWORDS = re.compile(r"\b(MUST|SHOULD|MAY|REQUIRED)\b")
-KEYWORD_SKILL = ROOT / "skills/investigate/spec-the-source/SKILL.md"
+KEYWORD_SKILL = ROOT / "skills/spec-the-source/SKILL.md"
 KEYWORD_LIST_MARKER = "This line lists them so"
 
 
@@ -205,13 +250,13 @@ def check_requirement_language():
 
 PROJECT_NAMES = re.compile(r"forgeledger|stealthdragonland|\bFL-\d", re.IGNORECASE)
 TOKEN_PRINT = re.compile(r"\b(echo|printf|print|cat)\b[^\n]*\$\{?\w*TOKEN", re.IGNORECASE)
-ADOPT_SKILL = ROOT / "skills/setup/adopt-the-repo/SKILL.md"
-CODEX_SKILL = ROOT / "skills/ground/kobold-codex/SKILL.md"
+ADOPT_SKILL = ROOT / "skills/adopt-the-repo/SKILL.md"
+CODEX_SKILL = ROOT / "skills/kobold-codex/SKILL.md"
 REQUIREMENTS_KEYS = ["source", "path", "tracked", "url", "project", "transport", "mcp-url", "openapi", "token-env"]
 
 
 def skill_files():
-    return sorted((ROOT / "skills").glob("*/*/SKILL.md"))
+    return sorted((ROOT / "skills").glob("*/SKILL.md"))
 
 
 def check_no_project_names():
@@ -263,6 +308,7 @@ def check_requirements_language():
 def main():
     version = check_manifests()
     check_layout()
+    check_other_manifests(version)
     check_requirement_language()
     check_no_project_names()
     check_requirements_keys()

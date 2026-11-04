@@ -1,7 +1,7 @@
 {
   "name": "kobold-codex",
-  "description": "Principles and workflow skills for DragonCrafted87's agents on Grok and Claude Code.",
-  "version": "2.8.0",
+  "description": "Principles and workflow skills for coding agents on Grok, Claude Code, Codex, Gemini CLI, Cursor, and any host that reads Agent Skills.",
+  "version": "3.0.0",
   "author": {
     "name": "Scott Gudeman",
     "email": "24697493+DragonCrafted87@users.noreply.github.com"
@@ -9,15 +9,6 @@
   "repository": "https://github.com/DragonCrafted87/kobold-codex",
   "license": "MIT",
   "skills": [
-    "./skills/ground/",
-    "./skills/investigate/",
-    "./skills/plan/",
-    "./skills/build/",
-    "./skills/review/",
-    "./skills/ship/",
-    "./skills/session/",
-    "./skills/learn/",
-    "./skills/write/",
-    "./skills/setup/"
+    "./skills/"
   ]
 }
