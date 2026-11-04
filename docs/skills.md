@@ -24,6 +24,8 @@ A behavior or a threshold that needs a reason uses [skills/investigate/why-it-is
 
 A rewrite or a port that needs specs from an existing system, from its source or clean-room from docs and a running instance, uses [skills/investigate/spec-the-source/SKILL.md](../skills/investigate/spec-the-source/SKILL.md).
 
+Reading code to answer how it works, writing back what was verified, and rechecking saved findings before a review or a ship uses [skills/investigate/keep-the-findings/SKILL.md](../skills/investigate/keep-the-findings/SKILL.md).
+
 ### Plan
 
 An architectural change, or a request for a plan, uses [skills/plan/write-the-plan/SKILL.md](../skills/plan/write-the-plan/SKILL.md).
@@ -131,3 +133,4 @@ Adding Kobold to a repository uses [skills/setup/adopt-the-repo/SKILL.md](../ski
 - The edit log and excluded paths paragraph in `review-the-diff` is recorded in [docs/specs/2026-11-02-audit-and-excluded-paths-design.md](specs/2026-11-02-audit-and-excluded-paths-design.md).
 - The screen checks heading in `prove-the-product` is recorded in [docs/specs/2026-11-03-ui-checks-design.md](specs/2026-11-03-ui-checks-design.md).
 - The few turns, cited claims heading in `kobold-codex` is recorded in [docs/specs/2026-11-03-turn-budget-design.md](specs/2026-11-03-turn-budget-design.md).
+- [skills/investigate/keep-the-findings/SKILL.md](../skills/investigate/keep-the-findings/SKILL.md) is recorded in [docs/specs/2026-11-03-keep-the-findings-design.md](specs/2026-11-03-keep-the-findings-design.md).

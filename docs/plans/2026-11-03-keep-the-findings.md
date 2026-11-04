@@ -1,0 +1,26 @@
+# Keep The Findings Implementation Plan
+
+> **For agentic workers:** Steps use checkbox (`- [ ]`) syntax for tracking.
+
+## Status
+
+Current: done
+Blocker: none
+Next: the review of this pull request
+
+**Goal:** Ship `keep-the-findings` in the investigate group, and the plugin is at `2.6.0`.
+
+**Specs:**
+
+- `docs/specs/2026-11-03-keep-the-findings-design.md`
+
+If a sentence in this plan disagrees with the spec, the spec wins.
+
+### Task 1: Add the skill
+
+Kind: docs-or-config
+
+- [x] **Step 1:** Copy the description and the section bodies from the spec into `skills/investigate/keep-the-findings/SKILL.md`, and add the map line to `docs/skills.md`.
+- [x] **Step 2:** Add the record line to `docs/skills.md`.
+- [x] **Step 3:** Bump the version to `2.6.0` in both manifests.
+- [x] **Step 4:** Run `python3 tests/check_plugin.py`.
