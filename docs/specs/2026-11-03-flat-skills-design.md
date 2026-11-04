@@ -46,9 +46,17 @@ group paths in the Claude manifest, so no other host found a skill.
   manifest and no `.agents/skills` copy are added; the Agent Plugins
   manifest covers Cursor and Codex, and a copy would be a second
   source.
-- The manifest description still names Grok and Claude Code. It is
-  the sentence the catalog's ship rule records, so changing it is
-  left to its own change.
+- The manifest description becomes one accurate line for every host
+  it now installs on, in all four manifests and in the check's pinned
+  sentence: "Principles and workflow skills for coding agents on Grok,
+  Claude Code, Codex, Gemini CLI, Cursor, and any host that reads
+  Agent Skills." It drops the owner's name, since the plugin is not
+  tied to one user's agents.
+- The README opens with that line, then a How section (skills,
+  groups, how a host loads them, and the install steps per host) and a
+  Why section (the reasoning, drawn from the existing skills and
+  specs). It links `docs/skills.md` and does not restate a section
+  body.
 - Version `3.0.0`: every skill path changes, which breaks any link
   or install that named a nested path.
 
@@ -91,7 +99,7 @@ it in the same change.
 
 It does not edit a past spec or plan. Their nested paths stay as the
 record of their time. Beyond the new `metadata` block, it changes no
-skill's wording other than `write-a-skill`, no key, and no bound. It
-does not change the
-manifest description. Installs on Codex, Gemini CLI, and Cursor are
+skill's wording other than `write-a-skill`, no key, and no bound. The
+`kobold-codex` skill's own description still names Grok and Claude
+Code; that is skill wording, left to its own change. Installs on Codex, Gemini CLI, and Cursor are
 documented from their docs and not yet run.

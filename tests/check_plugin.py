@@ -11,8 +11,8 @@ ROOT = Path(__file__).resolve().parents[1]
 PLUGIN = ROOT / ".claude-plugin/plugin.json"
 MARKET = ROOT / ".claude-plugin/marketplace.json"
 DESCRIPTION = (
-    "Principles and workflow skills for DragonCrafted87's agents on Grok "
-    "and Claude Code."
+    "Principles and workflow skills for coding agents on Grok, Claude Code, "
+    "Codex, Gemini CLI, Cursor, and any host that reads Agent Skills."
 )
 REPOSITORY = "https://github.com/DragonCrafted87/kobold-codex"
 BASE_BRANCHES = {"main", "master"}

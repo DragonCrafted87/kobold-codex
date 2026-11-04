@@ -24,3 +24,11 @@ Kind: docs-or-config
 - [x] **Step 2:** Add the record line to `docs/skills.md`.
 - [x] **Step 3:** Bump the version to `3.0.0` in both manifests.
 - [x] **Step 4:** Run `python3 tests/check_plugin.py`.
+
+### Task 2: The description and the README
+
+Kind: docs-or-config
+
+- [x] **Step 1:** Set the description from the spec in `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, `plugin.json`, and `gemini-extension.json`, and in `DESCRIPTION` in `tests/check_plugin.py`.
+- [x] **Step 2:** Rewrite `README.md` as the one-line description, How (with the install steps), and Why.
+- [x] **Step 3:** Run `python3 tests/check_plugin.py`.

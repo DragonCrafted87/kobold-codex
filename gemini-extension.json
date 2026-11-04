@@ -1,5 +1,5 @@
 {
   "name": "kobold-codex",
   "version": "3.0.0",
-  "description": "Principles and workflow skills for DragonCrafted87's agents on Grok and Claude Code."
+  "description": "Principles and workflow skills for coding agents on Grok, Claude Code, Codex, Gemini CLI, Cursor, and any host that reads Agent Skills."
 }
