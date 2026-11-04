@@ -96,6 +96,24 @@ similar edits, should leave a script or a skill behind. The next person
 runs that artifact a second time instead of reconstructing the steps
 from the last session.
 
+## Few turns, cited claims
+
+A turn costs more than its output. Batch independent probes into one
+call, mark where each probe's output starts, and cap each output.
+For a question about existing code or a system, aim for a few calls:
+one batched survey, one or two targeted reads, then the answer. Stop
+when every part of the question has evidence. Do not read again what
+this session already read and nothing since has changed.
+
+Use the cheapest tool that answers. A plain command that is already
+installed answers before a tool server that has to load, and a slice
+of a large file answers before the whole file.
+
+In an answer about how something works, mark each claim as seen,
+with the file and line or the output that shows it, or as inferred.
+A fact the session looked for and did not find is unknown, not
+absent. Reading the code is not watching it run.
+
 ## Requirements
 
 Requirements are the rules a project's behavior is held to.
