@@ -1,7 +1,6 @@
 # Isolate the work: colliding parallel pieces
 
-A revision of `isolate-the-work`, from the ultracode research of
-2026-11-09. The wording below is the version to ship.
+A revision of `isolate-the-work`, from the 2026-11-09 multi-agent orchestration research. The wording below is the version to ship.
 
 ## Why
 
