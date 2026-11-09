@@ -1,7 +1,7 @@
 # Optional work-item notes for findings and handoffs
 
 A revision of `keep-the-findings` and `map-the-handoffs`, from the
-ultracode research of 2026-11-09 and Scott's rule that tracker paths
+2026-11-09 multi-agent orchestration research and Scott's rule that tracker paths
 are OPTIONAL extra functionality. The wording below is the version
 to ship.
 
