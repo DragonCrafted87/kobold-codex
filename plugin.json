@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "kobold-codex",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "Principles and workflow skills for coding agents on Grok, Claude Code, Codex, Gemini CLI, Cursor, and any host that reads Agent Skills.",
   "author": {
     "name": "Scott Gudeman",
