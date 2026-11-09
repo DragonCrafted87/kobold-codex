@@ -144,3 +144,4 @@ Adding Kobold to a repository uses [skills/adopt-the-repo/SKILL.md](../skills/ad
 - The large named lists, verify-before-report, and optional child work items revision of `fan-out` is recorded in [docs/specs/2026-11-09-fan-out-large-lists-design.md](specs/2026-11-09-fan-out-large-lists-design.md).
 - The discovery-until-stable stop in `loop-to-the-goal` is recorded in [docs/specs/2026-11-09-loop-discovery-stop-design.md](specs/2026-11-09-loop-discovery-stop-design.md).
 - The colliding parallel pieces heading in `isolate-the-work` is recorded in [docs/specs/2026-11-09-isolate-colliding-pieces-design.md](specs/2026-11-09-isolate-colliding-pieces-design.md).
+- The optional work-item notes paths in `keep-the-findings` and `map-the-handoffs` are recorded in [docs/specs/2026-11-09-optional-tracker-notes-design.md](specs/2026-11-09-optional-tracker-notes-design.md).

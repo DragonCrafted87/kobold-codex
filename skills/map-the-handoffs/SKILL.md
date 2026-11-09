@@ -1,6 +1,6 @@
 ---
 name: map-the-handoffs
-description: Use when work passes between skills or agents along more than one path, such as a review that can send work back or a step that can branch. Write the handoffs as a graph in the plan, with each node a step or a skill and each edge a condition and the payload it carries, and follow only the edges the graph names.
+description: Use when work passes between skills or agents along more than one path, such as a review that can send work back or a step that can branch. Write the handoffs as a graph in the plan, with each node a step or a skill and each edge a condition and the payload it carries, optionally mirror that map as structured notes on a work item when one already exists, and follow only the edges the graph names.
 metadata:
   group: plan
 ---
@@ -31,6 +31,16 @@ finding's severity, not a judgment made later.
 An edge that goes back to an earlier node names how many times it
 can be taken. When that count is used up, the work goes to an end
 node that reports, not round again.
+
+The plan is the source of truth for the graph. A tracker is never
+required. When the session already has a work item in a tracker the
+project uses for that work, also recording the same nodes and edges
+as structured notes on that item is OPTIONAL. When that tracker
+already links work items, an OPTIONAL link from the parent item to
+each child item a node names may be added the same way the project
+already links items. A session with no work item, or no tracker,
+keeps the graph only in the plan. On a later session, read the plan
+first; notes on a work item are a hint when the plan is missing.
 
 ## Following it
 
