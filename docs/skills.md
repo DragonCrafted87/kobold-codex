@@ -32,6 +32,8 @@ An architectural change, or a request for a plan, uses [skills/write-the-plan/SK
 
 A task that should follow a playbook uses [skills/run-the-play/SKILL.md](../skills/run-the-play/SKILL.md).
 
+A large audit, a large migration, or cross-checked research uses the matching playbook beside [skills/run-the-play/SKILL.md](../skills/run-the-play/SKILL.md) under `playbooks/`.
+
 A change whose first shape would stick uses [skills/try-several-shapes/SKILL.md](../skills/try-several-shapes/SKILL.md).
 
 Work that passes between skills or agents along more than one path uses [skills/map-the-handoffs/SKILL.md](../skills/map-the-handoffs/SKILL.md).
@@ -145,3 +147,4 @@ Adding Kobold to a repository uses [skills/adopt-the-repo/SKILL.md](../skills/ad
 - The discovery-until-stable stop in `loop-to-the-goal` is recorded in [docs/specs/2026-11-09-loop-discovery-stop-design.md](specs/2026-11-09-loop-discovery-stop-design.md).
 - The colliding parallel pieces heading in `isolate-the-work` is recorded in [docs/specs/2026-11-09-isolate-colliding-pieces-design.md](specs/2026-11-09-isolate-colliding-pieces-design.md).
 - The optional work-item notes paths in `keep-the-findings` and `map-the-handoffs` are recorded in [docs/specs/2026-11-09-optional-tracker-notes-design.md](specs/2026-11-09-optional-tracker-notes-design.md).
+- The large-audit, large-migration, and cross-checked-research playbooks, with the matching revision of `run-the-play`, are recorded in [docs/specs/2026-11-09-orchestration-playbooks-design.md](specs/2026-11-09-orchestration-playbooks-design.md).
