@@ -1,7 +1,6 @@
 # Loop to the goal: discovery until stable
 
-A revision of `loop-to-the-goal`, from the ultracode research of
-2026-11-09. The wording below is the version to ship.
+A revision of `loop-to-the-goal`, from the 2026-11-09 multi-agent orchestration research. The wording below is the version to ship.
 
 ## Why
 
