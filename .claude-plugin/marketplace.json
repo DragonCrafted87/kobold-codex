@@ -9,7 +9,7 @@
     {
       "name": "kobold-codex",
       "description": "Principles and workflow skills for coding agents on Grok, Claude Code, Codex, Gemini CLI, Cursor, and any host that reads Agent Skills.",
-      "version": "3.0.1",
+      "version": "3.0.2",
       "source": "./",
       "license": "MIT",
       "author": {
