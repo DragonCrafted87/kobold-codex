@@ -1,6 +1,6 @@
 # Fan out: large named lists and verify-before-report
 
-A revision of `fan-out`, from the ultracode research of 2026-11-09.
+A revision of `fan-out`, from the 2026-11-09 multi-agent orchestration research.
 The wording below is the version to ship.
 
 ## Why
