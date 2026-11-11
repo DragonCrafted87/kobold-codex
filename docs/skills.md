@@ -141,3 +141,4 @@ Adding Kobold to a repository uses [skills/adopt-the-repo/SKILL.md](../skills/ad
 - [skills/loop-to-the-goal/SKILL.md](../skills/loop-to-the-goal/SKILL.md) is recorded in [docs/specs/2026-11-03-loop-to-the-goal-design.md](specs/2026-11-03-loop-to-the-goal-design.md).
 - [skills/map-the-handoffs/SKILL.md](../skills/map-the-handoffs/SKILL.md) is recorded in [docs/specs/2026-11-03-map-the-handoffs-design.md](specs/2026-11-03-map-the-handoffs-design.md).
 - The flat skills layout and the manifests for other hosts, with the revision of `write-a-skill`, are recorded in [docs/specs/2026-11-03-flat-skills-design.md](specs/2026-11-03-flat-skills-design.md).
+- The large named lists, verify-before-report, and optional child work items revision of `fan-out` is recorded in [docs/specs/2026-11-09-fan-out-large-lists-design.md](specs/2026-11-09-fan-out-large-lists-design.md).
