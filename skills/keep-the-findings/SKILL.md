@@ -1,6 +1,6 @@
 ---
 name: keep-the-findings
-description: Use before exploring code to answer a question about how it works, after verifying such an answer, and before reviewing or shipping a change. Read the saved findings first, explore only what they leave open, write back each finding verified this session with its evidence, scope, owner, and review trigger, and recheck the findings a change trips.
+description: Use before exploring code to answer a question about how it works, after verifying such an answer, and before reviewing or shipping a change. Read the saved findings first from `.kobold/findings/`, explore only what they leave open, write back each finding verified this session with its evidence, scope, owner, and review trigger, optionally mirror structured notes on a work item when one already exists, and recheck the findings a change trips.
 metadata:
   group: investigate
 ---
@@ -10,9 +10,12 @@ metadata:
 ## Read first
 
 Saved findings live in `.kobold/findings/` at the repository root,
-one Markdown file per finding. Before reading code to answer how
-something works, who owns it, or why it is that way, read the
-findings whose scope covers the paths in question. A finding that
+one Markdown file per finding. That directory is always the place
+to read first. Before reading code to answer how something works,
+who owns it, or why it is that way, read the findings whose scope
+covers the paths in question. When the session already has a work
+item with structured notes that hold findings, read those too as a
+hint; the files still win when they disagree. A finding that
 answers the question is the answer. Cite its file, and read the code
 only for what it leaves open.
 
@@ -38,11 +41,19 @@ docs is linked there, not copied.
 ## Write back
 
 After this session verifies an answer the findings did not hold,
-write it as a finding. Only a claim seen in the code or a run is
-written; an inferred or unknown claim stays in the reply. When an
-existing finding turned out wrong, correct it in place and name the
-change in the reply. Findings are committed with the work, under the
-same bounds.
+write it as a finding under `.kobold/findings/`. Only a claim seen
+in the code or a run is written; an inferred or unknown claim stays
+in the reply. When an existing finding turned out wrong, correct it
+in place and name the change in the reply. Findings are committed
+with the work, under the same bounds.
+
+The local files are the source of truth. A tracker is never
+required. When the session already has a work item in a tracker the
+project uses for that work, also writing a structured note of the
+same five fields on that item is OPTIONAL. Read those notes on a
+later session only as a hint; the `.kobold/findings/` files still
+win when the two disagree. A session with no work item, or no
+tracker, writes only the files.
 
 ## The triggers
 
