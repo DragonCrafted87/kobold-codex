@@ -25,14 +25,18 @@ When the user names none, choose from the files that are there. A
 failure they want fixed is `bug-fix`. An explanation or a
 diagnosis, with no edit asked for, is `investigation`. A reshape
 that keeps the outward behavior is `refactor`. New behavior is
-`feature`.
+`feature`. An audit across many named files, claims, or questions
+is `large-audit`. A migration across many named files or modules
+is `large-migration`. Research that must cross-check several
+sources or angles is `cross-checked-research`.
 
 When more than one of those fits, name the matching files and ask
 which one to run. When none of them fits, name the files that are
 there and stop.
 
-The four plugin playbooks stay the files for the task kinds they
-already name.
+The plugin playbooks stay the files for the task kinds they already
+name, including `large-audit`, `large-migration`, and
+`cross-checked-research` beside the basic four.
 
 A file that no rule above names stays unused until the user names
 it.
