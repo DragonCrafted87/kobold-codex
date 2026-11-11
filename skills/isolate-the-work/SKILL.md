@@ -1,6 +1,6 @@
 ---
 name: isolate-the-work
-description: Use when feature work, a fix meant for a pull request, or the execution of a plan should sit in its own checkout, and always when the current checkout holds other work in progress or another agent. Create that checkout when worktrees allows it, and record the path so ship-the-branch can remove it.
+description: Use when feature work, a fix meant for a pull request, or the execution of a plan should sit in its own checkout, always when the current checkout holds other work in progress or another agent, and when parallel pieces would change the same files. Create that checkout when worktrees allows it, and record the path so ship-the-branch can remove it.
 metadata:
   group: build
 ---
@@ -29,6 +29,21 @@ into.
 `carry-out-the-plan` runs the plan in the checkout the session is
 already in. Continue the rest of this work in the checkout this
 skill just made.
+
+## Parallel pieces that collide
+
+When `fan-out` or another skill splits work into pieces that would
+change the same file, the same checkout, or the same record outside
+the repo, give each colliding piece its own checkout under The key
+below. Pieces that only read, or that change disjoint paths, stay in
+one checkout. Per-piece isolation is not the default for every file
+in a large change; it applies only when writes would collide.
+
+After the pieces finish, fold or merge their results into the branch
+the parent work named, under the plan or the report that skill wrote.
+Remove a piece's checkout when `worktrees` allows the removal and the
+fold has taken what it needs. A checkout that still holds work the
+fold did not take stays, and the reply names the path.
 
 ## The key
 
