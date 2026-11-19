@@ -101,8 +101,8 @@ decides whether it belongs in this plugin or with them.
 
 Write the report in the reply before any edit. Open with the status
 of each piece of work across the repos read, taken from the Status
-lines each plan or trail keeps. A blocked row goes first. A repo
-with no Status block gets no row. When a Status line disagrees
+fields each plan or trail keeps. A blocked row goes first. A repo
+with no Status block gets no row. When a Status field disagrees
 with the plan's checkboxes, the checkbox wins,
 and say so.
 

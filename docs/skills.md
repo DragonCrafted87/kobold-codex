@@ -148,3 +148,4 @@ Adding Kobold to a repository uses [skills/adopt-the-repo/SKILL.md](../skills/ad
 - The colliding parallel pieces heading in `isolate-the-work` is recorded in [docs/specs/2026-11-09-isolate-colliding-pieces-design.md](specs/2026-11-09-isolate-colliding-pieces-design.md).
 - The optional work-item notes paths in `keep-the-findings` and `map-the-handoffs` are recorded in [docs/specs/2026-11-09-optional-tracker-notes-design.md](specs/2026-11-09-optional-tracker-notes-design.md).
 - The large-audit, large-migration, and cross-checked-research playbooks, with the matching revision of `run-the-play`, are recorded in [docs/specs/2026-11-09-orchestration-playbooks-design.md](specs/2026-11-09-orchestration-playbooks-design.md).
+- The Status block list-item format in `write-the-plan`, `leave-a-trail`, `carry-out-the-plan`, and `review-the-week` is recorded in [docs/specs/2026-11-19-status-block-format-design.md](specs/2026-11-19-status-block-format-design.md).
